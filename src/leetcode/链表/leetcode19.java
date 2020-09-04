@@ -44,5 +44,10 @@ public class leetcode19 {
         second.next = second.next.next;
         return dummy.next;
     }
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+  }
 
 }
