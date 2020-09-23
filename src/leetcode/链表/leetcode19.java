@@ -1,12 +1,6 @@
 package leetcode.链表;
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
+//双指针
+
 public class leetcode19 {
     public ListNode removeNthFromEnd1(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
@@ -32,16 +26,18 @@ public class leetcode19 {
         dummy.next = head;
         ListNode first = dummy;
         ListNode second = dummy;
-        // Advances first pointer so that the gap between first and second is n nodes apart
-        for (int i = 1; i <= n + 1; i++) {
+        //找到倒数第n+1个节点
+        for (int i = 0; i < n ; i++) {
             first = first.next;
         }
-        // Move first to the end, maintaining the gap
+
         while (first != null) {
             first = first.next;
             second = second.next;
         }
+        //用哑节点确保.next.next不会报错
         second.next = second.next.next;
+        //必须为dummy.next,head有可能被删除
         return dummy.next;
     }
     public class ListNode {
