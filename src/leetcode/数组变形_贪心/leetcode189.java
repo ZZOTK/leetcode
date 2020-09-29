@@ -1,4 +1,4 @@
-package leetcode.数组变形;
+package leetcode.数组变形_贪心;
 //不同方法
 public class leetcode189 {
     public class Solution1 {

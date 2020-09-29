@@ -1,4 +1,4 @@
-package leetcode.数组变形;
+package leetcode.数组变形_贪心;
 
 public class leetcode66 {
     public int[] plusOne(int[] digits) {
