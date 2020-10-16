@@ -1,5 +1,5 @@
 package leetcode.链表;
-
+//反转链表
 public class leetcode_24 {
     public ListNode swapPairs1(ListNode head) {
         if ((head == null) || (head.next == null)) {
@@ -14,6 +14,7 @@ public class leetcode_24 {
         //返回链表头节点
         return secondNode;
     }
+
     public ListNode swapPairs2(ListNode head) {
         //新建一个头节点，链表常用方法
         ListNode pre = new ListNode(0);
