@@ -1,9 +1,7 @@
-package leetcode.数组变形_贪心;
+package leetcode.数组_变形_贪心;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class leetcode56 {
     public int[][] merge(int[][] intervals) {

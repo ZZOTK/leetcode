@@ -1,4 +1,4 @@
-package leetcode.数组变形_贪心;
+package leetcode.数组_变形_贪心;
 //维护两个变量，最小值和最大利润;
 public class leetcode121 {
     public int maxProfit(int[] prices) {

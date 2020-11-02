@@ -1,4 +1,4 @@
-package leetcode.数组变形_贪心;
+package leetcode.数组_变形_贪心;
 //分组思维。寻找规律
 public class leetcode6 {
     public String convert(String s, int numRows) {

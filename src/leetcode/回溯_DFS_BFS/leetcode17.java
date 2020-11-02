@@ -1,4 +1,4 @@
-package leetcode.回溯;
+package leetcode.回溯_DFS_BFS;
 //回溯算法。
 // 1、先自己建表 2、list<String>.add(String buffer)
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package leetcode.数组变形_贪心;
+package leetcode.数组_变形_贪心;
 
 //数组旋转。两个思路。
 

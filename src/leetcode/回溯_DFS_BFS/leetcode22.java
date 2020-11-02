@@ -1,4 +1,4 @@
-package leetcode.回溯;
+package leetcode.回溯_DFS_BFS;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
