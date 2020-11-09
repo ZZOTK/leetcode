@@ -1,10 +1,10 @@
-
-import javax.xml.xpath.XPath;
+package leetcode.哈希表;
+//我们有一个由平面上的点组成的列表 points。需要从中找出 K 个距离原点 (0, 0) 最近的点。
+//（这里，平面上两点之间的距离是欧几里德距离。）
+//类似leetcode347,利用优先队列排序。java中默认为从小到大。
 import java.util.*;
-import java.util.Scanner;
-import java.util.concurrent.LinkedTransferQueue;
 
-public class solution {
+public class leetcode973 {
     public int[][] kClosest(int[][] points, int K) {
         int n = points.length;
         Map<Integer,Integer> ma = new HashMap<>();
@@ -34,29 +34,13 @@ public class solution {
         return ans;
     }
 
-    public static void main(String[] args) {
-        int[][] points = new int[][]{{1,3},{2,-2},{-2,2}};
-        solution a = new solution();
-        a.kClosest(points,2);
+    public int[][] kClosest1(int[][] points, int K) {
+        Arrays.sort(points, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] * o1[0] + o1[1] * o1[1] - o2[0] * o2[0] - o2[1] * o2[1];
+            }
+        });
+        return Arrays.copyOfRange(points,0,K);
     }
-
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
-
-
 }
