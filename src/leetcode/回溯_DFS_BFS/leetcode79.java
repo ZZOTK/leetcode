@@ -1,4 +1,4 @@
-package leetcode.图_路径;
+package leetcode.回溯_DFS_BFS;
 //dfs算法，没有使用visited矩阵。而是直接改board[i][j]的值再复原
 
 public class leetcode79 {

@@ -1,4 +1,4 @@
-package leetcode.数组_变形_贪心;
+package leetcode.自定义sort;
 //假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中h是这个人的身高，k是排在这个人前面且身高大于或等于h的人数。 编写一个算法来重建这个队列。
 //自定义comparator比较器。
 //compare( a , b ){return a - b ;}此时是按照a>b,则sort后从小到大排列

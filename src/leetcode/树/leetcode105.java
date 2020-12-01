@@ -1,6 +1,7 @@
 package leetcode.树;
 //根据一棵树的前序遍历与中序遍历构造二叉树。
 //利用中序遍历找位置，前序遍历依次往里面添加。
+//leetcode106从中序和后序遍历
 public class leetcode105 {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         return build(preorder,0, preorder.length - 1, inorder, 0, inorder.length - 1);
@@ -11,8 +12,8 @@ public class leetcode105 {
             return null;
         }
         int begin = preorder[l1];
-        int ans = l2;
-        for(int i = ans; i < r2; i ++){
+        int ans = 0;
+        for(int i = l2; i <= r2; i ++){
             if(inorder[i] == begin){
                 ans = i;
                 break;

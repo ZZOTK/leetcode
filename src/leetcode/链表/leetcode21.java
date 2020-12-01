@@ -28,6 +28,8 @@ public class leetcode21 {
         }
 //并不是新一个链表，而是两个链表间next指向改变
     }
+
+
     public class ListNode {
         int val;
         ListNode next;

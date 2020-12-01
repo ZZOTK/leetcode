@@ -1,6 +1,6 @@
 package leetcode.链表;
 //反转链表
-public class leetcode_206 {
+public class leetcode206 {
     public ListNode reverseList(ListNode head) {
         ListNode las=head;
         ListNode pre=null;

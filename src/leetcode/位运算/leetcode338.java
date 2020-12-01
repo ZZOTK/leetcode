@@ -12,7 +12,7 @@ public class leetcode338 {
     }
     //这就是leetcode191
     //n&n-1可以将最后一个1置0
-    //不断n&n-1就可以统计有多少个n
+    //不断n&n-1就可以统计有多少个1
     private int popcount(int x) {
         int count;
         for (count = 0; x != 0; ++count)

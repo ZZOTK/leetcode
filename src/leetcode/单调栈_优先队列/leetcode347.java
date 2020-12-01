@@ -1,4 +1,4 @@
-package leetcode.哈希表;
+package leetcode.单调栈_优先队列;
 
 import java.util.*;
 
@@ -14,6 +14,8 @@ public class leetcode347 {
         }
 
         //优先队列进行排序。comparator比较器实现比较。
+        //lamda表达式写法
+//        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> ma.get(b)-ma.get(a) );
         PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {

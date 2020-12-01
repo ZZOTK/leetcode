@@ -1,4 +1,4 @@
-package leetcode.图_路径;
+package leetcode.回溯_DFS_BFS;
 //岛屿数量，使用dfs算法。第一种方法使用了visited矩阵。第二种用变0
 //总结只用一次可以用0.不止一次用visited
 public class leetcode200 {
