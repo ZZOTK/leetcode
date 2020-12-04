@@ -1,5 +1,8 @@
 package leetcode.回溯_DFS_BFS;
 
+//给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+//candidates 中的数字可以无限制重复被选取。
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -36,10 +39,12 @@ public class leetcode39 {
             return;
         }
 
+        //回溯向后
         // 重点理解这里从 begin 开始搜索的语意
         for (int i = begin; i < len; i++) {
             path.push(candidates[i]);
 
+            //重难点。保证了不重复。
             // 注意：由于每一个元素可以重复使用，下一轮搜索的起点依然是 i，这里非常容易弄错
             dfs(candidates, i, len, target - candidates[i], path, res);
 

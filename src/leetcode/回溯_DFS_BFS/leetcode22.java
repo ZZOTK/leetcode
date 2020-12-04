@@ -1,5 +1,5 @@
 package leetcode.回溯_DFS_BFS;
-
+//数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +27,8 @@ public class leetcode22 {
 */
     public void backtrack(int left, int right, int n, String path) {
         // 肯定不合法，提前结束
+        //这个判断是核心
+        //left < right这个条件保证了括号的合法性
         if (left > n || left < right) {
             return;
         }

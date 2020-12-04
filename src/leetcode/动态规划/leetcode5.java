@@ -1,7 +1,33 @@
 package leetcode.动态规划;
 //最长回文字符串，动态规划解法
 public class leetcode5 {
+    //中心扩散法遍历做法
     public String longestPalindrome(String s) {
+        int n = s.length();
+        int max  = 0;
+        int templ = 0;
+        int tempr = 0;
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j <= 1; j ++){
+                int l = i;
+                int r = l + j;
+                while(l >= 0 && r < n && s.charAt(l) == s.charAt(r)){
+                    int temp = r - l + 1;
+                    if(temp > max){
+                        templ = l;
+                        tempr = r;
+                        max = temp;
+                    }
+                    l --;
+                    r ++;
+                }
+            }
+        }
+        return s.substring(templ,tempr + 1);
+    }
+
+    //动态规划做法
+    public String longestPalindrome1(String s) {
         int n=s.length();
         //特殊情况到单独考虑
         if(n==0){return "";}

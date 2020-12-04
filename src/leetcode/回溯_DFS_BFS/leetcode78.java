@@ -27,6 +27,7 @@ public class leetcode78 {
         }
         for (int j = begin; j < nums.length; j++) {
             path.addLast(nums[j]);
+            //注意理解j+1. 和leetcode39有相似的地方。
             backtrack(nums, path, ans, j + 1, i);
             path.removeLast();
         }

@@ -28,6 +28,23 @@ public class leetcode647 {
         return true;
     }
 
+    //中心扩展法的优化写法
+    public int countSubstrings2(String s) {
+        int n = s.length();
+        int ans = 0;
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j <= 1; j ++){
+                int l = i;
+                int r = l + j;
+                while(l >= 0 && r < n && s.charAt(l) == s.charAt(r)){
+                    l --;
+                    r ++;
+                    ans ++;
+                }
+            }
+        }
+        return ans;
+    }
 
     //中心拓展法。
     public int countSubstrings1(String s) {
