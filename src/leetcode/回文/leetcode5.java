@@ -1,4 +1,4 @@
-package leetcode.动态规划;
+package leetcode.回文;
 //最长回文字符串，动态规划解法
 public class leetcode5 {
     //中心扩散法遍历做法

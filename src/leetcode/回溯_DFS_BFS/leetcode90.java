@@ -7,6 +7,7 @@ import java.util.List;
 
 //给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
 //包含重复元素的去重是难点
+//leetcode47
 public class leetcode90 {
     Deque<Integer> path;
     List<List<Integer>> ans;

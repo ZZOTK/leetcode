@@ -11,6 +11,7 @@ public class offer_26 {
         }
         return issame(A, B) //判断A，B是否为一颗子树
                 //递归判断A.left与A.right是否为子树
+                //注意这里为isSubStructure
                 || isSubStructure(A.left,B) || isSubStructure(A.right, B);
     }
 

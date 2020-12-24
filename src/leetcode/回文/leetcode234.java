@@ -1,4 +1,4 @@
-package leetcode.链表;
+package leetcode.回文;
 
 import java.util.ArrayList;
 import java.util.List;

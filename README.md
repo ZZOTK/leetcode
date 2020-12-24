@@ -534,3 +534,104 @@ class Solution {
         }
     }
 ```
+##回溯算法（全排列与剪枝）
+
+> 1. 元素不重复
+> 例如给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集。(leetcode78)
+> 没有重复元素就意味着在树中，只需要 **一层中不出现之前层已有的数**。这样树从根节点到叶子节点，
+> 无论是哪条路径，都不会有重复的元素。
+> 常用的解题办法：
+
+```
+    //leetcode78
+    public void backtrack(int[] nums,Deque<Integer> path,List<List<Integer>> ans,int begin,int i ) {
+        if (path.size() == i) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int j = begin; j < nums.length; j++) {
+            //放入nums[j]
+            path.addLast(nums[j]);
+            //注意理解j+1. 
+            //下次遍历从j + 1 处开始，就可以做到不出现之前层有的树
+            backtrack(nums, path, ans, j + 1, i);
+            path.removeLast();
+        }
+    }
+    
+    //leetcode39
+    private void dfs(int[] candidates, int begin, int len, int target, Stack<Integer> path, List<List<Integer>> res) {
+        // target 为负数和 0 的时候不再产生新的孩子结点
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        //回溯向后
+        //重点理解这里从 begin 开始搜索的语意
+        for (int i = begin; i < len; i++) {
+            path.push(candidates[i]);
+            
+            //重难点。保证了不重复。
+            //注意：由于每一个元素可以重复使用，下一轮搜索的起点依然是 i，这里非常容易弄错
+            dfs(candidates, i, len, target - candidates[i], path, res);
+            
+            path.pop();
+        }
+    }
+```
+
+例题：leetcode78，39（
+
+> 2. 元素有重复
+> 比如，一个含有重复数字的序列，返回所有不重复的全排列。（leetcode47）
+> 这种问题就意味着 ： **树的一层中不包含重复元素**
+> 如何做到一层中不包含重复元素，最直接的办法，在回溯算法中，一层加一个set，用set来达到去重的效果。(leetcode491)
+> 办法二，**先排序**，如果nums[i] == nums[i - 1],剪枝跳过。(leetcode40)
+
+```java
+//leetcode47
+//给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
+public class leetcode47 {
+    List<List<Integer>> ans;
+    Deque<Integer> path;
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        ans = new LinkedList<>();
+        path = new LinkedList<>();
+        int n = nums.length;
+        boolean[] vis = new boolean[n];
+        //有重复数字的要先sort
+        Arrays.sort(nums);
+        backtrack(nums, vis, 0);
+        return ans;
+    }
+
+    public void backtrack(int[] nums, boolean[] vis, int len) {
+        if (len == nums.length) {
+            ans.add(new LinkedList(path));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (vis[i]) {
+                continue;
+            }
+            //这个!vis[i -1]理解。前一个相同并且没选过，剪枝
+            //就是对于相同的元素，只有第一个能作为根节点。
+            //相同元素的相对顺序其实是不变的。
+            //比如{1，1，2}，那么第一层循环将只有1，2
+            if (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1]) {
+                continue;
+            }
+            path.addFirst(nums[i]);
+            vis[i] = true;
+            backtrack(nums, vis, len + 1);
+            vis[i] = false;
+            path.pollFirst();
+        }
+    }
+}
+```

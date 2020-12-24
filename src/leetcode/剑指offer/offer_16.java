@@ -15,7 +15,7 @@ public class offer_16 {
             if((b & 1) == 1) res *= x;
             x *= x;
             //b右移一位，等于除以二
-            b = b -1 ;
+            b = b >> 1 ;
         }
         return res;
     }
