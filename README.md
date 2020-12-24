@@ -1,9 +1,18 @@
 # leetcode
 
-##二分查找注意点
-[leetcode34](leetcode/双指针/leetcode34.java)
+* [二分查找](#1)
+* [背包问题](#2)
+* [二叉树](#3)      
+* [二叉查找树](#4)             
+* [单调栈](#5)       
+* [双端队列Deque](#6)       
+* [回溯算法（全排列与剪枝）](#7)   
+
+
+<h2 id="1">二分查找</h2>
 >1.普通二分查找
     
+    //leetcode34
     public int binarySearch(int[] nums,int target){
         int left=0;
         int right=nums.length-1;
@@ -77,27 +86,27 @@
     }
    
 
-##打家劫舍问题
->1.[leetcode198](leetcode/动态规划/leetcode198.java)      
+打家劫舍问题
+>1.leetcode198  
  
 如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。    
 dp算法，int[] dp记录偷到第n家钱最多的钱。  
 dp[n]=Math.max(dp[n-2]+nums[n],dp[n-1])
 
 
->2.[leetcode213](leetcode/动态规划/leetcode213.java)
+>2.leetcode213
 
 强盗依然不能抢劫相邻的房子，输入依然是一个数组，但是告诉你这些房子不是一排，而是围成了一个圈。
 也就是说，现在第一间房子和最后一间房子也相当于是相邻的，不能同时抢。  
 分为三个情况。同上算法，我们求[0,n-1) , (0,n-1] , (0,n-1)三个范围内的最大值。显然，（0，n-1）的情况已经被
 包含。只需要求[0,n-1) , (0,n-1]这两个情况。
 
->3.[leetcode322](leetcode/动态规划/leetcode322.java) 
+>3.leetcode322
 
 树形dp。   
 
+<h2 id="2">背包问题</h2>
 
-##背包问题
 >1.　01背包问题
 
 有 N 件物品和一个容量是 V 的背包。`每件物品只能使用一次。`第 i 件物品的体积是 vi，价值是 wi。
@@ -172,8 +181,8 @@ dp[i][j]表示在 只能选择前i个物品，背包容量为j的情况下，背
     }
    
 补充：     
-1.01背包装到值为A有多少种做法：[leetcode494](leetcode/动态规划/leetcode494.java)       
-2.01背包能否装到值为A ： [leetcode416](leetcode/动态规划/leetcode416.java)       
+1.01背包装到值为A有多少种做法：leetcode494      
+2.01背包能否装到值为A ： leetcode416  
 
 
 >2.完全背包问题
@@ -217,7 +226,7 @@ dp[i][j]表示在 只能选择前i个物品，背包容量为j的情况下，背
             }
         }
         System.out.println(dp[V]);
-        
+
 >3 多重背包问题
 
 有 N 种物品和一个容量是 V 的背包。        
@@ -363,25 +372,25 @@ si>0 表示第 i 种物品可以使用 si 次；
             }
             return dp[N][V][M];
 
-##二叉树
+<h2 id="3">二叉树</h2>
 **二叉树的主要思路就是递归。我们需要重点考虑每个节点该做什么，考虑递归.left和.right在操作之前还是之后
 。然后写出函数。**
 >1.树到数组     
 
 这类问题，最直接的就是树的前序，中序，后序，层序遍历(leetcode102)。        
-将树拉直([leetcode114](leetcode/树/leetcode114.java))        
-树序列化到数组再反序列化为树（[leetcode297](leetcode/树/leetcode297.java)）（前序后序的序列化和复原）
+将树拉直(leetcode114))        
+树序列化到数组再反序列化为树（leetcode297）（前序后序的序列化和复原）
 
 
 >2.树本身的变形和访问
 
-树的反转（[leetcode226](leetcode/树/leetcode226.java)），树节点指向（[leetcode116](leetcode/树/leetcode116.java)）
+树的反转（leetcode226），树节点指向（leetcode116）
 
 
 >3.数组到树
 
-按照一定规律将数组转为树([leetcode654](leetcode/树/leetcode654.java))       
-根据前序、中序、层序、后序中的两个数组还原([**leetcode105**](leetcode/树/leetcode105.java))([**leetcode106**](leetcode/树/leetcode106.java))     
+按照一定规律将数组转为树(leetcode654)       
+根据前序、中序、层序、后序中的两个数组还原(**leetcode105**,**leetcode106**)     
 都使用了辅助函数bulid。重点：       
 1.利用左右指针大小比较来进行return。      
 2.注意left和right中范围的选取。（使用distance记录）;
@@ -391,7 +400,7 @@ si>0 表示第 i 种物品可以使用 si 次；
 1.动态规划      
 2.DFS，BFS（一般配合哈希表实现记忆化，完成剪枝。
 
-##二叉查找树（BST)
+<h2 id="4">二叉查找树</h2>
 定义: 
     
    1、对于 BST 的每一个节点node，左子树节点的值都比node的值要小，右子树节点的值都比node的值大。      
@@ -399,8 +408,8 @@ si>0 表示第 i 种物品可以使用 si 次；
    3、一个重要的性质：BST 的中序遍历结果是有序的（升序）。       
    
  例题：        
- 1.[leetcode230]():查找第k小的元素。中序遍历，第k个元素。     
- 2.[leetcode538]():BST转换为累加树。后序遍历，节点的累加值赋给节点。       
+ 1.leetcode230:查找第k小的元素。中序遍历，第k个元素。     
+ 2.leetcode538:BST转换为累加树。后序遍历，节点的累加值赋给节点。       
  
 进一步操作： 
     
@@ -481,17 +490,56 @@ BST中删除一个数：
         while (node.left != null) node = node.left;
         return node;
     } 
-    
-##单调栈
-单调栈一般解决问题：       
+
+<h2 id="5">单调栈</h2>
+单调栈一般解决问题：
 1.数组去除k个元素使（条件）   
     一般这种问题，使剩下的最大或最小。就是使删除k个元素之后，从前往后从小到大。  
 2.后一个大或小的元素         
     用单调栈找到每个元素的下一个大的或是小的元素，再用哈希表记录。
 
-leetcode402
 
-##Deque双端队列
+```java
+public class leetcode402 {
+    public String removeKdigits(String num, int k) {
+        //特殊情况全部删除
+        if (num.length() == k) {
+            return "0";
+        }
+        char[] s = num.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        //遍历数组
+        for (Character i : s) {
+            //移除元素的情况，k--
+            while (!stack.isEmpty() && i < stack.peek() && k > 0) {
+                stack.pop();
+                k--;
+            }
+            //栈为空，且当前位为0时，我们不需要将其入栈
+            if (stack.isEmpty() && i == '0') {
+                continue;
+            }
+            stack.push(i);
+        }
+        while (k > 0) {
+            stack.pop();
+            k--;
+        }
+        //这个是最后栈为空时，删除一位，比如我们的10，删除一位为0，按上面逻辑我们会返回""，所以我们让其返回"0"
+        if (stack.isEmpty()) {
+            return "0";
+        }
+        //反转并返回字符串
+        StringBuilder str = new StringBuilder();
+        while (!stack.isEmpty()) {
+            str.append(stack.pop());
+        }
+        return str.reverse().toString();
+    }
+}
+```
+
+<h2 id="6">双端队列Deque</h2>
 双端队列可以addFirst,也可以addlast。
 add(),offer()默认是addLast(),即加在尾端;        
 push()默认是addFirst();        
@@ -534,9 +582,9 @@ class Solution {
         }
     }
 ```
-##回溯算法（全排列与剪枝）
+<h2 id="7">回溯算法（全排列与剪枝）</h2>
 
-> 1. 元素不重复
+> 1. 元素不重复      
 > 例如给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集。(leetcode78)
 > 没有重复元素就意味着在树中，只需要 **一层中不出现之前层已有的数**。这样树从根节点到叶子节点，
 > 无论是哪条路径，都不会有重复的元素。
@@ -575,7 +623,6 @@ class Solution {
         for (int i = begin; i < len; i++) {
             path.push(candidates[i]);
             
-            //重难点。保证了不重复。
             //注意：由于每一个元素可以重复使用，下一轮搜索的起点依然是 i，这里非常容易弄错
             dfs(candidates, i, len, target - candidates[i], path, res);
             
@@ -584,9 +631,8 @@ class Solution {
     }
 ```
 
-例题：leetcode78，39（
 
-> 2. 元素有重复
+> 2. 元素有重复      
 > 比如，一个含有重复数字的序列，返回所有不重复的全排列。（leetcode47）
 > 这种问题就意味着 ： **树的一层中不包含重复元素**
 > 如何做到一层中不包含重复元素，最直接的办法，在回溯算法中，一层加一个set，用set来达到去重的效果。(leetcode491)
