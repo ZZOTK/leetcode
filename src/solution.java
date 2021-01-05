@@ -8,30 +8,34 @@ import java.util.Scanner;
 import java.util.concurrent.LinkedTransferQueue;
 
 public class solution {
-    public int nthUglyNumber(int n) {
-        PriorityQueue<Long> pq = new PriorityQueue<>();
-        pq.add((long)1);
-        int count = 0;
-        while(count != n -1){
-            long temp = pq.poll();
-            if(!pq.contains(temp * 2)){
-                pq.add(temp * 2);
+    public ListNode deleteDuplicates(ListNode head) {
+        Deque<ListNode> dq = new LinkedList<>();
+        ListNode start = head;
+        dq.add(start);
+        start = start.next;
+        while(start != null){
+            if(start.val == dq.peek().val){
+                while(start != null && start.val == dq.peek().val){
+                    start = start.next;
+                }
+                dq.pollFirst();
             }
-            if(!pq.contains(temp * 3)){
-                pq.add(temp * 3);
-            }
-            if(!pq.contains(temp * 5)){
-                pq.add(temp * 5);
-            }
-            count ++;
+            dq.addFirst(start);
+            start =start.next;
         }
-        long ans = pq.poll();
-        return (int)ans;
+        ListNode ans = dq.pollLast();
+        ListNode dummy =new ListNode(0);
+        dummy.next = ans;
+        while(!dq.isEmpty()){
+            ans.next = dq.pollLast();
+            ans = ans.next;
+        }
+        return dummy.next;
+
     }
 
     public static void main(String[] args) {
-        solution a = new solution();
-        System.out.println(a.nthUglyNumber(1364));
+
     }
 
 

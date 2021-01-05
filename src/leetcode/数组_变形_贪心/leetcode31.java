@@ -1,4 +1,5 @@
 package leetcode.数组_变形_贪心;
+
 //实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
 //如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
 //先从后向前找到第一个降序的数（index）。再从后向前找到第一个比这个大的数。交换。
@@ -26,6 +27,7 @@ public class leetcode31 {
         nums[j] = temp;
     }
 
+    //
     public void reverse(int[] nums, int start) {
         int left = start, right = nums.length - 1;
         while (left < right) {
@@ -34,6 +36,5 @@ public class leetcode31 {
             right--;
         }
     }
-
 
 }

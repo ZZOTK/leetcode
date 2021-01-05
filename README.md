@@ -1,13 +1,40 @@
 # leetcode
 
+* [位运算](#0)
 * [二分查找](#1)
 * [背包问题](#2)
-* [二叉树](#3)      
+* [二叉树](#3)
+* [链表](#9)  
 * [二叉查找树](#4)             
 * [单调栈](#5)       
 * [双端队列Deque](#6)       
 * [回溯算法（全排列与剪枝）](#7)   
+* [优先队列PriorityQueue](#8)
 
+<h2 id="0">位运算</h2>
+> + 位运算的是二进制每一位的逻辑运算。
+> + 常用的二进制运算：左移，右移（等价于除以二）
+> + 例题：统计二进制中1的个数
+
+```java
+//两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
+//给出两个整数 x 和 y，计算它们之间的汉明距离。
+
+//取x XOR y ，即只有xy不同时才为1。再统计有多少个1
+public class leetcode461 {
+    public int hammingDistance(int x, int y) {
+        //x^y 取xor
+        int xor = x ^ y;
+        int count = 0;
+        while(xor != 0){
+            count++;
+            //计算二进制中有多少个1的位算法，不断x&(x-1)
+            xor = xor&(xor - 1);
+        }
+        return count;
+    }
+}
+```
 
 <h2 id="1">二分查找</h2>
 >1.普通二分查找
@@ -373,8 +400,9 @@ si>0 表示第 i 种物品可以使用 si 次；
             return dp[N][V][M];
 
 <h2 id="3">二叉树</h2>
-**二叉树的主要思路就是递归。我们需要重点考虑每个节点该做什么，考虑递归.left和.right在操作之前还是之后
-。然后写出函数。**
+
+**二叉树的主要思路就是递归。我们需要重点考虑每个节点该做什么，考虑递归.left和.right在操作之前还是之后 。然后写出函数。**
+
 >1.树到数组     
 
 这类问题，最直接的就是树的前序，中序，后序，层序遍历(leetcode102)。        
@@ -399,6 +427,183 @@ si>0 表示第 i 种物品可以使用 si 次；
 
 1.动态规划      
 2.DFS，BFS（一般配合哈希表实现记忆化，完成剪枝。
+
+<h2 id="9">链表</h2>
+> + 链表与数组的最大区别：链表可以直接增删元素，而查找不方便。数组增删复杂，查找容易。 
+> + 链表题的常用技巧：哑节点，快慢指针。
+> + 经典问题：
+> + 倒数第n个节点（leetcode19）：快指针先走n步，快慢一起走，快指针到null则慢指针为所求。
+> + 反转链表（leetcode206，offer_24）：原地法（递归）。利用栈。         
+> + 是否有环（leetcode141）：快慢指证一起走，是否相遇。         
+> + 环的入口（leetcode142）：快慢指针判断是否有环，有环并相遇后起点与慢指针再相遇为入口。         
+> + 链表排序：插入排序（leetcode147） & 归并排序（leetcode148：O(n log n) 时间复杂度和常数级空间复杂度）    
+
+```java
+class Solution {
+    //leetcode61旋转链表
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null) return null;
+        if (head.next==null) return head;
+
+        ListNode old_tail=head;
+        //n记录链表的长度
+        int n;
+        for (n=1;old_tail.next!=null;n++){
+            old_tail=old_tail.next;
+        }
+        //将链表变成一个环形链表
+        old_tail.next=head;
+        //找到新的尾节点
+        ListNode new_tail=head;
+        for (int i=1;i<n-k%n;i++){
+            new_tail=new_tail.next;
+        }
+        //新的起点
+        ListNode new_head=new_tail.next;
+        //断开
+        new_tail.next=null;
+        return new_head;
+    }
+    
+    //leetcode147:链表的插入排序
+    public ListNode insertionSortList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        //插入排序
+        ListNode start = dummy.next;
+        ListNode cur = start.next;
+        while(cur != null){
+            if(start.val <= cur.val){
+                start = start.next;
+            }else{
+                ListNode tem = dummy;
+                //注意这里的tem.next
+                while(cur.val >= tem.next.val){
+                    tem = tem.next;
+                }
+                start.next = cur.next;
+                cur.next = tem.next;
+                tem.next = cur;
+            }
+            cur = start.next;
+        }
+        return dummy.next;
+    }
+
+    //leetcode148,归并排序链表
+    public ListNode sortList(ListNode head) {
+        int length = getLength(head);
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        for(int step = 1; step < length; step*=2){ //依次将链表分成1块，2块，4块...
+            //每次变换步长，pre指针和cur指针都初始化在链表头
+            ListNode pre = dummy;
+            ListNode cur = dummy.next;
+            while(cur!=null){
+                ListNode h1 = cur; //第一部分头 （第二次循环之后，cur为剩余部分头，不断往后把链表按照步长step分成一块一块...）
+                ListNode h2 = split(h1,step);  //第二部分头
+                cur = split(h2,step); //剩余部分的头
+                ListNode temp = merge(h1,h2); //将一二部分排序合并
+                pre.next = temp; //将前面的部分与排序好的部分连接
+                while(pre.next!=null){
+                    pre = pre.next; //把pre指针移动到排序好的部分的末尾
+                }
+            }
+        }
+        return dummy.next;
+    }
+    //获取链表长度
+    public int getLength(ListNode head){
+        int count = 0;
+        while(head!=null){
+            count++;
+            head=head.next;
+        }
+        return count;
+    }
+    //断链操作 返回第二部分链表头
+    public ListNode split(ListNode head,int step){
+        if(head==null)  return null;
+        ListNode cur = head;
+        for(int i=1; i<step && cur.next!=null; i++){
+            cur = cur.next;
+        }
+        ListNode right = cur.next;
+        cur.next = null; //切断连接
+        return right;
+    }
+    //合并两个有序链表
+    public ListNode merge(ListNode h1, ListNode h2){
+        ListNode head = new ListNode(-1);
+        ListNode p = head;
+        while(h1!=null && h2!=null){
+            if(h1.val < h2.val){
+                p.next = h1;
+                h1 = h1.next;
+            }
+            else{
+                p.next = h2;
+                h2 = h2.next;
+            }
+            p = p.next;
+        }
+        if(h1!=null)    p.next = h1;
+        if(h2!=null)    p.next = h2;
+        return head.next;
+    }
+    
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
+}
+```
+
+```
+//  leetcode2
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode temp=new ListNode(0);
+        ListNode cur=temp;
+        ListNode p1=l1;
+        ListNode p2=l2;
+        //定义一个进位符，方便进1.
+        int jinwei=0;
+        while (p1!=null||p2!=null){
+            int sum=0;
+            int x=0;int y=0;
+//         这么写是错误的。p1为null时无法进行p1.val的操作
+//           if (p1==null) p1.val=0;
+            if (p1!=null){
+                x=p1.val;
+            } else x=0;
+            if (p2!=null){
+                y=p2.val;
+            }else y=0;
+            sum=x+y+jinwei;
+            if (p1!=null){
+                p1=p1.next;
+            }
+            if (p2!=null){
+                p2=p2.next;
+            }
+            jinwei=sum/10;
+            cur.next=new ListNode(sum%10);
+            cur=cur.next;
+        }
+        //最后进位为1则需要再加一个1节点。
+        if (jinwei==1){
+            cur.next=new ListNode(jinwei);
+        }
+        return temp;
+    }
+```
+
+
 
 <h2 id="4">二叉查找树</h2>
 定义: 
@@ -634,9 +839,10 @@ class Solution {
 
 > 2. 元素有重复      
 > 比如，一个含有重复数字的序列，返回所有不重复的全排列。（leetcode47）
-> 这种问题就意味着 ： **树的一层中不包含重复元素**
-> 如何做到一层中不包含重复元素，最直接的办法，在回溯算法中，一层加一个set，用set来达到去重的效果。(leetcode491)
-> 办法二，**先排序**，如果nums[i] == nums[i - 1],剪枝跳过。(leetcode40)
+> 这种问题就意味着 ： **树的一层中不包含重复元素**       
+> 如何做到一层中不包含重复元素，最直接的办法，在回溯算法中，一层加一个set，用set来达到去重的效果。(leetcode491)      
+> 办法二，**先排序**，如果nums[i] == nums[i - 1],剪枝跳过。(leetcode40)                           
+> 本质上方法一和方法二是一样的，都是做到了每一层的去重。如果还需要考虑上下层，就再加入boolean[] vis 数组。
 
 ```java
 //leetcode47
@@ -678,6 +884,64 @@ public class leetcode47 {
             vis[i] = false;
             path.pollFirst();
         }
+    }
+}
+```
+
+<h2 id="8">优先队列PriorityQueue</h2>
+优先队列的主要用途：寻找前k个最大或最小的值
+> + java中默认的优先队列是小根堆，也就是remove的时候，输出的是最小值
+> + 难点是定义排序的标准（lamda表达式或是@Override）
+> + 寻找前k个最小的值：
+> + 寻找前k个最大的值：
+> + 例题：leetcode347，leetcode973
+
+```java
+public class leetcode347 {
+    //给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+    //哈希表加堆排序。
+    public int[] topKFrequent(int[] nums, int k) {
+        //哈希表存数据。key为值，value为出现的次数
+        Map<Integer,Integer> ma=new HashMap<>();
+        for(int num:nums){
+            int count = ma.getOrDefault( num,0)+1;
+            ma.put(num, count);
+        }
+
+        //优先队列进行排序。comparator比较器实现比较。
+        //lamda表达式写法
+        //PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> ma.get(b)-ma.get(a) );
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return ma.get(o1) - ma.get(o2);
+            }
+        });
+        //依次加入队列
+        for(int key : ma.keySet()){
+            //最多加入k个元素
+            if (pq.size() < k){
+                pq.add(key);
+            }
+            //如果新key的value大于之前最小的value，则一出顶，再入队
+            else if(ma.get(key) > ma.get(pq.peek())){
+                pq.remove();
+                pq.add(key);
+            }
+        }
+        //直接全部加入队列
+//        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> ma.get(b)-ma.get(a) );
+//        for(int key : ma.keySet()){
+//            pq.add(key);
+//        }
+//        再pop出k个即可
+
+        int[] res = new int[k];
+        int i=0;
+        while (!pq.isEmpty()){
+            res[i ++ ]=pq.remove();
+        }
+        return res;
     }
 }
 ```
