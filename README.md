@@ -3,6 +3,7 @@
 * [位运算](#0)
 * [二分查找](#1)
 * [背包问题](#2)
+* [二维数组自定义排序](#9)  
 * [二叉树](#3)
 * [链表](#9)  
 * [二叉查找树](#4)             
@@ -12,9 +13,9 @@
 * [优先队列PriorityQueue](#8)
 
 <h2 id="0">位运算</h2>
-> + 位运算的是二进制每一位的逻辑运算。
-> + 常用的二进制运算：左移，右移（等价于除以二）
-> + 例题：统计二进制中1的个数
+* 位运算的是二进制每一位的逻辑运算。
+* 常用的二进制运算：左移，右移（等价于除以二）
+* 例题：统计二进制中1的个数
 
 ```java
 //两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
@@ -399,6 +400,71 @@ si>0 表示第 i 种物品可以使用 si 次；
             }
             return dp[N][V][M];
 
+<h2 id="9">二维数组自定义排序</h2>
+
+java中Arrays.sort提供了自定义排序的功能。可以使用 @Override 重写方法，也可以使用lambda表达式完成自定义排序。      
+PriorityQueue中也常用自定义排序。排序时还可以借助HashMap来进行记录和排序。     
+遇到二维数组的排序、合并区间等问题，常用方法就是自定义排序加贪心算法。    
+
+```java
+public class Solution {
+    //leetcode56
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) {
+            return new int[0][2];
+        }
+        // 先按照区间起始位置排序，这时comparable接口的写法
+        
+        //Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
+        
+        //另一种实现按第一个元素排序的写法
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            public int compare(int[] interval1, int[] interval2) {
+                return interval1[0] - interval2[0];
+            }
+        });
+        // 遍历区间,合并区间
+        int[][] res = new int[intervals.length][2];
+        int idx = 0;
+        for (int[] interval: intervals) {
+            // 如果结果数组是空的，或者当前区间的起始位置 > 结果数组中最后区间的终止位置，
+            // 则不合并，直接将当前区间加入结果数组。
+            if (idx == 0 || interval[0] > res[idx-1][1]) {
+                res[idx] = interval;
+                idx++;
+            } else {
+                // 反之将当前区间合并至结果数组的最后区间
+                res[idx-1][1] = Math.max(res[idx-1][1], interval[1]);
+            }
+        }
+        return Arrays.copyOf(res, idx);
+    }
+
+    //leetcode406
+    //sort排序后再完成排序。
+    public int[][] reconstructQueue(int[][] people) {
+        Arrays.sort(people, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                // if the heights are equal, compare k-values
+                //先按照高h从大到小排列。同h再按照k从小到大排列。
+                return o1[0] == o2[0] ? o1[1] - o2[1] : o2[0] - o1[0];
+            }
+        });
+
+        List<int[]> output = new LinkedList<>();
+        for(int[] p : people){
+            //在第p[1]个位置插入p
+            output.add(p[1], p);
+        }
+
+        int n = people.length;
+        return output.toArray(new int[n][2]);
+    }
+
+}
+```
+
 <h2 id="3">二叉树</h2>
 
 **二叉树的主要思路就是递归。我们需要重点考虑每个节点该做什么，考虑递归.left和.right在操作之前还是之后 。然后写出函数。**
@@ -429,14 +495,14 @@ si>0 表示第 i 种物品可以使用 si 次；
 2.DFS，BFS（一般配合哈希表实现记忆化，完成剪枝。
 
 <h2 id="9">链表</h2>
-> + 链表与数组的最大区别：链表可以直接增删元素，而查找不方便。数组增删复杂，查找容易。 
-> + 链表题的常用技巧：哑节点，快慢指针。
-> + 经典问题：
-> + 倒数第n个节点（leetcode19）：快指针先走n步，快慢一起走，快指针到null则慢指针为所求。
-> + 反转链表（leetcode206，offer_24）：原地法（递归）。利用栈。         
-> + 是否有环（leetcode141）：快慢指证一起走，是否相遇。         
-> + 环的入口（leetcode142）：快慢指针判断是否有环，有环并相遇后起点与慢指针再相遇为入口。         
-> + 链表排序：插入排序（leetcode147） & 归并排序（leetcode148：O(n log n) 时间复杂度和常数级空间复杂度）    
+>+ 链表与数组的最大区别：链表可以直接增删元素，而查找不方便。数组增删复杂，查找容易。         
+>+ 链表题的常用技巧：哑节点，快慢指针。       
+>+ 经典问题：        
+>+ 倒数第n个节点（leetcode19）：快指针先走n步，快慢一起走，快指针到null则慢指针为所求。       
+>+ 反转链表（leetcode206，offer_24）：原地法（递归）。利用栈。              
+>+ 是否有环（leetcode141）：快慢指证一起走，是否相遇。              
+>+ 环的入口（leetcode142）：快慢指针判断是否有环，有环并相遇后起点与慢指针再相遇为入口。              
+>+ 链表排序：插入排序（leetcode147） & 归并排序（leetcode148：O(n log n) 时间复杂度和常数级空间复杂度）         
 
 ```java
 class Solution {
@@ -789,7 +855,7 @@ class Solution {
 ```
 <h2 id="7">回溯算法（全排列与剪枝）</h2>
 
-> 1. 元素不重复      
+>1. 元素不重复      
 > 例如给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集。(leetcode78)
 > 没有重复元素就意味着在树中，只需要 **一层中不出现之前层已有的数**。这样树从根节点到叶子节点，
 > 无论是哪条路径，都不会有重复的元素。
@@ -890,11 +956,11 @@ public class leetcode47 {
 
 <h2 id="8">优先队列PriorityQueue</h2>
 优先队列的主要用途：寻找前k个最大或最小的值
-> + java中默认的优先队列是小根堆，也就是remove的时候，输出的是最小值
-> + 难点是定义排序的标准（lamda表达式或是@Override）
-> + 寻找前k个最小的值：
-> + 寻找前k个最大的值：
-> + 例题：leetcode347，leetcode973
+> java中默认的优先队列是小根堆，也就是remove的时候，输出的是最小值     
+> 难点是定义排序的标准（lamda表达式或是@Override）       
+> 寻找前k个最小的值：        
+> 寻找前k个最大的值：        
+> 例题：leetcode347，leetcode973        
 
 ```java
 public class leetcode347 {

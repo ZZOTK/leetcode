@@ -1,8 +1,13 @@
-package leetcode.数组_变形_贪心;
+package leetcode.自定义sort;
+
+//给出一个区间的集合，请合并所有重叠的区间。
 
 import java.util.Arrays;
 import java.util.Comparator;
-
+//排序并贪心。
+//先按照第一位的大小排序。
+//再按照贪心算法，寻找当前区间的起始位置 > 结果数组中最后区间的终止位置
+//否则就将当前区间合并至最后区间
 public class leetcode56 {
     public int[][] merge(int[][] intervals) {
         if (intervals.length == 0) {

@@ -10,7 +10,7 @@ public class leetcode35 {
         int l = 0;
         int r = n -1;
         while(l < r){
-            int mid = 1/2 * (r -l) + l;
+            int mid =  (r -l)/2 + l;
             if(nums[mid] == target){
                 return mid;
             }else if(nums[mid] > target){
