@@ -30,6 +30,4 @@ public class leetcode106 {
         TreeNode right;
         TreeNode(int x) { val = x; }
     }
-
-
 }

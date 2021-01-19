@@ -3,7 +3,7 @@
 * [位运算](#0)
 * [二分查找](#1)
 * [背包问题](#2)
-* [二维数组自定义排序](#9)  
+* [二维数组自定义排序](#10)  
 * [二叉树](#3)
 * [链表](#9)  
 * [二叉查找树](#4)             
@@ -13,9 +13,9 @@
 * [优先队列PriorityQueue](#8)
 
 <h2 id="0">位运算</h2>
-* 位运算的是二进制每一位的逻辑运算。
-* 常用的二进制运算：左移，右移（等价于除以二）
-* 例题：统计二进制中1的个数
+> 位运算的是二进制每一位的逻辑运算。     
+> 常用的二进制运算：左移，右移（等价于除以二）        
+> 例题：统计二进制中1的个数     
 
 ```java
 //两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
@@ -38,7 +38,8 @@ public class leetcode461 {
 ```
 
 <h2 id="1">二分查找</h2>
->1.普通二分查找
+
+> 1.普通二分查找
     
     //leetcode34
     public int binarySearch(int[] nums,int target){
@@ -400,7 +401,7 @@ si>0 表示第 i 种物品可以使用 si 次；
             }
             return dp[N][V][M];
 
-<h2 id="9">二维数组自定义排序</h2>
+<h2 id="10">二维数组自定义排序</h2>
 
 java中Arrays.sort提供了自定义排序的功能。可以使用 @Override 重写方法，也可以使用lambda表达式完成自定义排序。      
 PriorityQueue中也常用自定义排序。排序时还可以借助HashMap来进行记录和排序。     
@@ -479,6 +480,27 @@ public class Solution {
 >2.树本身的变形和访问
 
 树的反转（leetcode226），树节点指向（leetcode116）
+树的最近公共祖先
+
+```
+//剑指offer68-2，二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    //如果节点为p或q，直接返回root
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null) {
+            return right;
+        }
+        if (right == null) {
+            return left;
+        }
+        //返回值left和right都有值，返回root。
+        return root;
+    }
+```
 
 
 >3.数组到树
@@ -488,21 +510,93 @@ public class Solution {
 都使用了辅助函数bulid。重点：       
 1.利用左右指针大小比较来进行return。      
 2.注意left和right中范围的选取。（使用distance记录）;
+```java
+public class leetcode105 {
+    
+    //前序遍历与中序遍历构造二叉树   
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return build(preorder,0, preorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+    
+    public TreeNode build(int[] preorder, int l1, int r1, int[] inorder, int l2, int r2){
+        //只需要判断前序是否出界
+        if(l1 > r1 ){
+            return null;
+        }
+        int begin = preorder[l1];
+        int ans = 0;
+        for(int i = l2; i <= r2; i ++){
+            if(inorder[i] == begin){
+                ans = i;
+                break;
+            }
+        }
+        //利用distance来确定位置。
+        int distance = ans - l2;
+        TreeNode root = new TreeNode(begin);
+        //位置。更新的r1，l1都需要思考
+        //递归的难点
+        root.left = build(preorder, l1 + 1, l1 + distance , inorder, l2, ans - 1);
+        root.right = build(preorder,l1 + distance + 1, r1, inorder, ans + 1, r2);
+        return root;
+    }
 
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
+    
+}
+```
+```java
+public class leetcode106 {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        return build(inorder, 0, inorder.length - 1,postorder, 0, postorder.length - 1);
+    }
+
+    public TreeNode build(int[] inorder,int l1, int r1, int[] postorder, int l2, int r2){
+        if(l2 > r2){
+            return null;
+        }
+        int node = postorder[r2];
+        int renode = 0;
+        for( int i = l1; i <= r1; i ++){
+            if(inorder[i] == node){
+                renode = i;
+            }
+        }
+        int distance = r1 - renode;
+        TreeNode root = new TreeNode(node);
+        root.left = build(inorder, l1 ,renode - 1 ,postorder,l2,r2 - distance - 1);
+        root.right= build(inorder, renode + 1 , r1 ,postorder, r2 - distance, r2 - 1);
+        return root;
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
+}
+
+```
 >4.树加入其他算法。
 
 1.动态规划      
 2.DFS，BFS（一般配合哈希表实现记忆化，完成剪枝。
 
 <h2 id="9">链表</h2>
->+ 链表与数组的最大区别：链表可以直接增删元素，而查找不方便。数组增删复杂，查找容易。         
->+ 链表题的常用技巧：哑节点，快慢指针。       
->+ 经典问题：        
->+ 倒数第n个节点（leetcode19）：快指针先走n步，快慢一起走，快指针到null则慢指针为所求。       
->+ 反转链表（leetcode206，offer_24）：原地法（递归）。利用栈。              
->+ 是否有环（leetcode141）：快慢指证一起走，是否相遇。              
->+ 环的入口（leetcode142）：快慢指针判断是否有环，有环并相遇后起点与慢指针再相遇为入口。              
->+ 链表排序：插入排序（leetcode147） & 归并排序（leetcode148：O(n log n) 时间复杂度和常数级空间复杂度）         
+>链表与数组的最大区别：链表可以直接增删元素，而查找不方便。数组增删复杂，查找容易。         
+>链表题的常用技巧：哑节点，快慢指针。       
+>经典问题：        
+>倒数第n个节点（leetcode19）：快指针先走n步，快慢一起走，快指针到null则慢指针为所求。       
+>反转链表（leetcode206，offer_24）：原地法（递归）。利用栈。              
+>是否有环（leetcode141）：快慢指证一起走，是否相遇。              
+>环的入口（leetcode142）：快慢指针判断是否有环，有环并相遇后起点与慢指针再相遇为入口。              
+>链表排序：插入排序（leetcode147） & 归并排序（leetcode148：O(n log n) 时间复杂度和常数级空间复杂度）         
 
 ```java
 class Solution {

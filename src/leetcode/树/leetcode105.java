@@ -35,5 +35,4 @@ public class leetcode105 {
         TreeNode(int x) { val = x; }
     }
 
-
 }

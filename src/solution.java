@@ -8,30 +8,13 @@ import java.util.Scanner;
 import java.util.concurrent.LinkedTransferQueue;
 
 public class solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        Deque<ListNode> dq = new LinkedList<>();
-        ListNode start = head;
-        dq.add(start);
-        start = start.next;
-        while(start != null){
-            if(start.val == dq.peek().val){
-                while(start != null && start.val == dq.peek().val){
-                    start = start.next;
-                }
-                dq.pollFirst();
-            }
-            dq.addFirst(start);
-            start =start.next;
+    public boolean isStraight(int[] nums) {
+        Arrays.sort(nums);
+        int[] count = new int[14];
+        for(int num : nums){
+            count[num] ++;
         }
-        ListNode ans = dq.pollLast();
-        ListNode dummy =new ListNode(0);
-        dummy.next = ans;
-        while(!dq.isEmpty()){
-            ans.next = dq.pollLast();
-            ans = ans.next;
-        }
-        return dummy.next;
-
+        return true;
     }
 
     public static void main(String[] args) {
