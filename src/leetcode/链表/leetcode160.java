@@ -22,6 +22,7 @@ public class leetcode160 {
         if(headA==null||headB==null){return null;}
         ListNode p1=headA;
         ListNode p2=headB;
+        //如果没有公共节点，那么p1，p2都会到null，此时p1==p2
         while(p1!=p2){
             if(p1==null){
                 p1=headB;
