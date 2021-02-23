@@ -3,7 +3,7 @@
 * [位运算](#0)
 * [二分查找](#1)
 * [背包问题](#2)
-* [二维数组自定义排序](#10)  
+* [自定义排序](#10)  
 * [二叉树](#3)
 * [链表](#9)  
 * [二叉查找树](#4)             
@@ -401,7 +401,7 @@ si>0 表示第 i 种物品可以使用 si 次；
             }
             return dp[N][V][M];
 
-<h2 id="10">二维数组自定义排序</h2>
+<h2 id="10">自定义排序</h2>
 
 java中Arrays.sort提供了自定义排序的功能。可以使用 @Override 重写方法，也可以使用lambda表达式完成自定义排序。      
 PriorityQueue中也常用自定义排序。排序时还可以借助HashMap来进行记录和排序。     
@@ -463,6 +463,35 @@ public class Solution {
         return output.toArray(new int[n][2]);
     }
 
+}
+```
+```java
+public class offer_45 {
+    public String minNumber(int[] nums) {
+        int n = nums.length;
+        String[] copy = new String[n];
+        for(int i = 0 ; i < n; i ++){
+            copy[i] = nums[i] + "";
+        }
+        
+        //字符串比较不用-。使用compareTo函数!!
+        
+        //这种情况下使用a+b与b+a比较大小再自定义排序!!
+        
+        //Arrays.sort(copy, (x, y) -> (x + y).compareTo(y + x));
+        Arrays.sort(copy, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o1+o2).compareTo(o2+o1) ;
+            }
+        });
+        
+        StringBuilder res = new StringBuilder();
+        for(String cop : copy){
+            res.append(cop);
+        }
+        return res.toString();
+    }
 }
 ```
 
