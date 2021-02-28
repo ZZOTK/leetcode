@@ -10,46 +10,32 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class solution {
-    public static void main(String[] args) {
-        List<String> list =  new CopyOnWriteArrayList<>();
-        Data data = new Data();
-        new Thread(() -> {
-            for(int i  = 0; i < 10; i ++){
-                try {
-                    data.increment();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"A").start();
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.decrement();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"B").start();
-        new Thread(() -> {
-            for(int i  = 0; i < 10; i ++){
-                try {
-                    data.increment();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"C").start();
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.decrement();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"D").start();
+    int ans = Integer.MAX_VALUE;
+    int res = Integer.MAX_VALUE;
+    public int closestCost(int[] baseCosts, int[] toppingCosts, int target) {
+        int n = baseCosts.length;
+        int m = toppingCosts.length;
+        for(int i = 0 ; i < n; i ++){
+            int target2 = target - baseCosts[i];
+            ans = Integer.MAX_VALUE;
+            backtrack(target2,toppingCosts,0);
+            res = Math.min(res,ans);
+        }
+        return target - res;
     }
+
+    public void backtrack(int target2 , int[] toppingCosts,int start){
+        if(target2 < 0){
+            return;
+        }
+        ans = Math.min(target2,ans);
+        for(int i = start; i < toppingCosts.length; i ++){
+            backtrack(target2 - toppingCosts[i],toppingCosts,start + 1);
+            backtrack(target2 - 2 * toppingCosts[i],toppingCosts,start + 1);
+            backtrack(target2 ,toppingCosts,start + 1);
+        }
+    }
+
 
     public class TreeNode {
         int val;
@@ -68,46 +54,6 @@ public class solution {
         ListNode(int x) {
             val = x;
             next = null;
-        }
-    }
-}
-
-class Data{
-    private int number = 0;
-
-    Lock lock = new ReentrantLock();
-    Condition condition = lock.newCondition();
-
-    public  void increment() throws InterruptedException {
-        try {
-            lock.lock();
-            while(number != 0){
-                condition.await();
-            }
-            number ++;
-            System.out.println(Thread.currentThread().getName() + "->" + number);
-            condition.signalAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-
-    public synchronized void decrement() throws InterruptedException {
-        try {
-            lock.lock();
-            while (number == 0) {
-                condition.await();
-            }
-            number--;
-            System.out.println(Thread.currentThread().getName() + "->" + number);
-            condition.signalAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
         }
     }
 }
