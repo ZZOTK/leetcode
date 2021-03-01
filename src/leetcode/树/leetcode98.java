@@ -48,5 +48,4 @@ public class leetcode98 {
         TreeNode right;
         TreeNode(int x) { val = x; }
     }
-
 }

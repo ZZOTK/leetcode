@@ -1,18 +1,16 @@
+package leetcode.树;
 
-import leetcode.剑指offer.offer_68_2;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+//找到二叉树两个节点间的最短距离
+//先找到公共祖先，再分别求两个到祖先的距离。
+public class FindDistance {
 
-public class solution {
-
+    //使用哈希表而不是递归求最近公共祖先！！！！！！！！！！！！！！
+    //
     Map<Integer, TreeNode> parent = new HashMap<Integer, TreeNode>();
     Set<Integer> visited = new HashSet<Integer>();
 
@@ -73,12 +71,10 @@ public class solution {
         node4.right = node7;
         node6.left = node8;
 
-        solution a = new solution();
+        FindDistance a = new FindDistance();
         TreeNode lca = a.lca(node1,node3,node7);
         int dis = a.dis(lca,node3,node7);
         System.out.println(dis);
-
-
     }
 
     public static class TreeNode {
@@ -91,13 +87,4 @@ public class solution {
         }
     }
 
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 }

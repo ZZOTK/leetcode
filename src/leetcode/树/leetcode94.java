@@ -72,10 +72,6 @@ public class leetcode94 {
     }
 
 
-
-
-
-
     public class TreeNode {
         int val;
         TreeNode left;
