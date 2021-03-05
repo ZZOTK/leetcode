@@ -40,29 +40,31 @@ public class leetcode461 {
 <h2 id="1">二分查找</h2>
 
 > 1.普通二分查找
-    
-    //leetcode34
-    public int binarySearch(int[] nums,int target){
-        int left=0;
-        int right=nums.length-1;
-        //此时区间长度很重要。[left,nums.length-1],[left,nums.length)
-        //[2,2]区间长度为1，[2,2)区间长度为0
-        while(left<=right){
-            //此时的=号是否需要很重要。
-            //带等于，left=right+1才跳出
-            //不带等于，left=right就跳出
-            int mid=left+(right-left)/2;
-            if(nums[mid]==target){
-                return mid;
-            }else if(nums[mid]<target){
-                left=mid+1;
-            }else if(nums[mid]>target){
-                right=mid-1;
-            }
+
+```
+//leetcode34
+public int binarySearch(int[] nums,int target){
+    int left=0;
+    int right=nums.length-1;
+    //此时区间长度很重要。[left,nums.length-1],[left,nums.length)
+    //[2,2]区间长度为1，[2,2)区间长度为0
+    while(left<=right){
+        //此时的=号是否需要很重要。
+        //带等于，left=right+1才跳出
+        //不带等于，left=right就跳出
+        int mid=left+(right-left)/2;
+        if(nums[mid]==target){
+            return mid;
+        }else if(nums[mid]<target){
+            left=mid+1;
+        }else if(nums[mid]>target){
+            right=mid-1;
         }
-        return -1;
     }
-    
+    return -1;
+}
+```
+
 >2.寻找二分查找的左边界   
 
 比如数组int[] nums={1,2,2,3,4},我们需要找到第一个2的位置,称为用二分查找找到左侧边界。   
@@ -90,7 +92,7 @@ public class leetcode461 {
         }
         return left;
     }
-    
+
 >3.寻找二分查找的右侧边界
 
     public int binarySearcLeft(int[] nums,int target){
@@ -113,11 +115,11 @@ public class leetcode461 {
         }
         return right;
     }
-   
+
 
 打家劫舍问题
 >1.leetcode198  
- 
+
 如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。    
 dp算法，int[] dp记录偷到第n家钱最多的钱。  
 dp[n]=Math.max(dp[n-2]+nums[n],dp[n-1])
@@ -181,7 +183,7 @@ dp[i][j]表示在 只能选择前i个物品，背包容量为j的情况下，背
             reader.close() ;
     
             // 正式工作的代码
-
+    
             int[][] dp = new int[N+1][V+1];
             dp[0][0] = 0;
             for(int i = 1; i <= N; i++){
@@ -208,7 +210,7 @@ dp[i][j]表示在 只能选择前i个物品，背包容量为j的情况下，背
             System.out.println(dp[N][V]);
         }
     }
-   
+
 补充：     
 1.01背包装到值为A有多少种做法：leetcode494      
 2.01背包能否装到值为A ： leetcode416  
@@ -327,9 +329,9 @@ dp[i][j]表示在 只能选择前i个物品，背包容量为j的情况下，背
         
         //利用优先队列优化多重背包问题
         （待学习）
-        
+
 >4.混合背包问题       
-        
+
 有 N 种物品和一个容量是 V 的背包。
 物品一共有三类：        
 第一类物品只能用1次（01背包）；       
@@ -343,7 +345,7 @@ si>0 表示第 i 种物品可以使用 si 次；
 
 思路：     
 分类讨论。01背包可以看作只使用一次的多重背包问题。
- 
+
         public static void main(String[] args){
             Scanner sc = new Scanner(System.in);
             int N = sc.nextInt(); // 物品个数
@@ -375,7 +377,7 @@ si>0 表示第 i 种物品可以使用 si 次；
             }
             System.out.println(dp[V]);
         }
-        
+
 >5.二维背包问题
 
 有 N 件物品和一个容量是 V 的背包，背包能承受的最大重量是 M。
@@ -800,11 +802,11 @@ class Solution {
    1、对于 BST 的每一个节点node，左子树节点的值都比node的值要小，右子树节点的值都比node的值大。      
    2、对于 BST 的每一个节点node，它的左侧子树和右侧子树都是 BST。       
    3、一个重要的性质：BST 的中序遍历结果是有序的（升序）。       
-   
+
  例题：        
  1.leetcode230:查找第k小的元素。中序遍历，第k个元素。     
  2.leetcode538:BST转换为累加树。后序遍历，节点的累加值赋给节点。       
- 
+
 进一步操作： 
     
 **1.判断BST的合法性**   
@@ -827,7 +829,7 @@ root的整个左子树都要小于root.val，整个右子树都要大于root.val
         return isValidBST(root.left, min, root) 
             && isValidBST(root.right, root, max);
     }     
-        
+
 **2.BST的增删改查**
 
 BST的查找：左小右大，依次向下。      
