@@ -18,3 +18,11 @@
 * [Spring框架学习](src/SSM/Spring.md)
 * 消息队列
   * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
+    
+# leetcode刷题笔记
+
+* [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
+* [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
+* **动态规划**
+    * [经典的背包问题](src/leetcode/动态规划/bags.md)
+    * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)

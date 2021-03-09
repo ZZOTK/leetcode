@@ -1,4 +1,10 @@
 package leetcode.双指针;
+//给定一个包含红色、白色和蓝色，一共n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+//
+//此题中，我们使用整数 0、1 和 2 分别表示红色、白色和蓝色。
+//链接：https://leetcode-cn.com/problems/sort-colors
+
+
 //两个思路，方法1先计数再赋值。方法二只需要扫描一遍数组。
 public class leetcode75 {
     public void sortColors(int[] nums) {
