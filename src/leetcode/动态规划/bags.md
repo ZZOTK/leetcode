@@ -143,3 +143,30 @@ public class Main {
         }
         System.out.println(dp[V]);
 ```
+
+## 二维背包问题
+> 有 N 件物品和一个容量是 V 的背包，背包能承受的最大重量是 M。 每件物品只能用一次。体积是 vi，重量是 mi，价值是 wi。
+> 求解将哪些物品装入背包，可使物品总体积不超过背包容量，总重量不超过背包可承受的最大重量，且价值总和最大。
+输出最大价值。
+
+**初始的01背包问题多加入了一个限制**
+思路: 与01背包一样，二维dp扩充为三维dp
+
+```java
+        public int two_dimension_knapsack_problem_1(int N, int V, int M, int[] v, int[] m, int[] w){
+            int[][][] dp = new int[N+1][V+1][M+1];
+            for(int i = 1; i <= N; i++){
+                for(int j = 1; j <= V; j++){
+                    for(int k = 1; k <= M; k++){
+                        if(j < v[i] || k < m[i]){
+                            // 客观条件限制，不能选择当前物品N
+                            dp[i][j][k] = dp[i-1][j][k];
+                        }else {
+                        //基本相同，多个限制
+                            dp[i][j][k] = Math.max(dp[i-1][j][k], dp[i-1][j-v[i]][k-m[i]] + w[i]);
+                        }
+                    }
+                }
+            }
+            return dp[N][V][M];
+```
