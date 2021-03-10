@@ -29,8 +29,8 @@
         int yihuo = a^b;
         while(jinwei != 0 ){
             int e = yihuo;
-            int f = a & b << 1;
-            yu = e & f;
+            int f = jinwei << 1;
+            jinwei = e & f;
             yihuo = e ^ f;
         }
         return yihuo;
