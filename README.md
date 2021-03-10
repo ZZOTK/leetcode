@@ -26,3 +26,6 @@
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
+    
+* [lca最近公共节点](src/leetcode/树/lca.md)
+* [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
