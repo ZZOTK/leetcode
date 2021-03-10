@@ -29,3 +29,6 @@
     
 * [lca最近公共节点](src/leetcode/树/lca.md)
 * [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
+
+* [有环无环环入口](src/leetcode/链表/huan.md)
+* [反转！](src/leetcode/链表/reverse.md)

@@ -21,6 +21,26 @@ public class leetcode142 {
         return null;
     }
 
+    // 补充：环的长度int
+    public int cycleLen(ListNode head) {
+        ListNode fast=head;
+        ListNode slow=head;
+        int ans = 0;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+            if(fast==slow){
+                while(fast!=slow){
+                    fast=fast.next;
+                    slow=slow.next;
+                    ans ++;
+                }
+                return ans;
+            }
+        }
+        return -1;
+    }
+
     class ListNode {
         int val;
         ListNode next;
