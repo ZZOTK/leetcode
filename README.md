@@ -23,7 +23,7 @@
 
 * 位运算
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
-    * [不用加号的加法](src/leetcode/位运算/byte.md)
+    * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
     
 * [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
   
@@ -32,7 +32,10 @@
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
     
 * [lca最近公共节点](src/leetcode/树/lca.md)
-* [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
+  
+* 分治|归并
+    * [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
+    * [逆序对]()
 
 * [有环无环环入口](src/leetcode/链表/huan.md)
 * [反转！](src/leetcode/链表/reverse.md)
