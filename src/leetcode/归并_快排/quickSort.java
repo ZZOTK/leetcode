@@ -25,7 +25,7 @@ public class quickSort {
     }
 
     public int partition(int[] nums, int l , int r){
-        int pivot =l;
+        int pivot = l;
         int index = pivot + 1;
         for(int i = index ; i <= r; i ++){
             if(nums[i] < nums[pivot]){

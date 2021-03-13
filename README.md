@@ -4,7 +4,9 @@
   * [HashMap的底层原理](src/JavaSE/容器.md)
 
 * **[计算机网络](src/network/计算机网络.md)**
-* **[多线程](src/multi_thread/线程.md)**
+* 多线程
+    * [多线程入门](src/multi_thread/线程.md)
+    * [深入Synchronized与volatile](src/multi_thread/syn.md)
 * **[JVM](src/JVM/jvm.md)**
 
 * 数据结构与算法
@@ -26,6 +28,7 @@
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
     
 * [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
+* [回文字符串如何分析](src/leetcode/回文/huiwen.md)
   
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
@@ -33,9 +36,12 @@
     
 * [lca最近公共节点](src/leetcode/树/lca.md)
   
-* 分治|归并
+* 分治与归并
     * [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
     * [逆序对]()
+* 回溯
+    * [和为target的方案](src/leetcode/回溯_DFS_BFS/btrack_sum.md)
 
-* [有环无环环入口](src/leetcode/链表/huan.md)
-* [反转！](src/leetcode/链表/reverse.md)
+* 链表
+    * [有环无环环入口](src/leetcode/链表/huan.md)
+    * [反转！](src/leetcode/链表/reverse.md)

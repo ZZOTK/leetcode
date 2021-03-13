@@ -1,58 +1,3 @@
-## 指定查询字段
-SELECT (字段) FROM (表)
-
---查询字段并取别名      
-SELECT `student` AS 学号，`studentName` AS 学生姓名 FROM student       
-
---函数Concat(a,b)     
-SELECT CONCAT(`姓名:`,StudentName) AS 新名字 FROM student
-
---去重 distinct       
-SELECT DISTINCT `studentno` FROM result     
-
---学员考试成绩加一分输出       
-SELECT `studentno`,`studentresult` + 1 AS `提分后` FROM result         
-
-## where 条件字句   
-
---查询成绩在95到100之间的        
-SELECT `studentresult` FROM result
-WHERE studentresult>=95 AND(&&) studentresult<=100      
-
---查询除了1000号学术之外的成绩
-SELECT studentno,`studentresult` FROM result
-WHERE NOT studentno = 1000
-
-## 模糊查询
-模糊查询本质是比较运算符。
-BETWEEN :  a between b and c  a在b和c之间则为真。       
-LIKE： a like b  SQL匹配。如果a匹配b则为真。        
-IN： a in(a1,a2,.....)  如果a在(a1,a2,...)中，则为真。        
-
---查询姓张的学生       
---LIKE结合 %(表示0到任意个字符) _(表示一个字符)
-SELECT `studentno`,`studentname` FROM `student`
-WHERE `studentname` LIKE '张%'
-
---IN(一个或多个具体的值)的使用
---查询1001，1002，1003三位学生
-SELECT `studentno`,`studentname` FROM `student`
-WHERE `studentn0` IN (1001,1002,1003)
-
-## 联表查询
-inner join : 如果表中至少有一个匹配，就返回行
-left join : 会从左表中返回所有的值，即使右表中没有匹配
-right join : 会从游标中返回所有的值，即使左表中没有匹配
-
-## 自连接
-
-## 分页和排序
-分页（limit） : limit + 起始 + pagesize     
-排序（order by） :  ASC,升序   DESC降序
-
-## 子查询
-where(select * 条件)
-
 ## 事务
 要么都成功，要么都失败（转账）     
 将一组sql放在一批中执行       
@@ -62,7 +7,25 @@ where(select * 条件)
 持久性：事务结束后的数据不会随着外界的原因导致数据丢失     
 隔离性：多个用户同时操作，排除其他事务对本次事务的影响     
 脏读：一个事务读取了另一个事务未提交的数据       
-幻读：一个事务内读取了别的事务插入的数据，导致前后不一致        
+幻读：一个事务内读取了别的事务插入的数据，导致前后不一致  
+
+# 封锁
+## 封锁粒度
+MySQL 中提供了两种封锁粒度：行级锁以及表级锁。
+
+应该尽量只锁定需要修改的那部分数据，而不是所有的资源。锁定的数据量越少，发生锁争用的可能就越小，系统的并发程度就越高。
+
+但是加锁需要消耗资源，锁的各种操作（包括获取锁、释放锁、以及检查锁状态）都会增加系统开销。因此封锁粒度越小，系统开销就越大。
+
+在选择封锁粒度时，需要在锁开销和并发程度之间做一个权衡。
+
+## 读写锁
+* 互斥锁（Exclusive），简写为 X 锁，又称写锁。
+* 共享锁（Shared），简写为 S 锁，又称读锁。
+
+有以下两个规定：
+* 一个事务对数据对象 A 加了 X 锁，就可以对 A 进行读取和更新。加锁期间其它事务不能对 A 加任何锁。
+* 一个事务对数据对象 A 加了 S 锁，可以对 A 进行读取操作，但是不能进行更新操作。加锁期间其它事务能对 A 加 S 锁，但是不能加 X 锁。
 
 ## 数据库的三大范式
 1、数据库表的每一列都是不可分割的原子数据项。（原子性）        

@@ -12,61 +12,32 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class solution {
-    public int reversePairs(int[] nums) {
-        int n  = nums.length;
-        if(n == 0){
-            return 0;
+    public double[] dicesProbability(int n) {
+        double[] dp = new double[6 * n + 1];
+        for(int i = 1 ; i <=6 ; i ++){
+            dp[i] = 1.0/6.0;
         }
-        int[] temp = new int[n];
-        return  reverse(nums,0,n-1,temp);
-
-    }
-
-    public int reverse(int[] nums, int left, int right,int[] temp) {
-        if (left == right) {
-            return 0;
-        }
-        int mid = left + (right - left) / 2;
-        int leftpairs = reverse(nums, left, mid,temp);
-        int rightpairs = reverse(nums, mid + 1, right,temp);
-
-        if (nums[mid] <= nums[mid + 1]) {
-            return leftpairs + rightpairs;
-        }
-
-        int crosspairs =  count(nums, left,mid, right,temp);
-        //递归的思路
-        return leftpairs + rightpairs + crosspairs ;
-    }
-
-    //将两个有序数组合并成一个
-    public int count(int[] nums, int left, int mid,int right,int[] temp) {
-        for(int i = left; i <=right; i ++){
-            temp[i] = nums[i];
-        }
-        int i = left;
-        int j = mid+1;
-        int res = 0;
-        for(int index = left; index <= right; index++){
-            if(i == mid + 1){
-                nums[index] = temp[j++];
-            }else if(j == right + 1){
-                nums[index] = temp[i++];
-            }else if(temp[i] > temp[j]){
-                nums[index] = temp[j++];
-                res += (mid - i + 1);
-            }else{
-                nums[index] = temp[i++];
+        for(int i = 2; i <= n ; i ++){
+            for(int l = 0 ; l < dp.length; l++){
+               dp[l] /= 6.0;
+            }
+            double[] temp = Arrays.copyOfRange(dp,1,6*(i-1) + 1);
+            for(int j = 1 ; j <= temp.length; j ++){
+                for(int k = 1; k <= 6; k ++){
+                    dp[j + k ] = temp[j -1];
+                }
             }
         }
-        return res;
+        double[] ans =  Arrays.copyOfRange(dp,n,n * 6 + 1);
+        return ans;
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{7,5,6,4};
         solution a = new solution();
-        int an = a.reversePairs(nums);
-        System.out.println(an);
+        double[] ans = a.dicesProbability(2);
+        for(double res : ans){
+            System.out.println(res);
+        }
     }
 
     public static class TreeNode {
