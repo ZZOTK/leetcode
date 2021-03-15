@@ -1,17 +1,19 @@
 本项目为个人学习用。
 
 * JavaSE
+  * [ArrayList与CopyOnWriteArrayList](src/JavaSE/arraylist.md)
+  * [LinkedList](src/JavaSE/LinkedList.md)  
   * [HashMap的底层原理](src/JavaSE/容器.md)
 
-* **[计算机网络](src/network/计算机网络.md)**
+* [计算机网络](src/network/计算机网络.md)
 * 多线程
     * [多线程入门](src/multi_thread/线程.md)
     * [深入Synchronized与volatile](src/multi_thread/syn.md)
-* **[JVM](src/JVM/jvm.md)**
+* [JVM](src/JVM/jvm.md)
 
 * 数据结构与算法
-  * **[leetcode刷题笔记](src/leetcode/leetcode.md)**
-  * **[几种排序算法](src/leetcode/归并_快排/)**
+  * [leetcode刷题笔记](src/leetcode/leetcode.md)
+  * [几种排序算法](src/leetcode/归并_快排/)
   
 * SQL
   * [sql索引](src/sql/sql索引.md)
@@ -45,3 +47,9 @@
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)
     * [反转！](src/leetcode/链表/reverse.md)
+    
+# 感谢
+参考并学习了一些优秀的开源项目
+* https://github.com/CyC2018/CS-Notes
+* https://github.com/Snailclimb/JavaGuide
+* https://github.com/geekxh/hello-algorithm
