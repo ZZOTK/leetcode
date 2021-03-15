@@ -49,6 +49,7 @@ MQ的劣势：
 2. Work queues工作队列模式：
 
 ![img.png](workqueue.png)
+
     * 一个或一些消费端，多个消费端竞争消费同一个队列中的消息。
     * 在一个Work queues队列中如果有多个消费者，那么消费者之间对于同一个消息的关系是竞争的关系
 
@@ -83,6 +84,7 @@ MQ的劣势：
 5. Topics通配符模式
 
 ![img.png](topics.png)
+
 Topic类型与Direct相比，都是可以根据RoutingKey把消息路由到不同的队列。只不过Topic类型Exchange可以让队列在绑定Routing key 的时候使用通配符！
 
 Routingkey 一般都是有一个或多个单词组成，多个单词之间以”.”分割，例如： item.insert

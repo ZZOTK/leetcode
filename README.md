@@ -31,7 +31,7 @@
     
 * [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
 * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
-  
+* [PriorityQueue优先队列怎么用](src/leetcode/单调栈_优先队列/pq.md)  
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
