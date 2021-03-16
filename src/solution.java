@@ -13,30 +13,31 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class solution {
-    public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
-        int N = reader.nextInt();
-        int[] weight = new int[N];
-        int[] count = new int[N];
-        for(int i = 0; i < N ; i ++){
-            weight[i] = reader.nextInt();
+    public int largestRectangleArea(int[] heights) {
+        Deque<Integer> dq = new LinkedList<>();
+        int ans = 0;
+        int top = 0;
+        for(int i = 0; i< heights.length; i ++){
+            if(dq.isEmpty() || heights[i] >= heights[dq.peek()]){
+                dq.push(i);
+            }else{
+                while(!dq.isEmpty() && heights[i] < heights[dq.peek()]){
+                    top  = dq.pop();
+                    int area = heights[top]*(i-top);
+                    ans = Math.max(area,ans);
+                }
+                dq.push(top);
+                heights[top] = heights[i];
+            }
         }
-        for(int i = 0; i < N ; i ++){
-            count[i] = reader.nextInt();
-        }
-        Set<Integer> set = new HashSet<>();
-        dfs(0,set,weight,count);
-        System.out.println(set.size());
+        return ans;
     }
 
-    public static void dfs(int sum, Set<Integer> set,int[] weight, int[] count){
-        set.add(sum);
-        for(int i= 0; i < weight.length;i++){
-            if(count[i--] == 0){
-                break;
-            }
-            dfs(sum+weight[i],set,weight,count);
-        }
+    public static void main(String[] args) {
+        solution a = new solution();
+        int[] heights = new int[]{2,1,5,6,2,3};
+        int ans = a.largestRectangleArea(heights);
+        System.out.println(ans);
     }
 
     public static class TreeNode {

@@ -12,8 +12,9 @@
 * [JVM](src/JVM/jvm.md)
 
 * 数据结构与算法
-  * [leetcode刷题笔记](src/leetcode/leetcode.md)
-  * [几种排序算法](src/leetcode/归并_快排/)
+    * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
+    * [leetcode刷题笔记](src/leetcode/leetcode.md)
+    * [几种排序算法](src/leetcode/归并_快排/)
   
 * SQL
   * [sql索引](src/sql/sql索引.md)
@@ -31,12 +32,14 @@
     
 * [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
 * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
-* [PriorityQueue优先队列怎么用](src/leetcode/单调栈_优先队列/pq.md)  
+
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
     
 * [lca最近公共节点](src/leetcode/树/lca.md)
+* [优先队列怎么用](src/leetcode/单调栈_优先队列/priority.md)
+* [栈的妙用——单调栈](src/leetcode/单调栈_优先队列/stack.md)
   
 * 分治与归并
     * [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
