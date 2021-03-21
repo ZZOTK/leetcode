@@ -30,8 +30,12 @@
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
     
-* [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
-* [回文字符串如何分析](src/leetcode/回文/huiwen.md)
+* **二分查找**
+    * [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
+    * [使最大值最小？](src/leetcode/双指针/erfen.md) 
+    
+* 回文
+    * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
 
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
