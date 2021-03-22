@@ -7,5 +7,33 @@ package leetcode.归并_快排;
 //希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序。
 
 public class shellSort {
+    public int[] shellsort(int[] nums){
+        int gap = 1;
+        while(gap < nums.length/3){
+            gap = gap *3 +1;
+        }
+        while(gap > 0){
+            for( int i = gap; i < nums.length; i ++){
+                int temp = nums[i];
+                int j = i -gap;
+                while(j >= 0 && nums[j] >temp){
+                    nums[j + gap] = nums[j];
+                    j -= gap;
+                }
+                nums[j +gap] = temp;
+            }
+            gap = gap/3;
+        }
+        return nums;
+    }
+
+    public static void main(String[] args) {
+        shellSort a = new shellSort();
+        int[] nums = new int[]{1,3,5,2,6,4,8,7};
+        int[] res = a.shellsort(nums);
+        for(int i : res){
+            System.out.println(i);
+        }
+    }
 
 }

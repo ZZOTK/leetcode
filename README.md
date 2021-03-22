@@ -1,30 +1,39 @@
-本项目为个人学习用。
+# JAVA学习
+
+> 本项目为个人学习用。除了自己总结的之外，还学习参考整理了许多的[博客与项目](#3)。
 
 * JavaSE
   * [ArrayList与CopyOnWriteArrayList](src/JavaSE/arraylist.md)
   * [LinkedList](src/JavaSE/LinkedList.md)  
   * [HashMap的底层原理](src/JavaSE/容器.md)
+  * [Concurrenthashmap底层原理分析](src/JavaSE/conhashmap.md)  
 
 * [计算机网络](src/network/计算机网络.md)
+  
 * 多线程
     * [多线程入门](src/multi_thread/线程.md)
+    * [乐观锁,悲观锁](src/multi_thread/lb.md) 
+    * [CAS机制理解](src/multi_thread/cas.md)  
     * [深入Synchronized与volatile](src/multi_thread/syn.md)
+    
 * [JVM](src/JVM/jvm.md)
 
 * 数据结构与算法
+    * [leetcode刷题笔记](#2)  
     * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
-    * [leetcode刷题笔记](src/leetcode/leetcode.md)
     * [几种排序算法](src/leetcode/归并_快排/)
   
 * SQL
   * [sql索引](src/sql/sql索引.md)
   * [Redis学习](src/sql/Redis.md)  
   * [sql面试题总结](src/sql/sql面试.md)  
+    
 * [Spring框架学习](src/SSM/Spring.md)
+  
 * 消息队列
   * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
     
-# leetcode刷题笔记
+<h2 id="2">leetcode刷题笔记</h2>
 
 * 位运算
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
@@ -54,9 +63,11 @@
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)
     * [反转！](src/leetcode/链表/reverse.md)
-    
-# 感谢
-参考并学习了一些优秀的开源项目
+
+<h2 id="3">感谢</h2>
+
+感谢这些优秀的开源项目！
+
 * https://github.com/CyC2018/CS-Notes
 * https://github.com/Snailclimb/JavaGuide
 * https://github.com/geekxh/hello-algorithm
