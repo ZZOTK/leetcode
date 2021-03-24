@@ -64,6 +64,4 @@ HashMap 只提供了 put 用于添加元素，putVal 方法只是给 put 方法�
 ## Resize方法
 为了解决哈希冲突导致链化严重，查询效率低的问题，扩容可以缓解该问题。
 
-# Concurrenthashmap
-
-Concurrenthashmap默认的加载因子是0.75，由于有final关键字修饰，不可改变。
+HashMap 扩容在1.8中由头插改为尾插。避免了死循环问题

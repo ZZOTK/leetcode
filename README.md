@@ -5,7 +5,7 @@
 * JavaSE
   * [ArrayList与CopyOnWriteArrayList](src/JavaSE/arraylist.md)
   * [LinkedList](src/JavaSE/LinkedList.md)  
-  * [HashMap的底层原理](src/JavaSE/容器.md)
+  * [HashMap的底层原理](src/JavaSE/hashmap.md)
   * [Concurrenthashmap底层原理分析](src/JavaSE/conhashmap.md)  
 
 * [计算机网络](src/network/计算机网络.md)
@@ -15,8 +15,11 @@
     * [乐观锁,悲观锁](src/multi_thread/lb.md) 
     * [CAS机制理解](src/multi_thread/cas.md)  
     * [深入Synchronized与volatile](src/multi_thread/syn.md)
-    
-* [JVM](src/JVM/jvm.md)
+
+* **JVM**    
+    * [JVM](src/JVM/jvm.md)
+    * [cpu使用过高怎么办](src/interview/cpu过高.md)
+    * [内存泄漏问题](src/interview/MemoryLeak.md)
 
 * 数据结构与算法
     * [leetcode刷题笔记](#2)  

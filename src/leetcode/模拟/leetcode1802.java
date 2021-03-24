@@ -8,7 +8,7 @@ package leetcode.模拟;
 //返回你所构造的数组中的 nums[index] 。
 //注意：abs(x) 等于 x 的前提是 x >= 0 ；否则，abs(x) 等于 -x 。
 
-public class leetcode5711 {
+public class leetcode1802 {
     public static int maxValue(int n, int index, int maxSum) {
         // 全部初始化为1
         maxSum -= n;

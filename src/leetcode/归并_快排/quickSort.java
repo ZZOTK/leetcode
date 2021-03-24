@@ -41,6 +41,27 @@ public class quickSort {
         nums[b] = temp;
     }
 
+    //单个递归实现
+    public void quickSort(int[] array,int left,int right){//快速排序
+        int index=left +1;
+        int povit=array[left];//用来做对的基数
+        int flag=left;//基数坐标
+        for(int i = left +1; i <= right; i++){
+            if(array[i] < povit){
+                swap(array,index,i);
+                index++;
+            }
+        }
+        swap(array,flag,index - 1);
+        int pos = index - 1;
+        if(pos>left){
+            quickSort(array, left, pos - 1);
+        }
+        if(pos<right){
+            quickSort(array, pos + 1, right);
+        }
+    }
+
     public static void main(String[] args) {
         int[] nums = new int[]{1,3,5,2,6,4,8,7};
         quickSort a = new quickSort();

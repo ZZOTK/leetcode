@@ -30,7 +30,8 @@
 
 其中隔离级别由低到高是：读未提交 < 读已提交 < 可重复读 < 串行化
 
-隔离级别越高，越能够保证数据的完整性和一致性，但是对并发的性能影响越大。大多数数据库的默认级别是读已提交(Read committed)，比如 Sql Server、Oracle ，但是 MySQL 的默认隔离级别是 可重复读(repeatable-read)。
+隔离级别越高，越能够保证数据的完整性和一致性，但是对并发的性能影响越大。大多数数据库的默认级别是读已提交(Read committed)，比如 Sql Server、Oracle ，
+**但是 MySQL 的默认隔离级别是 可重复读(repeatable-read)。**
 
 ## MySQL常见存储引擎的区别
 **InnoDB** 是 MySQL 默认支持的存储引擎，支持**事务、行级锁定和外键。**

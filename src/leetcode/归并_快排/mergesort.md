@@ -17,6 +17,7 @@ public class mergeSort {
         int n = nums.length;
         int mid = n/2;
         //找到中点，不断二分。
+        //copyOfRange范围：左闭右开
         int[] left = Arrays.copyOfRange(nums,0,mid);
         int[] right = Arrays.copyOfRange(nums,mid,n);
 
