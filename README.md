@@ -13,7 +13,7 @@
   
 * 多线程
     * [多线程入门](src/multi_thread/线程.md)
-    * [乐观锁,悲观锁](src/multi_thread/lb.md) 
+    * [说说各种锁](src/multi_thread/lock.md)
     * [CAS机制理解](src/multi_thread/cas.md)  
     * [深入Synchronized与volatile](src/multi_thread/syn.md)
     
