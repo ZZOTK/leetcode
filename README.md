@@ -1,6 +1,7 @@
 # JAVA学习
 
 > 本项目为个人学习用。除了自己总结的之外，还学习参考整理了许多的[博客与项目](#3)。
+> 对于算法题，还总结了[leetcode刷题笔记](#2)。
 
 * JavaSE
   * [ArrayList与CopyOnWriteArrayList](src/JavaSE/arraylist.md)
@@ -15,6 +16,10 @@
     * [乐观锁,悲观锁](src/multi_thread/lb.md) 
     * [CAS机制理解](src/multi_thread/cas.md)  
     * [深入Synchronized与volatile](src/multi_thread/syn.md)
+    
+* I/O
+    * [五大IO模型](src/IO/socketIO.md)
+    * [javaIO-NIO](src/IO/JAVAIO.md)
 
 * **JVM**    
     * [JVM](src/JVM/jvm.md)
@@ -22,7 +27,6 @@
     * [内存泄漏问题](src/interview/MemoryLeak.md)
 
 * 数据结构与算法
-    * [leetcode刷题笔记](#2)  
     * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
     * [几种排序算法](src/leetcode/归并_快排/)
   
@@ -72,7 +76,7 @@
 
 <h2 id="3">感谢</h2>
 
-感谢这些优秀的开源项目！
+**感谢这些优秀的开源项目！**
 
 * https://github.com/CyC2018/CS-Notes
 * https://github.com/Snailclimb/JavaGuide
