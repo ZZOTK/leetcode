@@ -48,6 +48,7 @@ volatile通过内存屏障指令实现禁止指令重排序。
 
 ### 内存屏障
 ![img.png](volatilesort.png)
+
 使用 volatile 修饰变量时，根据 volatile 重排序规则表，Java 编译器在生成字节码时，会在指令序列中插入内存屏障指令来禁止特定类型的处理器重排序。
 
 ![img.png](write.png)
