@@ -4,10 +4,14 @@
 > 对于算法题，还总结了[leetcode刷题笔记](#2)。
 
 * JavaSE
-  * [ArrayList与CopyOnWriteArrayList](src/JavaSE/arraylist.md)
-  * [LinkedList](src/JavaSE/LinkedList.md)  
-  * [HashMap的底层原理](src/JavaSE/hashmap.md)
-  * [Concurrenthashmap底层原理分析](src/JavaSE/conhashmap.md)  
+  * [JAVA基础](src/JavaSE/se.md)
+  * [聊聊String](src/JavaSE/String.md)
+    
+* 常用容器分析
+  * [ArrayList与CopyOnWriteArrayList](src/JavaSE/List/arraylist.md)
+  * [LinkedList](src/JavaSE/List/LinkedList.md)  
+  * [HashMap的底层原理](src/JavaSE/Hashmap/hashmap.md)
+  * [Concurrenthashmap底层原理分析](src/JavaSE/Hashmap/conhashmap.md)  
 
 * [计算机网络](src/network/计算机网络.md)
   

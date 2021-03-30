@@ -31,7 +31,14 @@ System.out.println(l1.getClass() == l2.getClass());
 * E (element) 代表 Element
 
 ## ==与equals()的区别
-== : 它的作用是判断两个对象的地址是不是相等。即判断两个对象是不是同一个对象。**(基本数据类型==比较的是值，引用数据类型==比较的是内存地址)**
+* 对于基本类型，== 判断两个值是否相等，基本类型没有 equals() 方法。
+* 对于引用类型，== 判断两个变量是否引用同一个对象，而 equals() 判断引用的对象是否等价。
+```java
+Integer x = new Integer(1);
+Integer y = new Integer(1);
+System.out.println(x.equals(y)); // true
+System.out.println(x == y);      // false
+```
 
 equals() : 它的作用也是判断两个对象是否相等，它不能用于比较基本数据类型的变量。equals()方法存在于Object类中，而Object类是所有类的直接或间接父类。
 * 类覆盖了 equals()方法。一般，我们都覆盖 equals()方法来两个对象的内容相等；若它们的内容相等，则返回 true(即，认为这两个对象相等)。
@@ -110,8 +117,58 @@ Java 基本类型的包装类的大部分都实现了常量池技术，即 Byte,
 
 注意 ： 调用可能会抛出异常的方法，必须添加try-catch代码块尝试去捕获异常 或者 添加throws 声明 来将异常 抛出给更上一层的调用者进行处理,这里需要注意一个细节:新的异常包含原始异常的所有信息，根据这个我们可以去追溯最初异常发生的位置.
 
+异常的分类
+Throwable 可以用来表示任何可以作为异常抛出的类，分为两种： Error 和 Exception。其中 Error 用来表示 JVM 无法处理的错误，Exception 分为两种：
+
+* 受检异常 ：需要用 try...catch... 语句捕获并进行处理，并且可以从异常中恢复；
+* 非受检异常 ：是程序运行时错误，例如除 0 会引发 Arithmetic Exception，此时程序崩溃并且无法恢复。
+
+
 常见异常：
 * 空指针异常类：NullPointerException
 * 类型强制转换异常：ClassCastException
 * 数组负下标异常：NegativeArrayException
 * 数组下标越界异常：ArrayIndexOutOfBoundsException
+
+## Java中抽象类与接口有什么区别
+在abstract class方式中，可以有自己的数据成员，也可以有非abstract的成员方法，
+而在interface方式实现中，Demo只能有静态的不能被修改的数据成员（也就是必须是static final的，不过在interface中一般不定义数据成员），所有的成员方法都是抽象的。
+
+总结：
+* 抽象类和接口都不能直接实例化，如果要实例化，抽象类变量必须指向实现所有抽象方法的子类对象，接口变量必须指向实现所有接口方法的类对象。
+* 抽象类要被子类继承，接口要被类实现。
+* 接口里定义的变量只能是公共的静态的常量，抽象类中的变量是普通变量。
+* 接口可以被类多实现（被其他接口多继承），抽象类只能被单继承。
+* 接口中没有 this 指针，没有构造函数，不能拥有实例字段（实例变量）或实例方法。
+
+## java中Object类中有哪些常用方法以及作用!
+
+![img.png](object.png)
+
+1. getClass()：获取类的class对象。
+2. hashCode:获取对象的hashCode值
+   * 见[HashMap](Hashmap/hashmap.md)
+3. equals():比较对象是否相等，比较的是值和地址，子类可重写以自定义。
+4. clone()：克隆方法。
+   * 浅拷贝 ：拷贝对象和原始对象的引用类型引用同一个对象。
+   * 深拷贝 ：拷贝对象和原始对象的引用类型引用不同对象。
+5. toString():如果没有重写，应用对象将打印的是地址值。
+6. notify():随机选择一个在该对象上调用wait方法的线程，解除其阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。
+7. notifyall():解除所有那些在该对象上调用wait方法的线程的阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。
+8. wait():导致线程进入等待状态，直到它被其他线程通过notify()或者notifyAll唤醒。该方法只能在同步方法中调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。
+9. finalize()：对象回收时调用
+
+扩展问题：
+重写equals为什么必须重写hash？
+hashcode怎么做的？
+jvm垃圾回收怎么做的？
+
+## java四种字符串拼接方式性能分析
+1. 直接用“+”号
+   * 加号拼接字符串jvm底层其实是调用StringBuilder来实现的
+   * 不是说直接用“+”号拼接就可以达到StringBuilder的效率了，因为用“+”号每拼接一次都会新建一个StringBuilder对象，并且最后toString()方法还会生成一个String对象。在循环拼接十万次的时候，就会生成十万个StringBuilder对象，十万个String对象。
+2. 使用String的方法concat
+   * concat其实就是申请一个char类型的buf数组，将需要拼接的字符串都放在这个数组里，最后再转换成String对象。
+3. 使用StringBuilder的append
+4. 使用StringBuffer的append
+   * StringBuffer是的append方法加了sychronized关键字，因此是线程安全的。
