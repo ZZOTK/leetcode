@@ -19,7 +19,11 @@
 * 持久性 ：持久性指的是一旦事务提交，那么发生的改变就是永久性的，即使数据库遇到特殊情况比如故障的时候也不会产生干扰。
 * 隔离性 ：多个用户同时操作，排除其他事务对本次事务的影响 
 
-事务的隔离级别：
+PS：
+Redis事务**没有隔离级别**的概念，也不支持roll back。
+Redis单条命令保证原子性，但是**Redis事务不保证原子性**。
+
+## 事务的隔离级别：
 
 1. 读未提交：
 
@@ -52,7 +56,7 @@
 
 ## 几种读取问题
 脏读：一个事务读取了另一个事务未提交的数据       
-幻读：一个事务内读取了别的事务插入的数据，导致前后不一致
+**幻读：一个事务内读取了别的事务插入的数据，导致前后不一致**
 
 ## SQL如何实现隔离级别
 多版本并发控制（Multi-Version Concurrency Control, MVCC）是 MySQL 的 InnoDB 存储引擎实现隔离级别的一种具体方式，用于实现提交读和可重复读这两种隔离级别。
@@ -78,6 +82,49 @@ UPDATE t SET x="c" WHERE id=1;
 快照中除了记录事务版本号 TRX_ID 和操作之外，还记录了一个 bit 的 DEL 字段，用于标记是否被删除。如果使用到删除，DEL会被改为1
 
 ## ReadView
+MVCC 维护了一个 ReadView 结构，主要包含了当前系统未提交的事务列表 TRX_IDs {TRX_ID_1, TRX_ID_2, ...}，还有该列表的最小值 TRX_ID_MIN 和 TRX_ID_MAX。
+
+![img.png](readview.png)
+
+在进行 SELECT 操作时，根据数据行快照的 TRX_ID 与 TRX_ID_MIN 和 TRX_ID_MAX 之间的关系，从而判断数据行快照是否可以使用：
+
+* TRX_ID < TRX_ID_MIN，表示该数据行快照时在当前所有未提交事务之前进行更改的，因此可以使用。
+
+* TRX_ID > TRX_ID_MAX，表示该数据行快照是在事务启动之后被更改的，因此不可使用。
+
+* TRX_ID_MIN <= TRX_ID <= TRX_ID_MAX，需要根据隔离级别再进行判断：
+
+在数据行快照不可使用的情况下，需要沿着 Undo Log 的回滚指针 ROLL_PTR 找到下一个快照，再进行上面的判断。
+
+## 快照读与当前读
+1. 快照读
+MVCC 的 SELECT 操作是快照中的数据，不需要进行加锁操作。
+* 在快照读（snapshot read）的情况下，MySQL通过MVCC（多版本并发控制）来避免幻读。
+
+2. 当前读
+MVCC 其它会对数据库进行修改的操作（INSERT、UPDATE、DELETE）需要进行加锁操作，从而读取最新的数据。可以看到 MVCC 并不是完全不用加锁，而只是避免了 SELECT 的加锁操作。
+* 在当前读（current read）的情况下，MySQL通过next-key lock来避免幻读。   
+
+# Next-Key Locks
+Next-Key Locks 是 MySQL 的 InnoDB 存储引擎的一种锁实现。
+
+MVCC 不能解决当前读幻影读问题，Next-Key Locks 就是为了解决这个问题而存在的。在可重复读（REPEATABLE READ）隔离级别下，使用 MVCC + Next-Key Locks 可以解决幻读问题。
+
+innoDB支持三种行锁定方式：
+
+* 行锁（Record Lock）：锁直接加在索引记录上面（无索引项时演变成表锁）。
+
+* 间隙锁（Gap Lock）：锁定索引记录间隙，确保索引记录的间隙不变。间隙锁是针对事务隔离级别为可重复读或以上级别的。
+
+* Next-Key Lock ：行锁和间隙锁组合起来就是 Next-Key Lock。
+
+innoDB默认的隔离级别是可重复读(Repeatable Read)，并且会以Next-Key Lock的方式对数据行进行加锁。Next-Key Lock是行锁和间隙锁的组合，
+当InnoDB扫描索引记录的时候，会首先对索引记录加上行锁（Record Lock），再对索引记录两边的间隙加上间隙锁（Gap Lock）。加上间隙锁之后，其他事务就不能在这个间隙修改或者插入记录。
+
+当查询的索引含有唯一属性（唯一索引，主键索引）时，Innodb存储引擎会对next-key lock进行优化，将其降为record lock,即仅锁住索引本身，而不是范围。
+
+
+
 
 
 ## MySQL常见存储引擎的区别
