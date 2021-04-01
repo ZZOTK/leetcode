@@ -29,3 +29,6 @@ Controller层负责具体的业务模块流程的控制。
 各层之间的联系：
 
 对象的调用流程：前端JSP ——> Controller ——>  Service ——> Dao ——> 数据库  
+
+## 转发(Forward)和重定向(Redirect)的区别
+转发是服务器行为，重定向是客户端行为。
