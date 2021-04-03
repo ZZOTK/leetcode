@@ -13,7 +13,14 @@
   * [HashMap的底层原理](src/JavaSE/Hashmap/hashmap.md)
   * [Concurrenthashmap底层原理分析](src/JavaSE/Hashmap/conhashmap.md)  
 
-* [计算机网络](src/network/计算机网络.md)
+* 计算机网络
+    * [计算机网络](src/network/计算机网络.md)
+    * [http协议](src/network/HTTP/http.md)
+    * [tcp/udp](src/network/TCP/tcp.md)
+    
+* 操作系统
+    * [process进程](src/OS/mem/mem.md)
+    * [memory内存管理](src/OS/process/process.md)
   
 * 多线程
     * [多线程入门](src/multi_thread/线程.md)
