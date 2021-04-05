@@ -129,6 +129,7 @@ Throwable 可以用来表示任何可以作为异常抛出的类，分为两种�
 * 类型强制转换异常：ClassCastException
 * 数组负下标异常：NegativeArrayException
 * 数组下标越界异常：ArrayIndexOutOfBoundsException
+* ConcurrentModificationException（并发修改异常）（多线程操作ArrayList等容器）
 
 ## Java中抽象类与接口有什么区别
 在abstract class方式中，可以有自己的数据成员，也可以有非abstract的成员方法，

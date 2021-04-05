@@ -94,7 +94,7 @@ TCP是通过超时重传保证可靠：如果发送的报文在时间内没有�
 
 因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。
 
-
+                                                                                                                                                            
 慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。
 
 
