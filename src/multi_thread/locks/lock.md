@@ -17,7 +17,7 @@
 
 ReentrantLock，synchronized都是可重入锁
 
-#从锁的设计理念来分类--悲观锁、乐观锁
+# 从锁的设计理念来分类--悲观锁、乐观锁
 
 ![img.png](bll.png)
 

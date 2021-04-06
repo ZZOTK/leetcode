@@ -8,6 +8,23 @@ package leetcode.双指针;
 //这个思路在数组原地修改问题中比较常用
 
 public class leetcode80 {
+    public int removeDuplicates1(int[] nums) {
+        int n = nums.length;
+        if(n <= 2){
+            return n;
+        }
+        int l = 2;
+        int r = 2;
+        while(r < n){
+            if(nums[l -2] != nums[r]){
+                nums[l] = nums[r];
+                l ++;
+            }
+            r++;
+        }
+        return l;
+    }
+
     public int removeDuplicates(int[] nums) {
         int j = 1;
         int count = 1;
