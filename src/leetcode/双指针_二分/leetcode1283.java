@@ -1,4 +1,4 @@
-package leetcode.双指针;
+package leetcode.双指针_二分;
 
 //双指针实现二分查找//
 

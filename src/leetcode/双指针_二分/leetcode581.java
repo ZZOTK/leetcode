@@ -1,4 +1,4 @@
-package leetcode.双指针;
+package leetcode.双指针_二分;
 
 import java.util.Arrays;
 //给定一个整数数组，你需要寻找一个连续的子数组，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。

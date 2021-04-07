@@ -1,4 +1,4 @@
-package leetcode.双指针;
+package leetcode.双指针_二分;
 
 //二分查找法查询左右边界
 

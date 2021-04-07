@@ -1,4 +1,4 @@
-package leetcode.双指针;
+package leetcode.双指针_二分;
 
 //双指针滑窗，重要！
 
