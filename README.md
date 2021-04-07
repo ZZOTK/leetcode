@@ -61,8 +61,8 @@
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
     
 * **二分查找**
-    * [二分查找的左右边界](src/leetcode/双指针/二分查找.md)
-    * [使最大值最小？](src/leetcode/双指针/erfen.md) 
+    * [二分查找的左右边界](src/leetcode/双指针_二分/二分查找.md)
+    * [使最大值最小？](src/leetcode/双指针_二分/erfen.md) 
     
 * 回文
     * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
