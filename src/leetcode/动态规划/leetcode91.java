@@ -15,6 +15,7 @@ public class leetcode91 {
             }
             String temp = s.substring(i-1,i+1);
             //string.compareTo函数注意使用。
+            //此处的dp[i+1] = dp[i-1]难点 测试用例 “2101”
             if(temp.compareTo("10")==0 || temp.compareTo("20") == 0  ){
                 dp[i + 1] = dp[i - 1];
             }else if(temp.compareTo("10")>0 && temp.compareTo("26") <= 0 ){

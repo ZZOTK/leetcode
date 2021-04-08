@@ -32,6 +32,22 @@ public class leetcode206 {
 
     }
 
+    //头插法
+    public ListNode reverseList2(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        ListNode h1 = head;
+        ListNode h2 = h1.next;
+        ListNode newhead = head;
+        while(h2 != null){
+            h1.next = h2.next;
+            h2.next = newhead;
+            newhead = h2;
+            h2 = h1.next;
+        }
+        return newhead;
+    }
 
     class ListNode {
         int val;
