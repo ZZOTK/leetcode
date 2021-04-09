@@ -40,11 +40,4 @@ public class leetcode652 {
         return substring;
     }
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
 }

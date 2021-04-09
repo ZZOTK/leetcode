@@ -24,11 +24,5 @@ public class leetcode230 {
         tra(root.right, k);
     }
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
 
 }

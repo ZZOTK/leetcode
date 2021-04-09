@@ -42,10 +42,4 @@ public class leetcode98 {
         return isva(root.left,min,root) && isva(root.right,root,max);
     }
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
 }

@@ -13,15 +13,5 @@ public class leetcode101 {
                 && isMirror(t1.left, t2.right);
     }
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
-
-
-
 
 }

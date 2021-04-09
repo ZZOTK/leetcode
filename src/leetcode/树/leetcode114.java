@@ -39,7 +39,7 @@ public class leetcode114 {
             right = _right;
             next = _next;
         }
-}
+    }
 
 
 }
