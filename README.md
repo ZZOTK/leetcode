@@ -70,11 +70,13 @@
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
+    * [分组dp](src/leetcode/动态规划/fengzudp.md)
     
 * [lca最近公共节点](src/leetcode/树/lca.md)
   
 * 优先队列
     * [优先队列怎么用](src/leetcode/单调栈_优先队列/priority.md)
+    * [优先队列配贪心]()
     * [数据流的中位数](src/leetcode/单调栈_优先队列/offer41.md)
 * [栈的妙用——单调栈](src/leetcode/单调栈_优先队列/stack.md)
   
