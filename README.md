@@ -44,7 +44,8 @@
   
 * SQL
   * [sql索引](src/sql/sql索引.md)
-  * [Redis学习](src/sql/Redis.md)
+  * [Redis学习](src/sql/redis/Redis.md)
+  * [布隆过滤器BloomFilter](src/sql/redis/BloomFilter.md)  
   * [sql面试题总结](src/sql/sql面试.md)  
     
 * Spring框架
@@ -71,8 +72,10 @@
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
     * [分组dp](src/leetcode/动态规划/fengzudp.md)
-    
-* [lca最近公共节点](src/leetcode/树/lca.md)
+   
+* 二叉树二叉搜索树 
+    * [lca最近公共节点](src/leetcode/树/lca.md)
+    * [BST删除节点](src/leetcode/树/BST.md)
   
 * 优先队列
     * [优先队列怎么用](src/leetcode/单调栈_优先队列/priority.md)
