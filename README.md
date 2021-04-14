@@ -92,6 +92,8 @@
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)
     * [反转！](src/leetcode/链表/reverse.md)
+* 字典树
+    * [实现一个Trie](src/leetcode/字典树/trie.md)
 
 <h2 id="3">感谢</h2>
 
