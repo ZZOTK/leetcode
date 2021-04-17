@@ -57,6 +57,8 @@
     
 <h2 id="2">leetcode刷题笔记</h2>
 
+* [常用的数学计算](src/leetcode/math.md)
+
 * 位运算
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)

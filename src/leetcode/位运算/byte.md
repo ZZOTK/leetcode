@@ -23,3 +23,21 @@ public class leetcode461 {
     }
 }
 ```
+
+## 补充阅读：JDK中是怎么统计1的个数的呢？
+
+最多执行5步，等于说复杂度从N到了LogN！
+```java
+    public static int bitCount(int i) {
+        // HD, Figure 5-2
+        //等价于 i = (i & 0x55555555) + ((i>>>1) & 0x55555555)
+        i = i - ((i >>> 1) & 0x55555555);
+        i = (i & 0x33333333) + ((i >>> 2) & 0x33333333);
+        i = (i + (i >>> 4)) & 0x0f0f0f0f;
+        i = i + (i >>> 8);
+        i = i + (i >>> 16);
+        return i & 0x3f;
+    }
+```
+
+
