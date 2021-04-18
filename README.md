@@ -98,7 +98,8 @@
     * [实现一个Trie](src/leetcode/字典树/trie.md)
 
 <h2 id="3">设计模式</h2>
-* [单例模式](src/设计模式/单例模式/single.md)
+
+* [单例模式](src/设计模式/single/single.md)
 
 <h2 id="4">感谢</h2>
 

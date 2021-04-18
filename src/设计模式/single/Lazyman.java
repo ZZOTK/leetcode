@@ -1,4 +1,4 @@
-package 设计模式.单例模式;
+package 设计模式.single;
 
 //懒汉式单例
 public class Lazyman {

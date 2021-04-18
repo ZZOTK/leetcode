@@ -1,4 +1,4 @@
-package 设计模式.单例模式;
+package 设计模式.single;
 
 //静态内部类实现单例
 public class Holder {
