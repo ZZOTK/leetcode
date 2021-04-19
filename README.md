@@ -25,6 +25,7 @@
 * 多线程
     * [多线程入门](src/multi_thread/线程.md)
     * [说说各种锁](src/multi_thread/locks/lock.md)
+    * [AQS理解](src/multi_thread/AQS/AQS.md) 
     * [CAS机制理解](src/multi_thread/locks/cas.md)  
     * [深入Synchronized与volatile](src/multi_thread/locks/syn.md)
     * [线程池](src/multi_thread/ExcutorService/xianchenchi.md)
