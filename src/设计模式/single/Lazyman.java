@@ -1,5 +1,8 @@
 package 设计模式.single;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
 //懒汉式单例
 public class Lazyman {
     private static boolean flag = false;
@@ -25,5 +28,21 @@ public class Lazyman {
             }
         }
         return lazyman;
+    }
+
+    public static void main(String[] args) throws Exception {
+        Field zz = Lazyman.class.getDeclaredField("flag");
+        zz.setAccessible(true);
+
+        Constructor<Lazyman> declaredConstructor= Lazyman.class.getDeclaredConstructor(null);
+        declaredConstructor.setAccessible(true);
+        Lazyman instance = declaredConstructor.newInstance();
+
+        zz.set(instance,false);
+
+        Lazyman instance2 = declaredConstructor.newInstance();
+
+        System.out.println(instance);
+        System.out.println(instance2);
     }
 }

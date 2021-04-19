@@ -122,15 +122,52 @@ public class Lazyman {
         }
         return lazyman;
     }
+
+    //反射获取flag再破坏
+    public static void main(String[] args) throws Exception {
+        Field zz = Lazyman.class.getDeclaredField("flag");
+        zz.setAccessible(true);
+
+        Constructor<Lazyman> declaredConstructor= Lazyman.class.getDeclaredConstructor(null);
+        declaredConstructor.setAccessible(true);
+        Lazyman instance = declaredConstructor.newInstance();
+
+        zz.set(instance,false);
+
+        Lazyman instance2 = declaredConstructor.newInstance();
+
+        System.out.println(instance);
+        System.out.println(instance2);
+    }
 }
 ```
 使用一个flag记录，当创建之后flag变为true，也就不能再创建。
 
 问题：反射可以改这个flag。只使用反射创建不能破坏单例了，但是反射技术可以改这个flag来破坏。
 
-## 
+## 枚举防止打破
+```java
+public enum EnumSingle {
+    INSTANCE;
+    public EnumSingle getInstance(){
+        return INSTANCE;
+    }
+}
 
+class  Test{
+    public static void main(String[] args) throws Exception {
+        EnumSingle instance = EnumSingle.INSTANCE;
+        //注意这里的参数，枚举类构建是有参数的
+        Constructor<EnumSingle> declaredConstructor = EnumSingle.class.getDeclaredConstructor(String.class, int.class);
+        declaredConstructor.setAccessible(true);
+        EnumSingle instance2 = declaredConstructor.newInstance();
 
+        System.out.println(instance);
+        System.out.println(instance2);
+    }
+}
+```
+为什么枚举可以防止单例被打破？
 
 
 

@@ -74,6 +74,7 @@
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
     * [分组dp](src/leetcode/动态规划/fengzudp.md)
+    * [最长公共子串与子序列](src/leetcode/动态规划/lencommon.md)
    
 * 二叉树二叉搜索树 
     * [lca最近公共节点](src/leetcode/树/lca.md)
