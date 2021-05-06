@@ -15,8 +15,10 @@
 
 * 计算机网络
     * [计算机网络](src/network/计算机网络.md)
+    * [数据链路层](src/network/数据链路层/lianlu.md)  
+    * [网络层](src/network/网络层/wl.md)  
     * [http协议](src/network/HTTP/http.md)
-    * [tcp/udp](src/network/TCP/tcp.md)
+    * [tcp/udp](src/network/传输层/tcp.md)
     
 * 操作系统
     * [process进程](src/OS/mem/mem.md)
@@ -66,7 +68,7 @@
     
 * **二分查找**
     * [二分查找的左右边界](src/leetcode/双指针_二分/二分查找.md)
-    * [使最大值最小？](src/leetcode/双指针_二分/erfen.md) 
+    * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
     
 * 回文
     * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
