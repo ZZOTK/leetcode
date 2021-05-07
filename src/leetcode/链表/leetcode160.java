@@ -37,14 +37,4 @@ public class leetcode160 {
         }
         return p1;
     }
-
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
 }

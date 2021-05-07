@@ -20,6 +20,7 @@ public class leetcode141 {
         }
         return true;
     }
+
     public boolean hasCycle2(ListNode head) {//哈希表的办法
         Set<ListNode> nodesSeen = new HashSet<>();
         while (head != null) {
@@ -32,13 +33,5 @@ public class leetcode141 {
         }
         return false;
     }
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-          val = x;
-          next = null;
-      }
-  }
 
 }

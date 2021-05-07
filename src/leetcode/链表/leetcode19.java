@@ -40,10 +40,5 @@ public class leetcode19 {
         //必须为dummy.next,head有可能被删除
         return dummy.next;
     }
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-  }
 
 }

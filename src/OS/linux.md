@@ -1,5 +1,18 @@
 ## Linux常用指令
 
+修改权限：chmod
+查看内存cpu状态：top
+
+### 搜索指令
+1. find
+2. locate
+   * 这里和 find 命令是有区别的，find是全盘检索，而locate 是在文件资料库中进行搜索。所以locate命令的执行要比find命令执行速度快很多。
+3. which
+   * 搜索命令所在的目录及别名信息
+4. grep ： 在文件中搜寻字符串匹配的行并输出
+    * 语法：grep -iv 【指定字符串】【文件】   -i 不区分大小写  -v 排除指定字符串
+
+    * 范例：查找 /root/install.log 文件中包含 mysql 字符串的行，并输出。 指令：grep mysql /root/install.log
 
 ## 孤儿进程
 一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。

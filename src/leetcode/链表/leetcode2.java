@@ -44,9 +44,4 @@ public class leetcode2 {
         return temp.next;
     }
 
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
 }

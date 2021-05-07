@@ -1,6 +1,6 @@
 package leetcode.链表;
 //反转链表
-public class leetcode_24 {
+public class leetcode24 {
     public ListNode swapPairs1(ListNode head) {
         if ((head == null) || (head.next == null)) {
             return head;
@@ -31,11 +31,4 @@ public class leetcode_24 {
         }
         return pre.next;
     }
-
-
-    public class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
 }
