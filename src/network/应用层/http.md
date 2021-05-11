@@ -1,9 +1,33 @@
-# HTTP常见面试题
+## 域名解析系统（DNS）
+DNS服务器：将域名转换为ip地址 
+
+![img.png](yuming.png)
+
+![img.png](dns.png)
+
+dns的递归查询与迭代查询（都不够快，所以又引入了高速缓存）
+
+## 输入URL后
+
+![img.png](url.png)
+
+## HTTP的连接方式
+持久连接（非流水线，流水线）与非持久连接
+
+![img.png](connect.png)
+
+* 非持久连接：每次传输前都要发起tcp连接。
+* 持久连接（非流水）：图示为非流水线式。发一个请求等到响应再发下一个请求。
+* 流水线式：一次发送多个请求，服务器再依次返回响应
+
+## HTTP报文
+![img.png](baow.png)
 
 ## HTTP 和 HTTPS 的区别
 HTTP 是一种 超文本传输协议(Hypertext Transfer Protocol)，HTTP 是一个在计算机世界里专门在两点之间传输文字、图片、音频、视频等超文本数据的约定和规范.      
 HTTPS 的全称是 Hypertext Transfer Protocol Secure，从名称我们可以看出 HTTPS 要比 HTTPS 多了 secure 安全性这个概念，实际上， HTTPS 并不是一个新的应用层协议，它其实就是 HTTP + TLS/SSL 协议组合而成，而安全性的保证正是 TLS/SSL 所做的工作。    
-也就是说，HTTPS 就是身披了一层 SSL 的 HTTP.      
+也就是说，HTTPS 就是身披了一层 SSL 的 HTTP.     
+
 ![img_1.png](https.png)
 * HTTP 在地址栏上的协议是以 http:// 开头，而 HTTPS 在地址栏上的协议是以 https:// 开头.       *
 * HTTP 的默认端口是 80，而 HTTPS 的默认端口是 443

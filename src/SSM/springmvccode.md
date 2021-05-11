@@ -1,3 +1,15 @@
+## MVC工作原理
+1. 客户端（浏览器）发送请求，直到请求到DispatchServlet(调度员服务程序)
+2. DispatchServlet根据请求信息调用handlerMapping，解析请求对应的Handler(处理者)
+3. 解析到对应的Handler后，开始又HandlerAdapter（处理者适配器）处理
+4. HandlerAdapter会根据Handler来调用真正的处理器处理请求，并处理业务逻辑
+5. 处理完业务之后，会返回一个ModelAndView对象，Model是返回的数据对象，View是逻辑上的View
+6. ViewResolver会根据逻辑View查找真正的View
+7. DispacherServlet会把返回的Model传给View（视图渲染）
+8. 把View返回给请求者（浏览器）
+
+
+
 ## 请求分发器DispatcherServlet的设计与实现
 
 * DispatcherServlet是SpringMVC的一个前端控制器，是MVC架构中的C，即controller的实现，用于拦截这个web应用的所有请求，具体为在web.xml中配置这个servlet，对应的url-pattern设置为“/”，或者使用servlet3.0之后的WebApplicationInitializer来配置。
