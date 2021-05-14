@@ -2,6 +2,7 @@
 
 > 本项目为个人学习用。除了自己总结的之外，还学习参考整理了许多的[博客与项目](#4)。
 > 对于算法题，还总结了[leetcode刷题笔记](#2)，常用的[设计模式](#3)。
+> 自己做的项目[总结分享]()
 
 * JavaSE
   * [JAVA基础](src/JavaSE/se.md)
@@ -61,6 +62,15 @@
   
 * 消息队列
   * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
+
+<h2 id="5">个人项目与分享</h2>
+
+* 门户网站
+    * [数据库索引与缓存](src/project/project.md)
+
+* RPC框架
+    * [zookeeper](src/rpcframe/zookeeper/zookeeper.md)
+    * [Netty](src/rpcframe/Netty/netty.md) 
     
 <h2 id="2">leetcode刷题笔记</h2>
 
