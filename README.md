@@ -46,7 +46,8 @@
     
 * SQL
     * [sql索引](src/sql/sql索引.md)
-    * [Redis数据结构](src/sql/redis/sjjg/shuju.md)  
+    * [Redis的HashMap与跳表](src/sql/redis/sjjg/shuju.md)  
+    * [BitMap简单入门](src/sql/redis/sjjg/bitmap.md)
     * [Redis学习](src/sql/redis/Redis.md)
     * [布隆过滤器BloomFilter](src/sql/redis/BloomFilter.md)  
     * [sql面试题总结](src/sql/sql面试.md)  
