@@ -74,9 +74,58 @@ private void down(int k) {
 	}
 }
 ```
-##复杂度分析
+## 复杂度分析
 |   | 时间复杂度|
 | --- | ------ | 
 |插入|	O(log n)|
 |删除|	O(log n)|
 |构造|	O(n)|
+
+## 堆排序的实现
+无序数组建立堆最直接的方法是从左到右遍历数组进行上浮操作。一个更高效的方法是从右至左进行下沉操作，
+如果一个节点的两个节点都已经是堆有序，那么进行下沉操作可以使得这个节点为根节点的堆有序。
+叶子节点不需要进行下沉操作，可以忽略叶子节点的元素，因此只需要遍历一半的元素即可。
+
+这里数组下标从0开始.k的左节点2*k+1，右节点2*k+2。
+
+```java
+    public void heapsort(int[] nums){
+        int N = nums.length - 1;
+        for(int k = N/2;k >= 0;k--){
+            sink(nums,k,N);
+        }
+        while(N > 0){
+            swap(nums,0,N--);
+            sink(nums,0,N);
+        }
+    }
+
+    public void sink(int[] nums, int k , int N){
+        while(2 * k + 1 <= N){
+            int j = 2 * k + 1;
+            if(j < N && nums[j] < nums[j + 1]){
+                j ++;
+            }
+            if(nums[k] >= nums[j]){
+                break;
+            }
+            swap(nums,k,j);
+            k = j;
+        }
+    }
+
+    private void swap(int[] nums, int k, int j) {
+        int temp = nums[k];
+        nums[k] = nums[j];
+        nums[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        solution a = new solution();
+        int[] nums = new int[]{1,4,5,2,3,6,7,2,4,8,3};
+        a.heapsort(nums);
+        for(int num :nums){
+            System.out.print(num + " ");
+        }
+    }
+```

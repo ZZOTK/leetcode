@@ -2,17 +2,17 @@
 
 > 本项目为个人学习用。除了自己总结的之外，还学习参考整理了许多的[博客与项目](#4)。
 > 对于算法题，还总结了[leetcode刷题笔记](#2)，常用的[设计模式](#3)。
-> 自己做的项目[总结分享]()
+> 自己做的项目[总结分享](#5)
 
 * JavaSE
-  * [JAVA基础](src/JavaSE/se.md)
-  * [聊聊String](src/JavaSE/String.md)
+    * [JAVA基础](src/JavaSE/se.md)
+    * [聊聊String](src/JavaSE/String.md)
     
 * 常用容器分析
-  * [ArrayList与CopyOnWriteArrayList](src/JavaSE/List/arraylist.md)
-  * [LinkedList](src/JavaSE/List/LinkedList.md)  
-  * [HashMap的底层原理](src/JavaSE/Hashmap/hashmap.md)
-  * [Concurrenthashmap底层原理分析](src/JavaSE/Hashmap/conhashmap.md)  
+    * [ArrayList与CopyOnWriteArrayList](src/JavaSE/List/arraylist.md)
+    * [LinkedList](src/JavaSE/List/LinkedList.md)  
+    * [HashMap的底层原理](src/JavaSE/Hashmap/hashmap.md)
+    * [Concurrenthashmap底层原理分析](src/JavaSE/Hashmap/conhashmap.md)  
 
 * 计算机网络
     * [计算机网络](src/network/计算机网络.md)
@@ -43,16 +43,13 @@
     * [JVM](src/JVM/jvm.md)
     * [cpu使用过高怎么办](src/interview/cpu过高.md)
     * [内存泄漏问题](src/interview/MemoryLeak.md)
-
-* 数据结构与算法
-    * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
-    * [几种排序算法](src/leetcode/归并_快排/)
-  
+    
 * SQL
-  * [sql索引](src/sql/sql索引.md)
-  * [Redis学习](src/sql/redis/Redis.md)
-  * [布隆过滤器BloomFilter](src/sql/redis/BloomFilter.md)  
-  * [sql面试题总结](src/sql/sql面试.md)  
+    * [sql索引](src/sql/sql索引.md)
+    * [Redis数据结构](src/sql/redis/sjjg/shuju.md)  
+    * [Redis学习](src/sql/redis/Redis.md)
+    * [布隆过滤器BloomFilter](src/sql/redis/BloomFilter.md)  
+    * [sql面试题总结](src/sql/sql面试.md)  
     
 * Spring框架
     * [Spring](src/SSM/Spring/Spring.md)
@@ -61,7 +58,7 @@
     * [SpringIOC源码解读](src/SSM/springioc.md)
   
 * 消息队列
-  * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
+    * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
 
 <h2 id="5">个人项目与分享</h2>
 
@@ -98,20 +95,26 @@
     * [BST删除节点](src/leetcode/树/BST.md)
   
 * 优先队列
+    * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
     * [优先队列怎么用](src/leetcode/单调栈_优先队列/priority.md)
     * [优先队列配贪心]()
     * [数据流的中位数](src/leetcode/单调栈_优先队列/offer41.md)
-* [栈的妙用——单调栈](src/leetcode/单调栈_优先队列/stack.md)
+    
+* 栈
+    * [逆波兰表达式（后缀表达式）](src/leetcode/模拟/nbl.md)
+    * [栈的妙用——单调栈](src/leetcode/单调栈_优先队列/stack.md)
   
 * 分治与归并
     * [写个归并排序呗](src/leetcode/归并_快排/mergesort.md)
     * [逆序对]()
+    
 * 回溯
     * [和为target的方案](src/leetcode/回溯_DFS_BFS/btrack_sum.md)
 
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)
     * [反转！](src/leetcode/链表/reverse.md)
+    
 * 字典树
     * [实现一个Trie](src/leetcode/字典树/trie.md)
 
