@@ -13,6 +13,8 @@ DNS服务器：将域名转换为ip地址
 
 ![img.png](yuming.png)
 
+![img.png](dnsdg.png)
+
 ![img.png](dns.png)
 
 dns的递归查询与迭代查询（都不够快，所以又引入了高速缓存）
@@ -46,7 +48,6 @@ HTTPS 的全称是 Hypertext Transfer Protocol Secure，从名称我们可以看
 下面就是https的整个架构，现在的https基本都使用TSL了，因为更加安全，所以下图中的SSL应该换为SSL/TSL。
 
 PS：由于HTTPS的推出受到了很多人的欢迎，在SSL更新到3.0时，IETF对SSL3.0进行了标准化，并添加了少数机制(但是几乎和SSL3.0无差异)，标准化后的IETF更名为TLS1.0(Transport Layer Security 安全传输层协议)，可以说TLS就是SSL的新版本3.1
-
 
 ![img_1.png](s.png)
 

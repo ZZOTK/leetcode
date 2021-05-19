@@ -5,18 +5,17 @@ import java.util.Arrays;
 public class bubbleSort {
     public int[] bubble(int[] arrs){
         int[] arr = Arrays.copyOf(arrs,arrs.length);
-        for(int i = 1 ; i < arr.length; i++){
-            boolean flag = false;
-            for(int j = 0 ; j < arr.length - i ; j ++){
+        int N = arr.length;
+        boolean flag = false;
+        for(int i = N-1 ; i > 0 && !flag ; i--){
+            for(int j = 0 ; j < i; j ++){
+                flag = true;
                 if(arr[j] > arr[j + 1]){
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j +1 ] = temp;
-                    flag = true;
+                    flag = false;
                 }
-            }
-            if(!flag){
-                break;
             }
         }
         return arr;
