@@ -34,6 +34,7 @@
     * [CAS机制理解](src/multi_thread/locks/cas.md)  
     * [深入Synchronized与volatile](src/multi_thread/locks/syn.md)
     * [线程池](src/multi_thread/ExcutorService/xianchenchi.md)
+    * [ThreadLocal](src/multi_thread/threadlocal/threadlocal.md)
     
 * I/O
     * [五大IO模型](src/IO/socketIO.md)
@@ -60,6 +61,11 @@
   
 * 消息队列
     * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
+    
+* Netty
+    * [Reactor与异步模型](src/rpcframe/Netty/reactor/reactor.md)
+    * [Netty核心组件&心跳机制&WebSocket长链接](src/rpcframe/Netty/zujian/Netty核心组件.md)
+    * [序列化&TCP粘包](src/rpcframe/Netty/up/nettyup.md)
 
 <h2 id="5">个人项目与分享</h2>
 
@@ -68,11 +74,12 @@
 
 * RPC框架
     * [zookeeper](src/rpcframe/zookeeper/zookeeper.md)
-    * [Netty](src/rpcframe/Netty/netty.md) 
+    * [Netty](src/rpcframe/Netty/reactor/reactor.md) 
     
 <h2 id="2">leetcode刷题笔记</h2>
 
 * [常用的数学计算](src/leetcode/math.md)
+* [常用排序总结](src/leetcode/归并_快排/sort.md)
 
 * 位运算
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
