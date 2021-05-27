@@ -20,6 +20,18 @@ Reactor的数量与处理资源池线程的数量不同，有三种典型实现�
 结合实例：服务器端用一个线程通过多路复用搞定所有的 IO 操作（包括连接，读、写等），编码简单，清晰明了，
 但是如果客户端连接数量较多，将无法支撑。
 
+单reactor单线程创建:
+
+```java
+//设置为1
+NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+
+try{
+    ServerBootstrap serverBootstrap = new ServerBootstrap();
+    serverBootstrap.group(bossGroup)
+        .channel(NioServerSocketChannel.class)
+```
+
 ### 单Reactor多线程
 
 ![img.png](reactor2.png)
@@ -33,6 +45,19 @@ Reactor的数量与处理资源池线程的数量不同，有三种典型实现�
 
 * 优点：可以充分的利用多核 cpu 的处理能力
 * 缺点：多线程数据共享和访问比较复杂。Reactor 承担所有的事件的监听和响应，它是单线程运行，在高并发场景容易出现性能瓶颈。也就是说Reactor主线程承担了过多的事
+
+单reactor多线程创建
+
+```java
+NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+NioEventLoopGroup workGroup = new NioEventLoopGroup();
+
+try{
+    ServerBootstrap serverBootstrap = new ServerBootstrap();
+
+    serverBootstrap.group(bossGroup,workGroup)
+        .channel(NioServerSocketChannel.class)
+```
 
 ### 主从Reactor多线程
 
@@ -50,6 +75,19 @@ Reactor的数量与处理资源池线程的数量不同，有三种典型实现�
 * 优点：父线程与子线程的数据交互简单职责明确，父线程只需要接收新连接，子线程完成后续的业务处理。
 * 优点：父线程与子线程的数据交互简单，Reactor 主线程只需要把新连接传给子线程，子线程无需返回数据。
 * 缺点：编程复杂度较高
+
+主从reactor多线程创建
+
+```java
+NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+NioEventLoopGroup workGroup = new NioEventLoopGroup();
+
+try{
+    ServerBootstrap serverBootstrap = new ServerBootstrap();
+
+    serverBootstrap.group(bossGroup,workGroup)
+        .channel(NioServerSocketChannel.class)
+```
 
 ## Netty模型
 简易版模型 ：

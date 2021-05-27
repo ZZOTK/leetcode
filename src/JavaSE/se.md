@@ -171,10 +171,16 @@ Throwable 可以用来表示任何可以作为异常抛出的类，分为两种�
 8. wait():导致线程进入等待状态，直到它被其他线程通过notify()或者notifyAll唤醒。该方法只能在同步方法中调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。
 9. finalize()：对象回收时调用
 
-扩展问题：
-重写equals为什么必须重写hash？
-hashcode怎么做的？
-jvm垃圾回收怎么做的？
+## hashcode怎么做的？
+对于String类，jdk的hash算法：
+
+```java
+String s;
+int hash = 0;
+for(int i = 0; i < s.length(); i ++){
+    hash = 31 * hash + s.charAt(i);
+        }
+```
 
 ## java四种字符串拼接方式性能分析
 1. 直接用“+”号

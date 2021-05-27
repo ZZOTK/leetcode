@@ -46,7 +46,7 @@
     * [内存泄漏问题](src/interview/MemoryLeak.md)
     
 * SQL
-    * [sql索引](src/sql/sql索引.md)
+    * [sql索引](src/sql/sql索引/sql索引.md)
     * [Redis的HashMap与跳表](src/sql/redis/sjjg/shuju.md)  
     * [BitMap简单入门](src/sql/redis/sjjg/bitmap.md)
     * [Redis学习](src/sql/redis/Redis.md)
@@ -129,6 +129,8 @@
 <h2 id="3">设计模式</h2>
 
 * [单例模式](src/设计模式/single/single.md)
+* [工厂模式](src/设计模式/factory/factory.md)
+* [代理模式](src/设计模式/Proxy/proxy.md)
 
 <h2 id="4">感谢</h2>
 

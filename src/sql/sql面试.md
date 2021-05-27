@@ -12,6 +12,47 @@
 * 关系型数据库能够支持复杂的 SQL 查询，能够体现出数据之间、表之间的关联关系；
 * 关系型数据库也支持事务，便于提交或者回滚。
 
+## SQL Select语句完整的执行顺序：
+
+1. from子句组装来自不同数据源的数据； （先join再on）
+    * FROM table1 left join table2 on 将table1和table2中的数据产生笛卡尔积，生成Temp1
+    * JOIN table2 所以先是确定表，再确定关联条件
+    * ON table1.column = table2.column 确定表的绑定条件 由Temp1产生中间表Temp2
+2. where子句基于指定的条件对记录行进行筛选；
+3. group by子句将数据划分为多个分组；
+4. 使用聚集函数进行计算；
+    * 有COUNT() -> 总行数；MAX() -> 最大值，MIN() -> 最小值,SUM() -> 求和;AVG() -> 平均值。
+5. 使用having子句筛选分组；
+6. 计算所有的表达式；
+7. select 的字段；
+8. 使用order by对结果集进行排序。
+9. limit分页
+
+## explain语句分析慢查询
+我们常常用到explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上了索引，有没有做全表扫描
+
+```sql
+-- 实际SQL，查找用户名为Jefabc的员工
+select * from emp where name = 'Jefabc';
+-- 查看SQL是否使用索引，前面加上explain即可
+explain select * from emp where name = 'Jefabc';
+```
+
+![img.png](explain.png)
+
+### 最重要的字段 ： type
+
+对表访问方式，表示MySQL在表中找到所需行的方式，又称“访问类型”。
+
+常用的类型有： ALL、index、range、 ref、eq_ref、const、system、NULL（从左到右，性能从差到好）
+1. ALL：Full Table Scan， MySQL将遍历全表以找到匹配的行
+2. index: Full Index Scan，index与ALL区别为index类型只遍历索引树
+3. range:只检索给定范围的行，使用一个索引来选择
+4. ref: 表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值
+5. eq_ref: 类似ref，区别就在使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配，简单来说，就是多表连接中使用primary key或者 unique key作为关联条件
+6. const、system: 当MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL就能将该查询转换为一个常量，system是const类型的特例，当查询的表只有一行的情况下，使用system
+7. NULL: MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引列里选取最小值可以通过单独索引查找完成。
+
 ## MySQL事务四大特性
 四大特性：原子性、一致性、隔离性、持久性
 * 原子性 ： MySQL 中的包含事务的操作要么全部成功、要么全部失败回滚
@@ -70,7 +111,30 @@ Redis单条命令保证原子性，但是**Redis事务不保证原子性**。
 MVCC 利用了多版本的思想，写操作更新最新的版本快照，而读操作去读旧版本快照，没有互斥关系，这一点和 CopyOnWrite 类似。
 在 MVCC 中事务的修改操作（DELETE、INSERT、UPDATE）会为数据行新增一个版本快照。
 
-## Undo日志
+## 快照读：
+单纯的select操作，不包括 select ... lock in share mode, select ... for update。
+
+* Read Committed隔离级别：每次select都生成一个快照读。
+* Read Repeatable隔离级别：开启事务后第一个select语句才是快照读的地方，而不是一开启事务就快照读。
+* 在快照读（snapshot read）的情况下，MySQL通过MVCC（多版本并发控制）来避免幻读。
+
+### 版本链
+
+在InnoDB引擎表中，它的聚簇索引记录中有两个必要的隐藏列：
+
+* trx_id
+    * 这个id用来存储的每次对某条聚簇索引记录进行修改的时候的事务id。
+
+* roll_pointer
+    * 每次对哪条聚簇索引记录有修改的时候，都会把老版本写入undo日志中。这个roll_pointer就是存了一个指针，它指向这条聚簇索引记录的上一个版本的位置，通过它来获得上一个版本的记录信息。(注意插入操作的undo日志没有这个属性，因为它没有老版本)
+
+每次对数据库记录进行改动，都会记录一条undo日志，每条undo日志也都有一个roll_pointer属性，可以将这些undo日志都连起来，串成一个链表，所以现在的情况就像下图一样：
+
+![img.png](version.png)
+
+所有的版本都会被roll_pointer属性连接成一个链表，我们把这个链表称之为版本链，版本链的头节点就是当前记录最新的值。另外，每个版本中还包含生成该版本时对应的事务id，在根据ReadView判断版本可见性的时候会用到。
+
+### Undo日志
 MVCC 的多版本指的是多个版本的快照，快照存储在 Undo 日志中，该日志通过回滚指针 ROLL_PTR 把一个数据行的所有快照连接起来。
 
 例如在 MySQL 创建一个表 t，包含主键 id 和一个字段 x。我们先插入一个数据行，然后对该数据行执行两次更新操作。
@@ -84,7 +148,7 @@ UPDATE t SET x="c" WHERE id=1;
 
 快照中除了记录事务版本号 TRX_ID 和操作之外，还记录了一个 bit 的 DEL 字段，用于标记是否被删除。如果使用到删除，DEL会被改为1
 
-## ReadView
+### ReadView
 MVCC 维护了一个 ReadView 结构，主要包含了当前系统未提交的事务列表 TRX_IDs {TRX_ID_1, TRX_ID_2, ...}，还有该列表的最小值 TRX_ID_MIN 和 TRX_ID_MAX。
 
 ![img.png](readview.png)
@@ -95,16 +159,33 @@ MVCC 维护了一个 ReadView 结构，主要包含了当前系统未提交的�
 
 * TRX_ID > TRX_ID_MAX，表示该数据行快照是在事务启动之后被更改的，因此不可使用。
 
-* TRX_ID_MIN <= TRX_ID <= TRX_ID_MAX，需要根据隔离级别再进行判断：
+* TRX_ID_MIN <= TRX_ID <= TRX_ID_MAX：判断当前ID在不在队列中
+    * 不存在：则说明read view产生的时候事务已经commit了，这种情况数据则可以显示。
+    * 已存在：则代表我Read View生成时刻，你这个事务还在活跃，还没有Commit，你修改的数据，我当前事务也是看不见的。
+
+已提交读隔离级别下的事务在每次查询的开始都会生成一个独立的ReadView,而可重复读隔离级别则在第一次读的时候生成一个ReadView，之后的读都复用之前的ReadView
 
 在数据行快照不可使用的情况下，需要沿着 Undo Log 的回滚指针 ROLL_PTR 找到下一个快照，再进行上面的判断。
 
-## 快照读与当前读
-1. 快照读
-MVCC 的 SELECT 操作是快照中的数据，不需要进行加锁操作。
-* 在快照读（snapshot read）的情况下，MySQL通过MVCC（多版本并发控制）来避免幻读。
+* 在RR级别下的某个事务的对某条记录的第一次快照读会创建一个快照及Read View， 将当前系统活跃的其他事务记录起来，此后在调用快照读的时候，还是使用的是同一个ReadView，
+  所以只要当前事务在其他事务提交更新之前使用过快照读，那么之后的快照读使用的都是同一个Read View，所以对之后的修改不可见；
 
-2. 当前读
+* 即RR级别下，快照读生成Read View时，Read View会记录此时所有其他活动事务的快照，这些事务的修改对于当前事务都是不可见的。而早于Read View创建的事务所做的修改均是可见
+
+## 当前读
+
+常用当前读：
+
+```sql
+select...lock in share mode (共享读锁)
+   
+select...for update
+   
+update , delete , insert
+```
+
+当前读, 读取的是最新版本, 并且对读取的记录加锁, 阻塞其他事务同时改动相同记录，避免出现安全问题。
+
 MVCC 其它会对数据库进行修改的操作（INSERT、UPDATE、DELETE）需要进行加锁操作，从而读取最新的数据。可以看到 MVCC 并不是完全不用加锁，而只是避免了 SELECT 的加锁操作。
 * 在当前读（current read）的情况下，MySQL通过next-key lock来避免幻读。   
 
