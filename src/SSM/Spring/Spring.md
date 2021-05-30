@@ -11,11 +11,19 @@ IoC 容器是 Spring 用来实现 IoC 的载体， IoC 容器实际上就是个M
 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可，完全不用考虑对象是如何被创建出来的。
 
 ## 理解IOC
+![img.png](yuanshi.png)
+
 ![img.png](befores.png)
 
 不使用spring时，我们需要全部自己手动创建对象。
 
+把对象创建和对象之间的调用过程，交给Spring管理。
+
+![img.png](jieou.png)
+
 ![img.png](afters.png)
+
+利用工厂模式创建与使用分离。
 
 使用spring后，不再主动创建这个对象，而是去spring容器中取这个对象。
 
@@ -26,6 +34,74 @@ IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时�
 
 **获取依赖对象的方式从程序到第三方（用户）**。
 
+## IOC接口
+Spring提供了两种方式：
+1. BeanFactory
+    * 是Spring内部使用的接口，不提供开发人员使用
+    * 加载配置文件不创建对象，使用时才创建
+
+2. ApplicationContext
+    * BeanFactory接口的子接口，提供了更多的功能。
+    * 加载配置文件时，对象就创建。
+
+## Spring依赖注入的方式有几种?
+1. setter方法注入: 通过构造器或工厂方法(静态工厂方法或实例bean工厂方法)构造bean所需要的依赖后， 使用setter方法设置bean的依赖。
+
+```java
+public class UserService {
+	//set注入的注解做法
+	//注解注入（autowire注解默认使用类型注入）
+	@Autowired
+	private UserDao userDao;
+	
+	public void login() {
+		userDao.login();
+	}
+}
+```
+
+2. 构造器注入: 构造器的每个参数都可以代表对其他bean的依赖。
+
+```java
+public class UserService {
+    
+	private UserDao userDao;
+	
+	//注解到构造方法处
+	@Autowired
+	public UserService(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	
+	public void login() {
+		userDao.login();
+	}
+}
+
+```
+
+## Spring如何解决循环依赖?
+循环依赖是指:A依赖B，并且B依赖A的情况。或者 A依赖B，B依赖C，C依赖A的情况。
+
+* 构造器注入的循环依赖无法解决，直接抛出BeanCurrentlyInCreationException异常。
+
+    * 容器在创建Bean的时候，会将Bean添加到正在创建的Bean池中，如果在创建Bean的时候， 发现自己已经在创建的Bean池中，就说明Bean陷入循环依赖了， 直接抛出BeanCurrentlyInCreationException异常。
+
+    * 为什么构造器注入不能像Setter方法注入一样解决循环依赖问题? 因为Setter方法注入的前提是首先需要实例化这个对象，而构造器注入的参数正是bean， 怎么实例化，所以无法解决这个问题。
+
+* Setter方法注入的循环依赖可以通过缓存解决。 三级缓存：
+
+    1. 初始化完成的Bean池。
+
+    2. 实例化完成，但是没有填充属性的Bean池。
+
+    3. 刚刚实例化完成的Bean的工厂缓存，用于提前曝光Bean
+
+![img.png](xhbean.png)
+    
+* Setter方法注入时，如果Bean A发现自己依赖于Bean B， 那么将自己实例化后并添加到第三级缓存(Bean 工厂)。 然后再初始化B,检查到B又依赖于A，于是到三级缓存里查询A,那么查询肯定是成功的, 于是将A设置为B的属性。当A初始化时， 发现B已经初始化完成,就可以直接将B设置为A的属性了。
+    
+* 非单例bean不能缓存，无法解决循环依赖: IOC容器是不会缓存非单例bean的，所以无法解决循环依赖问题。
 
 # AOP(面向切面编程)
 AOP(Aspect-Oriented Programming:面向切面编程)能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可拓展性和可维护性。
@@ -69,3 +145,4 @@ Bean可以借鉴Servlet的生命周期，实例化、初始init、接收请求se
 
 * 在类中定义一个 ThreadLocal 成员变量，将需要的可变成员变量保存在 [ThreadLocal]() 中（推荐的一种方式）。
 * 改变 Bean 的作用域为 “prototype”：每次请求都会创建一个新的 bean 实例，自然不会存在线程安全问题
+

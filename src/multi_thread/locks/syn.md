@@ -7,6 +7,21 @@
     
 * 修饰代码块 ： 锁定的是传入的对象。
 
+# synchronized工作原理
+
+syn在代码前后分别加上monitorenter和monitorexit这两个字节码指令。
+
+
+每个对象有一个监视器锁（monitor）。当monitor被占用时就会处于锁定状态，线程执行monitorenter指令时尝试获取monitor的所有权，过程如下：
+
+1. 如果monitor的进入数为0，则该线程进入monitor，然后将进入数设置为1，该线程即为monitor的所有者。
+
+2. 如果线程已经占有该monitor，只是重新进入，则进入monitor的进入数加1.
+
+3. 如果其他线程已经占用了monitor，则该线程进入阻塞状态，直到monitor的进入数为0，再重新尝试获取monitor的所有权。
+
+java线程本身是操作系统线程的映射，所以挂起唤醒线程都需要操作系统内核态工作，资源消耗很大。
+
 # volatile如何工作
 synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。 而volatile就可以说是java虚拟机提供的最轻量级的同步机制。
 
