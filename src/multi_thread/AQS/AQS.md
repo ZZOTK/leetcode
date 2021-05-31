@@ -1,3 +1,48 @@
+## AQS的思路
+如何利用原子类（AtomicInteger）设计一个同步管理框架：
+1. 通用性，下层实现透明的同步机制，与上层业务解耦
+2. 利用CAS，原子地去修改共享标志位
+3. 等待队列：这里不使用轮询是可以节省计算机资源.
+
+AQS：AbstractQueuedSynchronizer。
+
+JUC和许多同步中间件都使用了AQS。
+
+## AQS源码分析
+
+![img.png](AQS1.png)
+
+同步状态为什么要用int：
+* 线程有独占模式（其他线程都不能占用）和共享模式（其他线程可以一起占用），所以不能使用布尔类型，可以用int表示当前线程数。
+
+* 队列是一个FIFO（先进先出）的双向链表，tail和head分别表示头尾节点.
+
+![img.png](AQS2.png)
+
+队列节点包括：线程对象，前后指针，等待状态等信息。
+
+AQS中的两个核心方法：
+1. 尝试获取锁（修改标志位），立即返回。 -> tryAcquire
+    ![img.png](AQS3.png)
+    * 让上层自定义tryAcquire方法
+2. 获取锁（修改标志位），愿意进入等待队列，直到获取 -> acquire
+    ![img.png](AQS4.png)
+    * public final说明让所有继承类都可以直接调用这个方法
+    * 如果返回false没有获取到锁，就需要addWaiter加等待队列
+
+addWaiter（加入等待队列）:
+
+![img.png](AQS5.png)
+
+* enq方法是完整的入队方法，比原来的方法多了一个判空。
+
+acquireQueued(node）（获取队列中的节点）：
+
+![img.png](AQS6.png)
+
+利用interrupted标志位来确定是否获取。
+
+
 ## CountDownLatch
 用来控制一个或者多个线程等待多个线程。
 
