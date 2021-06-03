@@ -30,10 +30,10 @@
   
 * 多线程
     * [多线程入门](src/multi_thread/线程.md)
-    * [说说各种锁](src/multi_thread/locks/lock.md)
+    * [说说各种锁](src/multi_thread/locks/lock/lock.md)
     * [AQS理解](src/multi_thread/AQS/AQS.md) 
-    * [CAS机制理解](src/multi_thread/locks/cas.md)  
-    * [深入Synchronized与volatile](src/multi_thread/locks/syn.md)
+    * [CAS机制理解](src/multi_thread/locks/CAS/cas.md)  
+    * [深入Synchronized与volatile](src/multi_thread/locks/syn/syn.md)
     * [线程池](src/multi_thread/ExcutorService/xianchenchi.md)
     * [ThreadLocal](src/multi_thread/threadlocal/threadlocal.md)
     
@@ -67,11 +67,17 @@
     * [Reactor与异步模型](src/rpcframe/Netty/reactor/reactor.md)
     * [Netty核心组件&心跳机制&WebSocket长链接](src/rpcframe/Netty/zujian/Netty核心组件.md)
     * [序列化&TCP粘包](src/rpcframe/Netty/up/nettyup.md)
+    
+* 分布式
+    * [分布式锁](src/distributed/lock/distributedlock.md)
+    * [分布式事务](src/distributed/trans/trans.md)
 
 <h2 id="5">个人项目与分享</h2>
 
 * 门户网站
     * [数据库索引与缓存](src/project/project.md)
+    * [网关](src/project/gateway/gateway.md)
+    * [token及登录](src/project/token/token.md)
 
 * RPC框架
     * [zookeeper](src/rpcframe/zookeeper/zookeeper.md)

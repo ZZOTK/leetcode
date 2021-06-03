@@ -22,6 +22,47 @@ syn在代码前后分别加上monitorenter和monitorexit这两个字节码指令
 
 java线程本身是操作系统线程的映射，所以挂起唤醒线程都需要操作系统内核态工作，资源消耗很大。
 
+# ReentranLock
+
+![img.png](reen.png)
+
+ReentranLock是基于AQS实现的。在并发编程中可以实现公平锁与非公平锁对共享资源进行同步。
+
+与Synchronized一样，ReentranLock支持可重入，除此，在调度上更灵活，支持更多的功能。
+
+![img.png](lockjk.png)
+
+ReentranLock实现了lock接口的方法。lock接口有：
+1. lock():获取锁，如果已被占用，就等待获取
+2. lockInterruptibly():同lock获取锁，如果当前线程在等待锁的过程中被中断，就会抛出中断异常。
+3. trylock()：尝试获取锁并返回布尔
+4. trylock(time):一段时间内尝试获取锁，如果期间被中断，将抛出中断异常。
+5. unlock(): 释放锁
+6. newCondition():新建一个绑定在当前lock上的condition对象。
+    * condition对象表示一个等待的状态。 获得锁的线程可能在某些时刻需要等待一些条件的完成才能继续执行。他就会通过await方法注册在condition对象上进行等待，再通过condition对象的signao方法唤醒
+    * 类似Object方法的wait和notify方法。不同的是一个lock对象可以关联多个condition，多个线程可以被绑定在不同的condition。这样可以实现分组唤醒。
+    * 此外，condition还听了限时、中断等功能。丰富了线程的调度策略
+
+![img.png](reen2.png)
+
+ReentranLock实现了lock之外，还继承了AQS
+
+NonfairSync：非公平锁的实现
+* 通常情况下，去唤醒一个挂起的线程，线程切换之间会产生短暂的延迟，非公平锁就利用这段时间完成操作。
+
+![img.png](nofair.png)
+
+* lock方法进行了两次非公平的锁获取，两次失败就直接排队（公平）
+* tryAcquire就进行插队尝试
+
+FairSync：公平锁的实现
+
+![img.png](fair.png)
+
+* 直接调用了AQS中的tryAcquire方法
+* 如果锁空闲且队列之前没有排在之前的线程，就尝试获取锁
+
+    
 # volatile如何工作
 synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。 而volatile就可以说是java虚拟机提供的最轻量级的同步机制。
 

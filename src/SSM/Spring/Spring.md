@@ -127,6 +127,7 @@ AOC的本质：不影响原有类的功能的基础下，横向实现类功能�
 
 # Bean的生命周期
 Bean可以借鉴Servlet的生命周期，实例化、初始init、接收请求service、销毁destroy。
+
 ![img.png](bean.png)
 
 简单理解一下：
