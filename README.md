@@ -69,6 +69,7 @@
     * [序列化&TCP粘包](src/rpcframe/Netty/up/nettyup.md)
     
 * 分布式
+    * [分布式理论](src/distributed/theory/theory.md)
     * [分布式锁](src/distributed/lock/distributedlock.md)
     * [分布式事务](src/distributed/trans/trans.md)
 

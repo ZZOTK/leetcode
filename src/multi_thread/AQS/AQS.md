@@ -23,9 +23,12 @@ JUC和许多同步中间件都使用了AQS。
 
 AQS中的两个核心方法：
 1. 尝试获取锁（修改标志位），立即返回。 -> tryAcquire
+    
     ![img.png](AQS3.png)
+
     * 让上层自定义tryAcquire方法
 2. 获取锁（修改标志位），愿意进入等待队列，直到获取 -> acquire
+   
     ![img.png](AQS4.png)
     * public final说明让所有继承类都可以直接调用这个方法
     * 如果返回false没有获取到锁，就需要addWaiter加等待队列

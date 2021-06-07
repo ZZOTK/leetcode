@@ -40,6 +40,10 @@ explain select * from emp where name = 'Jefabc';
 
 ![img.png](explain.png)
 
+* select_type : 查询类型，有简单查询、联合查询、子查询等
+* key : 使用的索引
+* rows : 扫描的行数
+
 ### 最重要的字段 ： type
 
 对表访问方式，表示MySQL在表中找到所需行的方式，又称“访问类型”。

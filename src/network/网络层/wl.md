@@ -103,7 +103,7 @@ ARP协议的4种典型情况：
 ## DHCP协议
 动态主机配置协议（DHCP）：是应用层协议，使用客户、服务器方式，客户端和服务端通过广播方式交互，基于UDP；
 
-DHCP提供即插即用联网的机制。
+DHCP提供即插即用联网的机制。DHCP 配置的内容不仅是 IP 地址，还包括子网掩码、网关 IP 地址。
 
 ![img.png](DHCP.png)
 
@@ -111,14 +111,15 @@ DHCP提供即插即用联网的机制。
     * 在DHCP服务配置完成后，DHCP Client启动时，由于没有IP地址，会自动发送以discover的广播报文，源地址为0.0.0.0目的地址为255.255.255.255。网络上的所有支持TCP/IP的主机都会收到该DHCP Discovery报文，但是只有DHCP Server会响应该报文。
 
 2. DHCP Server offer响应阶段
-    * DHCP Server收到discover报文后，通过解析报文，查询dhcpd.conf配置文件，如果在地址池中能找到合适的IP地址，DHCP Server会给DHCP Client发送offer报文，告诉DHCP Client，该DHCP Server拥有资源，可以提供DHCP服务。
+    * DHCP 服务器收到 Discover 报文之后，发送 Offer 报文给客户端，该报文包含了客户端所需要的信息。
+    * 客户端可能收到多个 DHCP 服务器提供的信息，因此客户端需要进行选择
 
 3. DHCP Client请求使用阶段
-    * 当DHCP Client收到offer报文时，知道在本网段中有可用的DHCP Server可以提供DHCP服务，因此，它会发送一个request请求报文，向该DHCP Server请求IP地址、掩码、网关、DNS等信息，以便登陆网络。
+    * 如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。 
 
 4. DHCP Server确认使用阶段（获得IP地址）
-    * 当DHCP Server收到DHCP Client发送的DHCP Request后，确认要为该DHCP Client提供的IP地址后，便向该DHCP Client响应一个包含该IP地址以及其他Option的报文，来告诉DHCP Client可以使用该IP地址了。然后DHCP Client即可以将该IP地址与网卡绑定。另外其他DHCP Server都将收回自己之前为DHCP Client提供的IP地址。
-
+    * DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。DHCP Client即可以将该IP地址与网卡绑定。另外其他DHCP Server都将收回自己之前为DHCP Client提供的IP地址。
+    
 5. DHCP Client重新登录网络阶段
     * 当DHCP Client重新登录后，发送一个以前的DHCP Server分配的IP地址信息的DHCP Request报文，当DHCP Server收到该请求后，会尝试让DHCP客户端继续使用该IP地址。并回答一个ACK报文。
     * 如果该IP地址无法再次分配给该DHCP Client后，DHCP回复一个NAK报文，当DHCP Client收到该NAK报文后，会重新发送DHCP Discovery报文来重新获取IP地址。
