@@ -224,6 +224,26 @@ MyISAM 和 InnoDB 存储引擎的对比：
 * 表结构文件上： MyISAM 的表结构文件包括：.frm(表结构定义),.MYI(索引),.MYD(数据)；而 InnoDB 的表数据文件为:.ibd和.frm(表结构定义)；
 * InnoDB为聚簇索引，MyISAM为非聚簇索引。
 
+## sql三种日志：binlog、redo log和undo log
+binlog用于记录数据库执行的写入性操作(不包括查询)信息，以二进制的形式保存在磁盘中。binlog是mysql的逻辑日志，并且由Server层进行记录，使用任何存储引擎的mysql数据库都会记录binlog日志。
+
+* 逻辑日志：可以简单理解为记录的就是sql语句。
+* 物理日志：因为mysql数据最终是保存在数据页中的，物理日志记录的就是数据页变更。
+
+binlog是通过追加的方式进行写入的，可以通过max_binlog_size参数设置每个binlog文件的大小，当文件大小达到给定值之后，会生成新的文件来保存日志。
+
+binlog使用场景：
+* 主从复制：在Master端开启binlog，然后将binlog发送到各个Slave端，Slave端重放binlog从而达到主从数据一致。
+* 数据恢复：通过使用mysqlbinlog工具来恢复数据
+
+Redo log：被称之为重做日志，是在数据库发生意外时，进行数据恢复，redo log会备份是事务执行过程中的修改数据，redo log备份的是事务过程中最新的数据位置
+
+当我们提交一个事务时，InnoDB会先去把要修改的数据写入日志，然后再去修改缓冲池里面的真正数据页。
+
+redo log包括两部分：一个是内存中的日志缓冲(redo log buffer)，另一个是磁盘上的日志文件(redo log file)。mysql每执行一条DML语句，先将记录写入redo log buffer，后续某个时间点再一次性将多个操作记录写到redo log file。这种先写日志，再写磁盘的技术就是MySQL里经常说到的WAL(Write-Ahead Logging) 技术。
+
+redo log实际上记录数据页的变更，而这种变更记录是没必要全部保存，因此redo log实现上采用了大小固定，循环写入的方式，当写到结尾时，会回到开头循环写日志。
+
 ## Q：谈谈 SQL 优化的经验
 * 查询语句无论是使用哪种判断条件 等于、小于、大于， **WHERE 左侧的条件查询字段不要使用函数或者表达式**
 * 当你的 SELECT 查询语句只需要使用一条记录时，要使用 LIMIT 1

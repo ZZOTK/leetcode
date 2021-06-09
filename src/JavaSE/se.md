@@ -42,6 +42,13 @@ System.out.println(l1.getClass() == l2.getClass());
 
 static和final一起使用 ，static final用来修饰成员变量和成员方法，可简单理解为“全局常量”
 
+## transient关键字
+* 一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。
+* transient关键字只能修饰变量，而不能修饰方法和类。注意，本地变量是不能被transient关键字修饰的。变量如果是用户自定义类变量，则该类需要实现Serializable接口。
+* 被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。
+
+transient修饰的变量可以手动序列化
+
 ## ==与equals()的区别
 * 对于基本类型，== 判断两个值是否相等，基本类型没有 equals() 方法。
 * 对于引用类型，== 判断两个变量是否引用同一个对象，而 equals() 判断引用的对象是否等价。
@@ -200,16 +207,32 @@ java中默认使用的就是强引用
 
 ### 软引用
 在内存足够的时候，软引用对象不会被回收，只有在内存不足时，系统则会回收软引用对象，如果回收了软引用对象之后仍然没有足够的内存，才会抛出内存溢出异常。
-
+```java
+Object obj = new Object();
+SoftReference<Object> sf = new SoftReference<Object>(obj);
+obj = null;  // 使对象只被软引用关联
+```
 如果一个对象惟一剩下的引用是软引用，那么该对象是软可及的（softly reachable）。垃圾收集器并不像其收集弱可及的对象一样尽量地收集软可及的对象，相反，它只在真正 “需要” 内存时才收集软可及的对象。
 
 可以用来设计缓存
 ### 弱引用
 无论内存是否足够，只要 JVM 开始进行垃圾回收，那些被弱引用关联的对象都会被回收。
+```java
+Object obj = new Object();
+WeakReference<Object> wf = new WeakReference<Object>(obj);
+obj = null;
+```
 
 ### 虚引用
 虚引用是最弱的一种引用关系，如果一个对象仅持有虚引用，那么它就和没有任何引用一样，它随时可能会被回收，在 JDK1.2 之后，用 PhantomReference 类来表示，通过查看这个类的源码，发现它只有一个构造函数和一个 get() 方法，而且它的 get() 方法仅仅是返回一个null，也就是说将永远无法通过虚引用来获取对象，虚引用必须要和 ReferenceQueue 引用队列一起使用。
 
+为一个对象设置虚引用的唯一目的是能在这个对象被回收时收到一个系统通知。
+
+```java
+Object obj = new Object();
+PhantomReference<Object> pf = new PhantomReference<Object>(obj, null);
+obj = null;
+```
 
 
 

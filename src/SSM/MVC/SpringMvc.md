@@ -34,5 +34,7 @@
 7. DispacherServlet会把返回的Model传给View（视图渲染）
 8. 把View返回给请求者（浏览器）
 
+## RESTFUL的优势
+
 
 

@@ -96,6 +96,7 @@
 * **二分查找**
     * [二分查找的左右边界](src/leetcode/双指针_二分/二分查找.md)
     * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
+    * [最长递增子序列](src/leetcode/双指针_二分/txef.md)
     
 * 回文
     * [回文字符串如何分析](src/leetcode/回文/huiwen.md)

@@ -5,11 +5,11 @@ ConcurrentHashMap 中有一个 Segment 的概念。Segment 本身就相当于一
 
 ConcurrentHashMap 集合中有 2 的N次方个 Segment 对象，共同保存在一个名为 segments 的数组当中。因此整个 ConcurrentHashMap 的结构如下：
 
-![img.png](segment.png)
+![img.png](seg.png)
 
 可以说，ConcurrentHashMap 是一个二级哈希表。在一个总的哈希表下面，有若干个子哈希表。这样的二级结构，和数据库的水平拆分有些相似。
 
-采取了锁分段技术，每一个 Segment 就好比一个自治区，读写操作高度自治，Segment 之间互不影响。
+采取了锁分段技术，每一个 Segment 就好比一个自治区，读写操作高度自治，Segment 之间互不影响。Segment继承ReentrantLock。
 
 * 不同 Segment 的并发写入【可以并发执行】
 * 同一 Segment 的一写一读【可以并发执行】
