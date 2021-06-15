@@ -117,13 +117,17 @@ AOC的本质：不影响原有类的功能的基础下，横向实现类功能�
 * 公共部分交给了代理角色，实现了业务的分工
 * 公共业务发生拓展时，方便集中管理
 
+## Spring是如何实现单例Bean的
+Spring是通过单例注册表实现单例的，Ioc容器维护了一个bean表格，当需要一个单例bean时，从表格中获取，没有获取到的，向表格注册一个新的bean。
+
+定义一个final的ConcurrentHashMap对象，从而该域是线程安全的
+
 ## Spring 中的 bean 的作用域有哪些?
 * singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。
 * prototype : 每次请求都会创建一个新的 bean 实例。
 * request : 每一次HTTP请求都会产生一个新的bean，该bean仅在当前HTTP request内有效。
 * session : 每一次HTTP请求都会产生一个新的 bean，该bean仅在当前 HTTP session 内有效。
 * global-session： 全局session作用域，仅仅在基于portlet的web应用中才有意义，Spring5已经没有了。Portlet是能够生成语义代码(例如：HTML)片段的小型Java Web插件。它们基于portlet容器，可以像servlet一样处理HTTP请求。但是，与 servlet 不同，每个 portlet 都有不同的会话
-
 
 # Bean的生命周期
 Bean可以借鉴Servlet的生命周期，实例化、初始init、接收请求service、销毁destroy。

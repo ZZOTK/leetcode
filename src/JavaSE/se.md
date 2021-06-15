@@ -234,6 +234,10 @@ PhantomReference<Object> pf = new PhantomReference<Object>(obj, null);
 obj = null;
 ```
 
+## java .class的文件头
+
+每一个Java Class文件都是以0x CAFEBABE开头的。Java这么做的原因就是为了快速判断一个文件是不是有可能为class文件，以及这个class文件有没有受损（文件受损，文件开头受损的可能性最大）。
+
 
 
 

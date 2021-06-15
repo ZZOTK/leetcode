@@ -12,6 +12,9 @@
 * 关系型数据库能够支持复杂的 SQL 查询，能够体现出数据之间、表之间的关联关系；
 * 关系型数据库也支持事务，便于提交或者回滚。
 
+## char和varchar的区别
+char是固定长度，varchar是可变长度。在Innodb下，推荐使用varchar。
+
 ## SQL Select语句完整的执行顺序：
 
 1. from子句组装来自不同数据源的数据； （先join再on）
@@ -42,6 +45,7 @@ explain select * from emp where name = 'Jefabc';
 
 * select_type : 查询类型，有简单查询、联合查询、子查询等
 * key : 使用的索引
+    * 没有索引就是null
 * rows : 扫描的行数
 
 ### 最重要的字段 ： type
@@ -53,7 +57,9 @@ explain select * from emp where name = 'Jefabc';
 2. index: Full Index Scan，index与ALL区别为index类型只遍历索引树
 3. range:只检索给定范围的行，使用一个索引来选择
 4. ref: 表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值
+    * 联合索引复合索引都是ref
 5. eq_ref: 类似ref，区别就在使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配，简单来说，就是多表连接中使用primary key或者 unique key作为关联条件
+    * 主键索引唯一索引是eq_ref
 6. const、system: 当MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL就能将该查询转换为一个常量，system是const类型的特例，当查询的表只有一行的情况下，使用system
 7. NULL: MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引列里选取最小值可以通过单独索引查找完成。
 

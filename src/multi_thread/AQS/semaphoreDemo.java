@@ -12,7 +12,7 @@ public class semaphoreDemo {
             for(int i = 0;  i < 10 ; i ++){
                 try {
                     A.acquire();
-                    System.out.println("1");
+                    System.out.println(Thread.currentThread().getName() +"1");
                     B.release();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -24,7 +24,7 @@ public class semaphoreDemo {
             for(int i = 0;  i < 10 ; i ++){
                 try {
                     B.acquire();
-                    System.out.println("2");
+                    System.out.println(Thread.currentThread().getName() +"2");
                     C.release();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -36,7 +36,7 @@ public class semaphoreDemo {
             for(int i = 0;  i < 10 ; i ++){
                 try {
                     C.acquire();
-                    System.out.println("3");
+                    System.out.println(Thread.currentThread().getName() +"3");
                     A.release();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

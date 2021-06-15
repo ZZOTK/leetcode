@@ -42,7 +42,8 @@
     * [javaIO-NIO](src/IO/JAVAIO.md)
 
 * **JVM**    
-    * [JVM](src/JVM/jvm.md)
+    * [类加载机制](src/JVM/classload/classloader.md)
+    * [JVM内存](src/JVM/jvm.md)
     * [cpu使用过高怎么办](src/interview/cpu过高.md)
     * [内存泄漏问题](src/interview/MemoryLeak.md)
     
@@ -69,7 +70,7 @@
     * [序列化&TCP粘包](src/rpcframe/Netty/up/nettyup.md)
     
 * 分布式
-    * [分布式理论](src/distributed/theory/theory.md)
+    * [分布式理论(一致性)](src/distributed/theory/theory.md)
     * [分布式锁](src/distributed/lock/distributedlock.md)
     * [分布式事务](src/distributed/trans/trans.md)
 
@@ -108,6 +109,7 @@
     * [最长公共子串与子序列](src/leetcode/动态规划/lencommon.md)
    
 * 二叉树二叉搜索树 
+    * [二叉树的中序遍历](src/leetcode/树/inorder.md)
     * [lca最近公共节点](src/leetcode/树/lca.md)
     * [BST删除节点](src/leetcode/树/BST.md)
   
