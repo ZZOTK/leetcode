@@ -1,7 +1,12 @@
 ## Linux常用指令
 
 修改权限：chmod
+
 查看内存cpu状态：top
+
+查看端口： lsof -i:端口号 ，netstat -npl 查看端口    
+
+nc ：设置路由器的相关参数。
 
 ### 搜索指令
 1. find
@@ -13,6 +18,7 @@
     * 语法：grep -iv 【指定字符串】【文件】   -i 不区分大小写  -v 排除指定字符串
 
     * 范例：查找 /root/install.log 文件中包含 mysql 字符串的行，并输出。 指令：grep mysql /root/install.log
+5. ag ：比grep更快的搜索
 
 ## 孤儿进程
 一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。

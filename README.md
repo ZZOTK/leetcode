@@ -120,6 +120,7 @@
     * [数据流的中位数](src/leetcode/单调栈_优先队列/offer41.md)
     
 * 栈
+    * [简化文件路径]()
     * [逆波兰表达式（后缀表达式）](src/leetcode/模拟/nbl.md)
     * [栈的妙用——单调栈](src/leetcode/单调栈_优先队列/stack.md)
   

@@ -18,3 +18,9 @@ ArrayList 基于动态数组实现，LinkedList 基于双向链表实现。Array
 * 数组支持随机访问，但插入删除的代价很高，需要移动大量元素；
 * 链表不支持随机访问，但插入删除只需要改变指针
 * LinkedList还可以用来作栈、队列和双向队列
+
+## LinkedList与ArrayList的遍历效率
+使用迭代器时，两者效率差不对。
+
+使用for(size)时，由于ArrayList支持随机访问，速度大大加快。
+
