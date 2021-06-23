@@ -65,8 +65,9 @@ public class quickSort {
     public static void main(String[] args) {
         int[] nums = new int[]{1,3,5,2,6,4,8,7};
         quickSort a = new quickSort();
-        int[] ans = a.quicksort(nums);
-        for(int num:ans){
+//        int[] ans = a.quicksort(nums);
+        a.quickSort(nums,0,nums.length - 1);
+        for(int num:nums){
             System.out.println(num);
         }
     }

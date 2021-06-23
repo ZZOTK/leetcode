@@ -48,12 +48,17 @@
     * [内存泄漏问题](src/interview/MemoryLeak.md)
     
 * SQL
-    * [sql索引](src/sql/sql索引/sql索引.md)
+    * [Mysql基础](src/sql/sql基础.md)
+    * [Mysql索引](src/sql/sql索引/sql索引.md)
+    * [Mysql事务](src/sql/sql事务.md)
+    * [Innodb四大特性](src/sql/Innodb.md)
+      
+* Redis
+    * [Redis基础](src/sql/redis/Redis.md)
     * [Redis的HashMap与跳表](src/sql/redis/sjjg/shuju.md)  
     * [BitMap简单入门](src/sql/redis/sjjg/bitmap.md)
-    * [Redis学习](src/sql/redis/Redis.md)
     * [布隆过滤器BloomFilter](src/sql/redis/BloomFilter.md)  
-    * [sql面试题总结](src/sql/sql面试.md)  
+
     
 * Spring框架
     * [Spring](src/SSM/Spring/Spring.md)
@@ -135,6 +140,11 @@
     * [有环无环环入口](src/leetcode/链表/huan.md)
     * [反转！](src/leetcode/链表/reverse.md)
     
+* 并查集
+    * [并查集模板](src/leetcode/并查集/uf.md)
+    
+* 图
+
 * 字典树
     * [实现一个Trie](src/leetcode/字典树/trie.md)
 
