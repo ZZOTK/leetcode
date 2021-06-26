@@ -30,6 +30,72 @@ Insert Buffer的升级，InnoDB存储引擎可以对DML操作——INSERT、DELE
 
 Change Buffer使用的对象：非唯一的辅助索引。
 
+InsertBuffer changeBuffer都在一定频率下进行合并，那所谓的频率是什么条件？
+
+1. 辅助索引页被读取到缓冲池中。正常的select先检查Insert Buffer是否有该非聚集索引页存在，若有则合并插入。
+
+2. 辅助索引页没有可用空间。空间小于1/32页的大小，则会强制合并操作。
+
+3. Master Thread 每秒和每10秒的合并操作。
+
+### 二次写double write
+Doublewrite缓存是位于系统表空间的存储区域，用来缓存InnoDB的数据页从innodb buffer pool中flush之后并写入到数据文件之前。
+
+对缓冲池的脏页进行刷新时，不是直接写磁盘，而是会通过memcpy()函数将脏页先复制到内存中的doublewrite buffer，之后通过doublewrite 再分两次，每次1M顺序地写入共享表空间的物理磁盘上，在这个过程中，因为doublewrite页是连续的，因此这个过程是顺序写的，开销并不是很大。在完成doublewrite页的写入后，再将doublewrite buffer 中的页写入各个 表空间文件中，此时的写入则是离散的。如果操作系统在将页写入磁盘的过程中发生了崩溃，在恢复过程中，innodb可以从共享表空间中的doublewrite中找到该页的一个副本，将其复制到表空间文件，再应用重做日志。
+
+![img.png](doublewri.png)
+
+### 自适应哈希索引
+生成hash索引的条件比较苛刻
+1. 索引是否被访问了17次
+2. 索引中的某个页已经被访问了100次
+3. 访问模式必须是一样的。
+    * 例如对于（a,b）访问模式情况： where a = xxx where a = xxx and b = xxx
+
+Innodb存储引擎会监控对表上二级索引的查找，如果发现某二级索引被频繁访问，二级索引成为热数据，建立哈希索引可以带来速度的提升
+
+经常访问的二级索引数据会自动被生成到hash索引里面去(最近连续被访问三次的数据)，自适应哈希索引通过缓冲池的B+树构造而来，因此建立的速度很快。
+
+特点
+* 无序，没有树高
+* 降低对二级索引树的频繁访问资源，索引树高<=4，访问索引：访问树、根节点、叶子节点
+* 自适应
+
+缺陷:
+* hash自适应索引会占用innodb buffer pool；
+* 自适应hash索引只适合搜索等值的查询，如select * from table where index_col='xxx'，而对于其他查找类型，如范围查找，是不能使用的；
+* 极端情况下，自适应hash索引才有比较大的意义，可以降低逻辑读。
+
+### 预读
+InnoDB在I/O的优化上有个比较重要的特性为预读(Read-Ahead)，它会异步地在缓冲池中提前读取多个预计很快就会用到的数据页。
+
+![img.png](yudu.png)
+
+数据库请求数据时：
+1. 将读请求交给文件系统，放入请求队列中
+2. 相关进程从请求队列中将读请求取出，根据需求到相关数据区(内存、磁盘)读取数据；
+3. 取出的数据，放入响应队列中
+4. 进程继续处理请求队列   
+    * 判断后面几个数据读请求的数据是否相邻.再根据自身系统IO带宽处理量，进行预读
+    * 进行读请求的合并处理，一次性读取多块数据放入响应队列中，
+5. 数据库就会从响应队列中将数据取走，完成一次数据读操作过程。
+
+InnoDB使用两种预读算法来提高I/O性能：线性预读（linear read-ahead）和随机预读（randomread-ahead）
+
+把线性预读放到以extent(区，八个连续页面为区，一个页面8kb，一个区64kb)为单位，而随机预读放到以extent中的page为单位。线性预读着眼于将下一个extent提前读取到buffer pool中，而随机预读着眼于将当前extent中的剩余的page提前读取到buffer pool中。
+
+线性预读（linear read-ahead）：
+
+有一个很重要的变量控制是否将下一个extent预读到buffer pool中，通过使用配置参数innodb_read_ahead_threshold（默认为56），可以控制Innodb执行预读操作的时间。如果一个extent中的被顺序读取的page超过或者等于该参数变量时，Innodb将会异步的将下一个extent读取到buffer pool中，值越高，访问模式检查越严格
+
+例如，如果将值设置为48，则InnoDB只有在顺序访问当前extent中的48个pages时才触发线性预读请求，将下一个extent读到内存中。
+
+在没有该变量之前，当访问到extent的最后一个page的时候，Innodb会决定是否将下一个extent放入到buffer pool中。
+
+### 异步IO（Async  IO）
+AIO 用户可以连续发送多条IO请求，不需要等待其执行结果，直到所有请求都发送完成了再等待结果。另外可以将多个IO合并成一个IO。
+InnoDB提供内核级别的AIO支持，成为Native AIO。启用Native AIO, 恢复速度提升75%。
+
 ## MySQL常见存储引擎的区别
 **InnoDB** 是 MySQL 默认支持的存储引擎，支持**事务、行级锁定和外键。**
 
