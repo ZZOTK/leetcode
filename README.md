@@ -104,6 +104,8 @@
     * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
     * [最长递增子序列](src/leetcode/双指针_二分/txef.md)
     
+* 前缀和
+    * [一般的前缀和做法](src/leetcode/哈希表/qzh.md)
 * 回文
     * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
 
@@ -117,6 +119,7 @@
     * [二叉树的中序遍历](src/leetcode/树/inorder.md)
     * [lca最近公共节点](src/leetcode/树/lca.md)
     * [BST删除节点](src/leetcode/树/BST.md)
+    * [子树问题](src/leetcode/程序员面试金典/subtree.md)
   
 * 优先队列
     * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
