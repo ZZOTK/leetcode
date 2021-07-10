@@ -46,6 +46,7 @@
     * [JVM内存](src/JVM/jvm.md)
     * [cpu使用过高怎么办](src/interview/cpu过高.md)
     * [内存泄漏问题](src/interview/MemoryLeak.md)
+    * [JMM内存模型](src/JVM/JMM/jmm.md)
     
 * SQL
     * [Mysql基础](src/sql/sql基础.md)
@@ -73,11 +74,18 @@
     * [Reactor与异步模型](src/rpcframe/Netty/reactor/reactor.md)
     * [Netty核心组件&心跳机制&WebSocket长链接](src/rpcframe/Netty/zujian/Netty核心组件.md)
     * [序列化&TCP粘包](src/rpcframe/Netty/up/nettyup.md)
+    * [Netty高性能分析](src/rpcframe/Netty/highab/gaoxingneng.md)
     
 * 分布式
     * [分布式理论(一致性)](src/distributed/theory/theory.md)
     * [分布式锁](src/distributed/lock/distributedlock.md)
     * [分布式事务](src/distributed/trans/trans.md)
+
+* 大数面试题
+    * [10亿个数中如何高效地找到最大的一个数以及最大的第K个数](src/interview/bigdata/bigdata1.md)
+    * [1000台机器，每台机器1000个 文件，每个文件存储了10亿个 整数，如何找到其中最小的1000个值？](src/interview/bigdata/MergeMultiFile.md)
+    * [两个 10G 大小包含 URL 数据的文件，最多使用 1G 内存，将这两个文件合并，并找到相同的 URL](src/interview/bigdata/MergeBigFile.md)
+    * [两个文件包含无序的数字，数字的大小范围是0-500w左右。如何求两个文件中的重复的数据？](src/interview/bigdata/MergeDuplicate.md)
 
 <h2 id="5">个人项目与分享</h2>
 
@@ -165,3 +173,4 @@
 * https://github.com/CyC2018/CS-Notes
 * https://github.com/Snailclimb/JavaGuide
 * https://github.com/geekxh/hello-algorithm
+* https://github.com/resumejob/interview-questions
