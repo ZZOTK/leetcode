@@ -102,7 +102,7 @@ public class UserService {
 
     * 容器在创建Bean的时候，会将Bean添加到正在创建的Bean池中，如果在创建Bean的时候， 发现自己已经在创建的Bean池中，就说明Bean陷入循环依赖了， 直接抛出BeanCurrentlyInCreationException异常。
 
-    * 为什么构造器注入不能像Setter方法注入一样解决循环依赖问题? 因为Setter方法注入的前提是首先需要实例化这个对象，而构造器注入的参数正是bean， 怎么实例化，所以无法解决这个问题。
+    * 为什么构造器注入不能像Setter方法注入一样解决循环依赖问题? 因为构造器方法注入的前提是首先需要实例化这个对象，而构造器注入的参数正是bean， 怎么实例化，所以无法解决这个问题。
 
 * Setter方法注入的循环依赖可以通过缓存解决。 三级缓存：
 
@@ -132,6 +132,15 @@ AOC的本质：不影响原有类的功能的基础下，横向实现类功能�
 * 公共部分交给了代理角色，实现了业务的分工
 * 公共业务发生拓展时，方便集中管理
 
+## AOP原理
+Spring AOP的原理大致如下：
+
+配置一个实现了InstantiationAwareBeanPostProcessor接口的bean。在每次bean初始化的时候找到所有advisor，根据pointcut 判断是不是需要为将实例化的bean生成代理，如果需要，就把advice编制在代理对象里面。
+
+* advice:如拦截到对应的某个方法后，我们要做写什么？advice就是拦截后要执行的动作。
+* Pointcut：决定advice应该作用于哪个方法。
+* advisor，pointcut和advice的结合
+
 ## Spring是如何实现单例Bean的
 Spring是通过单例注册表实现单例的，Ioc容器维护了一个bean表格，当需要一个单例bean时，从表格中获取，没有获取到的，向表格注册一个新的bean。
 
@@ -148,6 +157,19 @@ Spring是通过单例注册表实现单例的，Ioc容器维护了一个bean表�
 Bean可以借鉴Servlet的生命周期，实例化、初始init、接收请求service、销毁destroy。
 
 ![img.png](bean.png)
+
+* Bean 容器找到配置文件中 Spring Bean 的定义。
+* Bean 容器利用 Java Reflection API 创建一个Bean的实例。
+* 如果涉及到一些属性值 利用 set()方法设置一些属性值。
+* 如果 Bean 实现了 BeanNameAware 接口，调用 setBeanName()方法，传入Bean的名字。
+* 如果 Bean 实现了 BeanClassLoaderAware 接口，调用 setBeanClassLoader()方法，传入 ClassLoader对象的实例。
+* 与上面的类似，如果实现了其他 *.Aware接口，就调用相应的方法。
+* 如果有和加载这个 Bean 的 Spring 容器相关的 BeanPostProcessor 对象，执行postProcessBeforeInitialization() 方法
+* 如果Bean实现了InitializingBean接口，执行afterPropertiesSet()方法。
+* 如果 Bean 在配置文件中的定义包含 init-method 属性，执行指定的方法。
+* 如果有和加载这个 Bean的 Spring 容器相关的 BeanPostProcessor 对象，执行postProcessAfterInitialization() 方法
+* 当要销毁 Bean 的时候，如果 Bean 实现了 DisposableBean 接口，执行 destroy() 方法。
+* 当要销毁 Bean 的时候，如果 Bean 在配置文件中的定义包含 destroy-method 属性，执行指定的方法。
 
 简单理解一下：
 1. 实例化bean对象

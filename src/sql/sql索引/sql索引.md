@@ -123,6 +123,8 @@ UUID并不一定保证是递增的。可能用到插入操作
 ### 联合索引的最左匹配原则
 比如建立了（name,phonenum,age）的联合索引。那么可以理解为建立了（name）（name，phonenum）（name，phonenum，age）三个索引。
 
+联合索引的数据结构依然是B+树，只是换成了键值对。
+
 ![img.png](sysx.png)
 
 联合索引时，B+Tree的数据结构
