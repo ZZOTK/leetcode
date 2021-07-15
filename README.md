@@ -103,12 +103,15 @@
 * [常用的数学计算](src/leetcode/math.md)
 * [常用排序总结](src/leetcode/归并_快排/sort.md)
 
+* [旋转问题](src/leetcode/剑指offer/xuanzh.md)
+
 * 位运算
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
     
 * **二分查找**
     * [二分查找的左右边界](src/leetcode/双指针_二分/二分查找.md)
+    * [旋转数组的二分查找](src/leetcode/双指针_二分/xzsz.md)  
     * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
     * [最长递增子序列](src/leetcode/双指针_二分/txef.md)
     
