@@ -2,8 +2,6 @@
 
 修改权限：chmod
 
-查看内存cpu状态：top
-
 查看端口： lsof -i:端口号 ，netstat -npl 查看端口    
 
 nc ：设置路由器的相关参数。
@@ -19,6 +17,37 @@ nc ：设置路由器的相关参数。
 
     * 范例：查找 /root/install.log 文件中包含 mysql 字符串的行，并输出。 指令：grep mysql /root/install.log
 5. ag ：比grep更快的搜索
+
+### top指令详解
+
+![img.png](top.png)
+
+* PID — 进程id
+* USER — 进程所有者
+* PR — 进程优先级
+* NI — nice值。数值越小、优先级越高。负值表示高优先级，正值表示低优先级
+* VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+* RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+* SHR — 共享内存大小，单位kb
+* S —进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+* %CPU — 上次更新到现在的CPU时间占用百分比
+* %MEM — 进程使用的物理内存百分比
+* TIME+ — 进程使用的CPU时间总计，单位1/100秒
+* COMMAND — 进程名称（命令名/命令行）
+
+
+### 查看指定端口、某个服务占用情况
+
+一，指定端口，例8080
+1. netstat -tunlp |grep  8080
+2. lsof  -i:8080
+
+二、查看服务器所有端口
+1. netstat -ntlp
+
+三、查看某进程端口占用，例Tomcat
+1. ps -ef |grep tomcat
+
 
 ## 孤儿进程
 一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。

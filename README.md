@@ -23,9 +23,9 @@
     * [传输层（TCP/UDP）](src/network/传输层/tcp.md)
     
 * 操作系统
-    * [操作系统概述（用户态内核态，系统调用）](src/OS/os.md)
-    * [process进程](src/OS/mem/mem.md)
-    * [memory内存管理](src/OS/process/process.md)
+    * [操作系统概述（用户态内核态，系统调用）](src/OS/os/os.md)
+    * [process进程](src/OS/process/process.md)
+    * [memory内存管理](src/OS/mem/mem.md)
     * [linux系统入门](src/OS/linux.md)
   
 * 多线程

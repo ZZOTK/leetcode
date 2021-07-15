@@ -15,6 +15,28 @@
     }
 ```
 
+## 剑指offer33
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，
+否则返回 false。假设输入的数组的任意两个数字都互不相同。
+
+```java
+    public boolean verifyPostorder(int[] postorder) {
+        int n = postorder.length;
+        Deque<Integer> stack = new LinkedList<>();
+        int root = Integer.MAX_VALUE;
+        for(int i = n - 1; i >= 0; i--) {
+            if(postorder[i] > root) {
+                return false;
+            }
+            while(!stack.isEmpty() && stack.peek() > postorder[i]){
+                root = stack.pop();
+            }
+            stack.add(postorder[i]);
+        }
+        return true;
+    }
+```
+
 ## leetcode907
 
 给定一个整数数组 arr，找到 min(b)的总和，其中 b 的范围为 arr 的每个（连续）子数组。
