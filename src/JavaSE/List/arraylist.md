@@ -44,6 +44,12 @@ public E remove(int index) {
     return oldValue;
 }
 ```
+
+## ArrayList与LinkedList的插入速度比较
+* 头插法：ArrayList需要做大量的位移和复制操作，而LinkedList的优势就体现出来了，耗时只是实例化一个对象。
+* 尾插时：ArrayList 不需要做位移拷贝也就不那么耗时了，而LinkedList则需要创建大量的对象。所以这里ArrayList尾插的效果更好一些。
+* 中间插入时：Linkedlist在中间插入时，遍历寻找位置非常耗时。Arraylist更好。
+
 ## 序列化
 ### java中的序列化是指什么
 * Java 提供了一种对象序列化的机制，该机制中，一个对象可以被表示为一个字节序列，该字节序列包括该对象的数据、有关对象的类型的信息和存储在对象中数据的类型。
