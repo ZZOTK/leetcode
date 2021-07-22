@@ -25,6 +25,8 @@
 
 由于对int的修改是原子的，可以省去加锁，所以不使用两个int记录。
 
+![img.png](zhuantai.png)
+
 ## ThreadPolExecutor如何维护内部线程
 
 ## ThreadPolExecutor如何处理提交任务

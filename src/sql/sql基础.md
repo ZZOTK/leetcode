@@ -29,6 +29,19 @@ char是固定长度，varchar是可变长度。在Innodb下，推荐使用varcha
 8. 使用order by对结果集进行排序。
 9. limit分页
 
+## join语句
+
+![img.png](left.png)
+* left join(左联接) 返回包括左表中的所有记录和右表中联结字段相等的记录
+  
+![img.png](right.png)
+* right join(右联接) 返回包括右表中的所有记录和左表中联结字段相等的记录
+  
+![img.png](inner.png)
+* inner join(等值连接) 只返回两个表中联结字段相等的行
+
+
+
 ## explain语句分析慢查询
 我们常常用到explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上了索引，有没有做全表扫描
 

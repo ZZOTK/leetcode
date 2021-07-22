@@ -7,6 +7,8 @@
     
 * 修饰代码块 ： 锁定的是传入的对象。
 
+![img.png](syn1.png)
+
 # synchronized工作原理
 
 syn在代码前后分别加上monitorenter和monitorexit这两个字节码指令。
@@ -29,6 +31,21 @@ java线程本身是操作系统线程的映射，所以挂起唤醒线程都需�
 ReentranLock是基于AQS实现的。在并发编程中可以实现公平锁与非公平锁对共享资源进行同步。
 
 与Synchronized一样，ReentranLock支持可重入，除此，在调度上更灵活，支持更多的功能。
+
+## ReentranLock公平锁的实现
+![img.png](fairlock.png)
+
+CLH（Craig，Landin and Hagersten），是一种基于链表的可扩展、高性能、公平的自旋锁。
+
+lock()：
+1. 通过 this.node.get() 获取当前节点，并设置 locked 为 true。
+2. 接着调用 this.tail.getAndSet(node)，获取当前尾部节点 pred_node，同时把新加入的节点设置成尾部节点。
+3. 之后就是把 this.prev 设置为之前的尾部节点，也就相当于链路的指向。
+4. 最后就是自旋 while (pred_node.locked)，直至程序释放。
+
+unlock()：
+1. 释放锁的过程就是拆链，把释放锁的节点设置为false node.locked = false。
+2. 之后最重要的是把当前节点设置为上一个节点，这样就相当于把自己的节点拆下来了，等着垃圾回收。
 
 ![img.png](lockjk.png)
 
@@ -62,7 +79,6 @@ FairSync：公平锁的实现
 * 直接调用了AQS中的tryAcquire方法
 * 如果锁空闲且队列之前没有排在之前的线程，就尝试获取锁
 
-    
 # volatile如何工作
 synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。 而volatile就可以说是java虚拟机提供的最轻量级的同步机制。
 
@@ -132,3 +148,12 @@ volatile通过内存屏障指令实现禁止指令重排序。
 * volatile 提供了可见性，任何一个线程对其的修改将立马对其他线程可见。volatile 属性**不会被线程缓存，始终从主存中读取。**
 * volatile 提供了 happens-before 保证，对 volatile 变量 V 的写入 happens-before 所有其他线程后续对 V 的读操作。
 * volatile 可以使纯赋值操作是原子的，如 boolean flag = true; falg = false。
+
+
+## 为什么添加 synchronized 也能保证变量的可见性呢？
+
+1. 线程解锁前，必须把共享变量的最新值刷新到主内存中。
+2. 线程加锁前，将清空工作内存中共享变量的值，从而使用共享变量时需要从主内存中重新读取最新的值。
+3. volatile 的可见性都是通过内存屏障（Memnory Barrier）来实现的。
+4. synchronized 靠操作系统内核互斥锁实现，相当于 JMM 中的 lock、unlock。退出代码块时刷新变量到主内存。
+

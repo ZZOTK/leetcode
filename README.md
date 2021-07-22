@@ -38,7 +38,7 @@
     * [ThreadLocal](src/multi_thread/threadlocal/threadlocal.md)
     
 * I/O
-    * [IO多路服用](src/IO/多路复用/socketIO.md)
+    * [IO多路复用](src/IO/多路复用/socketIO.md)
     * [javaIO-NIO](src/IO/JAVAIO.md)
 
 * **JVM**    
@@ -51,14 +51,14 @@
 * SQL
     * [Mysql基础](src/sql/sql基础.md)
     * [Mysql索引](src/sql/sql索引/sql索引.md)
-    * [Mysql事务](src/sql/sql事务.md)
-    * [Innodb四大特性](src/sql/Innodb.md)
+    * [Mysql事务](src/sql/sql事务/sql事务.md)
+    * [Innodb四大特性](src/sql/innodb特性/Innodb.md)
       
 * Redis
     * [Redis基础](src/sql/redis/Redis.md)
     * [Redis的HashMap与跳表](src/sql/redis/sjjg/shuju.md)  
     * [BitMap简单入门](src/sql/redis/sjjg/bitmap.md)
-    * [布隆过滤器BloomFilter](src/sql/redis/BloomFilter.md)  
+    * [布隆过滤器BloomFilter](src/sql/redis/bloomfliter/BloomFilter.md)  
 
     
 * Spring框架
