@@ -105,6 +105,8 @@
 
 * [旋转问题](src/leetcode/剑指offer/xuanzh.md)
 
+* [面试题：打靶子](src/interview/inter/daba.md)
+
 * 位运算
     * [如何计算二进制数中1的个数](src/leetcode/位运算/byte.md)
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
