@@ -102,5 +102,45 @@ private static int pow(int n, int m)
 
 依次质因数分解，再讲所有（质因数个数+1）乘起来。
 
+## 高精度乘法
+```java
+//String乘法
+public class solution {
+    public static String multi(String num1, String num2) {
+        int[] nums1 = new int[num1.length()];
+        int[] nums2 = new int[num2.length()];
+        for (int i = 0; i < num1.length(); i++) {
+            nums1[i] = num1.charAt(i) - '0';
+        }
+        for (int i = 0; i < num2.length(); i++) {
+            nums2[i] = num2.charAt(i) - '0';
+        }
+        int[] res = new int[num1.length() + num2.length()];
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            int jw = 0;
+            for (int j = num2.length() - 1; j >= 0; j--) {
+                int temp = res[i + j + 1] + nums1[i] * nums2[j] + jw;
+                res[i + j + 1] = temp % 10;
+                jw = temp / 10;
+            }
+            res[i] += jw;
+        }
+        StringBuffer sb = new StringBuffer();
+        //去掉首位0
+        int index = 0;
+        while (index < res.length && res[index] == 0) {
+            index++;
+        }
+        for (int i = index; i < res.length; i++) {
+            sb.append(res[i]);
+        }
+        if (sb.length() == 0) {
+            return "0";
+        }
+        return sb.toString();
+    }
+}
+```
 
+##  String加法
 
