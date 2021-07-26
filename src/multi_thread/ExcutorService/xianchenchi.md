@@ -18,6 +18,12 @@
     * 维护线程状态  
     * 维护任务执行状态
 
+## 线程池如何创建
+* 通过 ThreadPoolExecutor 创建的线程池；
+    * 最原始的创建线程池的方式，它包含了多个参数可供设置。
+* 通过 Executors 创建的线程池。
+    * 创建特殊的线程池
+
 ## ThreadPolExecutor自身有哪些状态？如何维护自身状态
 ![img.png](xcc11.png)
 
