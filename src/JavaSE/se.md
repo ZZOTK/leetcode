@@ -7,6 +7,21 @@
 * Java 的类是单继承的，C++ 支持多重继承；虽然 Java 的类不可以多继承，但是接口可以多继承。
 * Java 有自动内存管理垃圾回收机制(GC)，不需要程序员手动释放无用内存
 
+## JDK8的新特性
+1. lambda表达式
+    * Lambda 表达式也可称为闭包。lambda表达式本质上是一个匿名方法。Lambda允许把函数作为一个方法的参数。
+2. 新的日期API
+    * 在java.time包下，可以定制时区
+3. Stream类
+    * Arrays.stream(array, from, to)可以生成流
+    
+Stream中的常用函数：
+    * max(Comparator)：返回流中最大值
+    * count()：返回流中元素个数
+    * filter(Predicate) ：将结果为false的元素过滤掉    
+    * distinct() ：剔除重复元素
+    * sorted() ：将Comparable元素的流排序
+    
 ##  Java 泛型了解么？什么是类型擦除？介绍一下常用的通配符？
 Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。
 

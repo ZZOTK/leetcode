@@ -30,7 +30,7 @@ private static boolean check(int x) {
                     mul++;
                     x /= i;
                 }
-                map.put(x,mul);
+                map.put(i,mul);
             }
         }
         //x本身就是质数

@@ -59,8 +59,8 @@
     * [Redis的HashMap与跳表](src/sql/redis/sjjg/shuju.md)  
     * [BitMap简单入门](src/sql/redis/sjjg/bitmap.md)
     * [布隆过滤器BloomFilter](src/sql/redis/bloomfliter/BloomFilter.md)  
+    * [Redis集群](src/sql/redis/集群/jq.md)
 
-    
 * Spring框架
     * [Spring](src/SSM/Spring/Spring.md)
     * [SpringMVC](src/SSM/MVC/SpringMvc.md)
@@ -121,6 +121,8 @@
     * [一般的前缀和做法](src/leetcode/哈希表/qzh.md)
 * 回文
     * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
+* 贪心
+    * [重叠区间问题](src/leetcode/自定义sort/cdqj.md)
 
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
@@ -151,6 +153,7 @@
     
 * 回溯
     * [和为target的方案](src/leetcode/回溯_DFS_BFS/btrack_sum.md)
+    * [子集问题](src/leetcode/程序员面试金典/ziji.md)
 
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)

@@ -41,7 +41,24 @@ dns的递归查询与迭代查询（都不够快，所以又引入了高速缓�
 
 ![img.png](httpxy.png)
 
-请求行就是方法+Url+http版本
+http请求的构成：
+1. 请求方法 + URI + 协议/版本
+    * GET/sample.jspHTTP/1.1 
+2. 请求头(Request Header)
+    * Accept 可接受的内容类型
+    * Accept-Language 语言
+    * Connection连接状态
+    * Host 请求的域名（这里我设置的是请求本地，当然，关于域名，就是所谓的URL）
+    * User-Agent 浏览器端浏览器型号和版本
+    * Accept-Encoding 可接受的压缩类型 gzip,deflate
+3. 请求正文
+    * username=jinqiao&password=1234，像restful后面加的，实际就是一个kv键值对
+
+http响应的构成：
+1. 状态行
+    *  例如HTTP/1.1 200 OK，协议+状态码+状态描述
+2. 响应头
+3. 响应正文
 
 ## URL格式
 
