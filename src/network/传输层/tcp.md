@@ -18,6 +18,13 @@
 
 进程间使用socket通讯。
 
+### 同一个端口可以共用TCP，UDP吗（socket可以tcp，udp共用吗）？
+TCP:
+* 一个端口能建立多个TCP连接，同一个端口也就是说 server ip和server port 是不变的。那么只要[client ip 和 client port]不相同就可以了。能保证接唯一标识[server ip, server port, client ip, client port]的唯一性。
+* 一个端口同一时间只能bind给一个SOCKET。就是同一时间一个端口只可能有一个监听线程(监听listen之前要bind)
+
+同一个端口可以同时绑定一个TCP与一个UDP。TCP和UDP传输协议监听同一个端口后，接收数据互不影响，不冲突。
+
 ## UDP和TCP的区别
 TCP 和 UDP 都位于计算机网络模型中的运输层，它们负责传输应用层产生的数据。
 

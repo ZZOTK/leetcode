@@ -40,7 +40,14 @@ char是固定长度，varchar是可变长度。在Innodb下，推荐使用varcha
 ![img.png](inner.png)
 * inner join(等值连接) 只返回两个表中联结字段相等的行
 
+## Mysql分页查询怎么实现的
+limit语句实现分页。
 
+```sql
+limit a,b
+```
+
+跳过a行选b行
 
 ## explain语句分析慢查询
 我们常常用到explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上了索引，有没有做全表扫描

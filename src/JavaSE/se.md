@@ -16,11 +16,11 @@
     * Arrays.stream(array, from, to)可以生成流
     
 Stream中的常用函数：
-    * max(Comparator)：返回流中最大值
-    * count()：返回流中元素个数
-    * filter(Predicate) ：将结果为false的元素过滤掉    
-    * distinct() ：剔除重复元素
-    * sorted() ：将Comparable元素的流排序
+* max(Comparator)：返回流中最大值
+* count()：返回流中元素个数
+* filter(Predicate) ：将结果为false的元素过滤掉
+* distinct() ：剔除重复元素
+* sorted() ：将Comparable元素的流排序
     
 ##  Java 泛型了解么？什么是类型擦除？介绍一下常用的通配符？
 Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。
@@ -54,6 +54,19 @@ System.out.println(l1.getClass() == l2.getClass());
     * final修饰变量，声明变量时可以不赋值，而且一旦赋值就不能被修改了。
     * final修饰方法。可以被继承，但继承后不能被重写。
     * final修饰类。类不可以被继承，也就是不能有子类。
+
+* 对于一个final变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改； 如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。
+
+```java
+final int[] value={1,2,3};
+value[2]=100;
+
+int[] another={4,5,6};
+value=another;    
+```
+
+第一种情况value[2]是会变成100的。
+第二种则会报错，不能直接改引用的对象。
 
 static和final一起使用 ，static final用来修饰成员变量和成员方法，可简单理解为“全局常量”
 
@@ -203,6 +216,14 @@ for(int i = 0; i < s.length(); i ++){
     hash = 31 * hash + s.charAt(i);
         }
 ```
+
+一般对象的hashcode是在他的对象头中。
+
+## 为什么java要封装基本类型
+1. 便于统一管理，传递参数方便
+2. 需要用到Object中的方法。比如int 是没有hashcode 方法的。
+3. 实际业务中需要用到null。基本类型没有null。
+
 
 ## java四种字符串拼接方式性能分析
 1. 直接用“+”号

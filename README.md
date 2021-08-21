@@ -1,7 +1,7 @@
 # JAVA学习
 
 > 本项目为个人学习用。除了自己总结的之外，还学习参考整理了许多的[博客与项目](#4)。
-> 对于算法题，还总结了[leetcode刷题笔记](#2)，常用的[设计模式](#3)。
+> 对于算法题，还总结了[leetcode刷题笔记](#2)，[SQL语法笔记](#6),常用的[设计模式](#3)。
 > 自己做的项目[总结分享](#5)
 
 * JavaSE
@@ -53,7 +53,7 @@
     * [Mysql索引](src/sql/sql索引/sql索引.md)
     * [Mysql事务](src/sql/sql事务/sql事务.md)
     * [Innodb四大特性](src/sql/innodb特性/Innodb.md)
-      
+    
 * Redis
     * [Redis基础](src/sql/redis/Redis.md)
     * [Redis的HashMap与跳表](src/sql/redis/sjjg/shuju.md)  
@@ -96,8 +96,13 @@
 
 * RPC框架
     * [zookeeper](src/rpcframe/zookeeper/zookeeper.md)
-    * [Netty](src/rpcframe/Netty/reactor/reactor.md) 
-    
+    * [RPC框架](src/rpcframe/framework.md) 
+
+<h2 id="6">SQL语法</h2>
+
+* [sql语法练习](src/sql/sql语法/sqllan.md)
+* [sql四大排序](src/sql/sql语法/paixu.md)
+
 <h2 id="2">leetcode刷题笔记</h2>
 
 * [常用的数学计算](src/leetcode/math.md)
@@ -158,7 +163,8 @@
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)
     * [反转！](src/leetcode/链表/reverse.md)
-    
+    * [LRU的实现](src/leetcode/哈希表/lru.md)    
+
 * 并查集
     * [并查集模板](src/leetcode/并查集/uf.md)
     

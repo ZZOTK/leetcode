@@ -133,16 +133,16 @@
         //2.调整堆结构+交换堆顶元素与末尾元素
         for(int j=N;j>0;j--){
             swap(arr,0,j);//将堆顶元素与末尾元素进行交换
-            adjustHeap(arr,0,j);//重新对堆进行调整
+            adjustHeap(arr,0,j-1);//重新对堆进行调整
         }
 
     }
     
     public static void adjustHeap(int[] arr,int i,int length){
         //由于下标从0开始，左节点2n+1，右节点2n+2
-        while(2 * i + 1 < length ){
+        while(2 * i + 1 <= length ){
             int j = 2 * i +1;
-            if( j + 1< length && arr[j] < arr[j+1]){
+            if( j + 1 <= length && arr[j] < arr[j+1]){
                 j ++;
             }
             if(arr[i] > arr[j]){
