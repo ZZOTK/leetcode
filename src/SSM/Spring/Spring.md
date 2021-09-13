@@ -1,6 +1,19 @@
 官方文档（中文）：       
 https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference
 
+## Spring，SpringMVC，SpringBoot的区别
+Spring最初使用IOC与AOP解耦组件
+
+大家利用这种模式，搞了一个MVC框架，用于开发web应用（SpringMVC）
+
+由于开发中还有许多重复的工作，更进一步整合简化为Springboot
+
+总结：Spring 是一个“引擎”；
+
+Spring MVC 是基于Spring的一个 MVC 框架 ；
+
+Spring Boot 是基于Spring4的条件注册的一套快速开发整合包。
+
 # IOC(控制反转)
 IoC（Inverse of Control:控制反转）是一种设计思想，就是 将原本在程序中手动创建对象的控制权，交由Spring框架来管理。 IoC 在其他语言中也有应用，并非 Spring 特有。 
 IoC 容器是 Spring 用来实现 IoC 的载体， IoC 容器实际上就是个Map（key，value）,Map 中存放的是各种对象。
@@ -140,6 +153,8 @@ Spring AOP的原理大致如下：
 * advice:如拦截到对应的某个方法后，我们要做写什么？advice就是拦截后要执行的动作。
 * Pointcut：决定advice应该作用于哪个方法。
 * advisor，pointcut和advice的结合
+
+## AOP中的事务
 
 ## Spring是如何实现单例Bean的
 Spring是通过单例注册表实现单例的，Ioc容器维护了一个bean表格，当需要一个单例bean时，从表格中获取，没有获取到的，向表格注册一个新的bean。

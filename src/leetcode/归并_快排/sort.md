@@ -7,6 +7,28 @@
     }
 ```
 
+## 冒泡排序
+通过交换，每次将最大的元素移动至最后
+
+加入一个标志位。如果遍历一遍没有发生交换，则已有序，停止。
+```java
+    public int[] bubble(int[] arr){
+        int N = arr.length;
+        boolean flag = false;
+        for(int i = N-1 ; i > 0 && !flag ; i--){
+            for(int j = 0 ; j < i; j ++){
+                flag = true;
+                if(arr[j] > arr[j + 1]){
+                    swap(arr,j,j +1)
+                    flag = false;
+                }
+            }
+        }
+        return arr;
+    }
+```
+
+
 ## 选择排序
 将最小元素与未排序的第一个元素交换。
 ```java
@@ -28,6 +50,8 @@
 ```
 
 时间复杂度N^2，空间复杂度O(1)，非稳定排序。
+
+## 插入排序
 
 ## 快速排序
 快速排序每次选择一个标准pivot，将比pivot小的都放到左边，大的放到右边，递归排序完成整个数组。

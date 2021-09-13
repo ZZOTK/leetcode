@@ -11,11 +11,11 @@
 1. lambda表达式
     * Lambda 表达式也可称为闭包。lambda表达式本质上是一个匿名方法。Lambda允许把函数作为一个方法的参数。
 2. 新的日期API
-    * 在java.time包下，可以定制时区
+    * 在java.time包下，可以定制时区，且线程安全
 3. Stream类
     * Arrays.stream(array, from, to)可以生成流
     
-Stream中的常用函数：
+Stream中的常用函数：    
 * max(Comparator)：返回流中最大值
 * count()：返回流中元素个数
 * filter(Predicate) ：将结果为false的元素过滤掉

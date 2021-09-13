@@ -217,6 +217,11 @@ oldCap。
 
 HashMap 扩容在1.8中由头插改为尾插。避免了死循环问题
 
+## 并发时hashmap的resize会发生什么情况
+Hashmap的Resize包含扩容和ReHash两个步骤，ReHash在并发的情况下可能会形成链表环。
+
+然后在后续的get一个不存在的值时会出现死循环。
+
 ## hashmap遍历时删除会怎么样
 
 ```java

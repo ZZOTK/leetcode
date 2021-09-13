@@ -1,5 +1,17 @@
 # JAVA解决数学问题
 
+## 最大公约数
+辗转相除递归。
+```java
+    public static int gcd(int a, int b){
+        if(b == 0){
+            return a;
+        }else{
+            return gcd(b,a % b);
+        }
+    }
+```
+
 ## 判断是不是质数
 判断数j是不是质数：从0开始尝试到sqrt（j）
 
@@ -116,6 +128,7 @@ public class solution {
             nums2[i] = num2.charAt(i) - '0';
         }
         int[] res = new int[num1.length() + num2.length()];
+        //核心
         for (int i = num1.length() - 1; i >= 0; i--) {
             int jw = 0;
             for (int j = num2.length() - 1; j >= 0; j--) {
