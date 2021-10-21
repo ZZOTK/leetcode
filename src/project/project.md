@@ -1,3 +1,17 @@
+## 读写分离的具体实现
+
+![img.png](dx.png)
+
+1. 主从数据源的配置
+2. 数据源路由的配置
+    * Spring 提供了 AbstractRoutingDataSource 根据用户定义的规则选择当前的数据源，作用就是在执行查询之前，设置使用的数据源,实现动态路由的数据源，在每次数据库查询操作前执行它的抽象方法 determineCurrentLookupKey() 决定使用哪个数据源。
+3. 数据源上下文环境
+    * ThreadLocal将数据源设置到每个线程上下文中
+4. 切换注解和 Aop 配置
+    * 来定义一个@DataSourceSwitcher 注解,拥有两个属性 1. 当前的数据源 2. 是否清除当前的数据源,并且只能放在方法上
+    * 该注解的主要作用就是进行数据源的切换,在 dao 层进行操作数据库的时候,可以在方法上注明表示的是当前使用哪个数据源;
+5. 使用在 service 层或者 dao 层,在需要查询的方法上添加@DataSourceSwitcher(DataSourceEnum.SLAVE),它表示该方法下所有的操作都走的是读库;在需要 update 或者 insert 的时候使用@DataSourceSwitcher(DataSourceEnum.MASTER)表示接下来将会走写库。    
+
 
 ## 读写分离的情况下如何保持数据一致性
 ![img_1.png](dxfl.png)

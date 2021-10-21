@@ -1,4 +1,4 @@
-由于排序需要用到交换，定义交换数组中a，b位置的swap方法：
+## 由于排序需要用到交换，定义交换数组中a，b位置的swap方法：
 ```java
     public void swap(int[] nums, int a, int b){
         int temp = nums[a];

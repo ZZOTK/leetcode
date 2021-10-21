@@ -78,7 +78,7 @@
     
 * 分布式
     * [分布式理论(一致性)](src/distributed/theory/theory.md)
-    * [分布式锁](src/distributed/lock/distributedlock.md)
+    * [分布式锁及分布式ID](src/distributed/lock/distributedlock.md)
     * [分布式事务](src/distributed/trans/trans.md)
 
 * 大数面试题
@@ -95,7 +95,7 @@
     * [token及登录](src/project/token/token.md)
 
 * RPC框架
-    * [zooke eper](src/rpcframe/zookeeper/zookeeper.md)
+    * [zookeeper](src/rpcframe/zookeeper/zookeeper.md)
     * [RPC框架](src/rpcframe/framework.md) 
 
 <h2 id="6">SQL语法</h2>
@@ -117,6 +117,7 @@
     * [不用加号的加法](src/leetcode/剑指offer/byteadd.md)
     
 * **二分查找**
+    * [二维数组的搜索](src/leetcode/双指针_二分/erwei.md)
     * [二分查找的左右边界](src/leetcode/双指针_二分/二分查找.md)
     * [旋转数组的二分查找](src/leetcode/双指针_二分/xzsz.md)  
     * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
@@ -137,6 +138,7 @@
    
 * 二叉树二叉搜索树 
     * [二叉树的中序遍历](src/leetcode/树/inorder.md)
+    * [最长路径与最大路径和](src/leetcode/树/longest.md)
     * [lca最近公共节点](src/leetcode/树/lca.md)
     * [BST删除节点](src/leetcode/树/BST.md)
     * [子树问题](src/leetcode/程序员面试金典/subtree.md)
@@ -148,6 +150,7 @@
     * [数据流的中位数](src/leetcode/单调栈_优先队列/offer41.md)
     
 * 栈
+    * [最多的出栈顺序(catalan树)](src/leetcode/模拟/catalan.md)
     * [简化文件路径]()
     * [逆波兰表达式（后缀表达式）](src/leetcode/模拟/nbl.md)
     * [栈的妙用——单调栈](src/leetcode/单调栈_优先队列/stack.md)

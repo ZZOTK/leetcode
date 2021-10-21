@@ -107,6 +107,13 @@ Linux磁盘管理常用三个命令为df、du和fdisk。
 
 ![img.png](dush.png)
 
+## docker指令
+docker ps查看容器属性
+
+Docker提供了attach命令来进入Docker容器。
+
+使用docker exec进入Docker容器
+
 ## 孤儿进程
 一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。
 
