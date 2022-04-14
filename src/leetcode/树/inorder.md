@@ -69,5 +69,37 @@ public List<Integer> inorderTraversal(TreeNode root) {
 
 ```
 
+中序遍历的下一个节点
+
+```java
+private class TreeLinkNode{
+        int val;
+        TreeLinkNode left;
+        TreeLinkNode right;
+        TreeLinkNode next;
+        public TreeLinkNode(int val){
+            this.val = val;
+        }
+    }
+public TreeLinkNode GetNext1(TreeLinkNode pNode) {
+         //如果当前节点存在右子节点，则中序下一个节点为右子树最左下的节点，如果右子树没有左子结点就返回右子树根结点
+        if (pNode.right != null){
+            pNode = pNode.right;
+            while (pNode.left != null){
+                pNode = pNode.left;
+            }
+            return pNode;
+        }
+
+        //如果不存在右子节点，则回到父节点中判断，如果父节点的右子树为该节点，则继续寻找父节点
+        while (pNode.next != null && pNode == pNode.next.right){
+            pNode = pNode.next;
+        }
+        //若该节点为父节点的左孩子，则下一个中序节点就是父节点
+
+        return pNode.next;
+    }
+```
+
 
 

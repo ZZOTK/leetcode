@@ -25,3 +25,24 @@
         System.out.println(nums[n]);
     }
 ```
+
+回溯模拟（有效括号的做法）
+```java
+    int ans = 0;
+    public void backtrack(int left, int right, int n) {
+        // 肯定不合法，提前结束
+        //这个判断是核心
+        //left < right这个条件保证了括号的合法性
+        if (left > n || left < right) {
+            return;
+        }
+        // 到达结束条件
+        if (left + right == 2 * n) {
+            ans++;
+            return;
+        }
+        // 选择
+        backtrack(left + 1, right,n);
+        backtrack(left, right + 1,n);
+    }
+```

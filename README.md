@@ -2,7 +2,9 @@
 
 > 本项目为个人学习用。除了自己总结的之外，还学习参考整理了许多的[博客与项目](#4)。
 > 对于算法题，还总结了[leetcode刷题笔记](#2)，[SQL语法笔记](#6),常用的[设计模式](#3)。
-> 自己做的项目[总结分享](#5)
+> 自己做的项目[总结分享](#5)。
+> 
+> 加入[工作之后](#7)的工具等学习
 
 * JavaSE
     * [JAVA基础](src/JavaSE/se.md)
@@ -142,11 +144,12 @@
     * [lca最近公共节点](src/leetcode/树/lca.md)
     * [BST删除节点](src/leetcode/树/BST.md)
     * [子树问题](src/leetcode/程序员面试金典/subtree.md)
+    * [构造二叉树问题](src/leetcode/树/gouzao.md)
   
 * 优先队列
     * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
     * [优先队列怎么用](src/leetcode/单调栈_优先队列/priority.md)
-    * [优先队列配贪心]()
+    * [优先队列配贪心](src/leetcode/单调栈_优先队列/tanx.md)
     * [数据流的中位数](src/leetcode/单调栈_优先队列/offer41.md)
     
 * 栈
@@ -182,6 +185,9 @@
 * [工厂模式](src/设计模式/factory/factory.md)
 * [代理模式](src/设计模式/Proxy/proxy.md)
 * [适配器模式](src/设计模式/adapter/adapter.md)
+
+<h2 id="7">工作之后</h2>
+* [git使用](src/git/git.md)
 
 <h2 id="4">感谢</h2>
 
