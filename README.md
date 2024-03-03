@@ -62,6 +62,7 @@
     * [BitMap简单入门](src/sql/redis/sjjg/bitmap.md)
     * [布隆过滤器BloomFilter](src/sql/redis/bloomfliter/BloomFilter.md)  
     * [Redis集群](src/sql/redis/集群/jq.md)
+    * [2024-4-redis](src/sql/redis/redis面试.md)
 
 * Spring框架
     * [Spring](src/SSM/Spring/Spring.md)
@@ -131,6 +132,9 @@
     * [回文字符串如何分析](src/leetcode/回文/huiwen.md)
 * 贪心
     * [重叠区间问题](src/leetcode/自定义sort/cdqj.md)
+* 纯逻辑
+  * [前后两次遍历](src/leetcode/逻辑思考/双向遍历.md)
+  * [杂项汇总](src/leetcode/逻辑思考/汇总.md)
 
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
