@@ -71,7 +71,9 @@
     * [SpringIOC源码解读](src/SSM/springioc.md)
   
 * 消息队列
-    * [RabbitMQ](src/消息队列MQ/RabbitMQ.md)
+    * [RabbitMQ](src/消息队列MQ/rabbitMq/RabbitMQ.md)
+    * [kafka](src/消息队列MQ/kafka/kafka.md)
+    * [RabbitMQ](src/消息队列MQ/rocketMq/rocketmq.md)
     
 * Netty
     * [Reactor与异步模型](src/rpcframe/Netty/reactor/reactor.md)
