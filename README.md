@@ -73,7 +73,7 @@
 * 消息队列
     * [RabbitMQ](src/消息队列MQ/rabbitMq/RabbitMQ.md)
     * [kafka](src/消息队列MQ/kafka/kafka.md)
-    * [RabbitMQ](src/消息队列MQ/rocketMq/rocketmq.md)
+    * [rocketMq](src/消息队列MQ/rocketMq/rocketmq.md)
     
 * Netty
     * [Reactor与异步模型](src/rpcframe/Netty/reactor/reactor.md)
@@ -127,7 +127,10 @@
     * [旋转数组的二分查找](src/leetcode/双指针_二分/xzsz.md)  
     * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
     * [最长递增子序列](src/leetcode/双指针_二分/txef.md)
-    
+
+* 前缀和
+  * [一般的前缀和做法](src/leetcode/哈希表/huachuang.md)
+  * 
 * 前缀和
     * [一般的前缀和做法](src/leetcode/哈希表/qzh.md)
 * 回文
