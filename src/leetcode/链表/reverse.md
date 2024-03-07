@@ -55,32 +55,79 @@ public class leetcode206 {
     }
 }
 ```
+## 翻转链表的前N个节点
+
+对于翻转前N个节点，使用递归方法
+
+```java
+class Solution {
+    public ListNode reverseN(ListNode head, int n) {
+        if (n == 1) {
+            return head;
+        }
+        ListNode last = reverseN(head.next, n - 1);
+        ListNode successor = head.next.next;
+        head.next.next = head;
+        head.next = successor;
+        return last;
+    }
+}
+```
+
 
 ## leetcode92
 
 反转[left，right]区间的链表
 
+
+
 ```java
+import leetcode.链表.ListNode;
+
 class Solution {
+    // 普通的迭代方法
     public ListNode reverseBetween(ListNode head, int left, int right) {
         ListNode dum = new ListNode(-1);
         dum.next = head;
         ListNode h1 = dum;
-        for(int i = 0; i < left - 1; i ++){
+        for (int i = 0; i < left - 1; i++) {
             h1 = h1.next;
         }
         ListNode h2 = h1.next;
         ListNode pre = h2.next;
         ListNode las = h2;
-        for(int i = 0; i <right - left; i ++){
+        for (int i = 0; i < right - left; i++) {
             h2.next = pre.next;
             pre.next = las;
             h1.next = pre;
             las = pre;
             pre = h2.next;
-            
+
         }
         return dum.next;
+    }
+
+    
+
+    // 借用翻转1-N个节点递归实现
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (left == 1) {
+            return reverseN(head, right);
+        }
+        // 前进到反转的起点触发 base case
+        head.next = reverseBetween(head.next, left - 1, right - 1);
+        return head;
+    }
+
+    public ListNode reverseN(ListNode head, int n) {
+        if (n == 1) {
+            return head;
+        }
+        ListNode last = reverseN(head.next, n - 1);
+        ListNode successor = head.next.next;
+        head.next.next = head;
+        head.next = successor;
+        return last;
     }
 }
 ```
