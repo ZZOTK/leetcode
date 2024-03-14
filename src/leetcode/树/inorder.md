@@ -101,5 +101,41 @@ public TreeLinkNode GetNext1(TreeLinkNode pNode) {
     }
 ```
 
+二叉树的层序遍历
 
+利用队列记录上一层的节点，再放入一个list中
+```java
+public class leetcode102 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans=new ArrayList<>();
+        Queue<TreeNode> path=new LinkedList<>();
+        if (root == null) {
+            return ans;
+        }
+        path.add(root);
+        while (!path.isEmpty()){
+            List<Integer> level=new ArrayList<>();
+            int len=path.size();
+            for (int i=0;i<len;i++){
+                TreeNode node=path.poll();
+                level.add(node.val);
+                if (node.left!=null){
+                    path.add(node.left);
+                }
+                if (node.right!=null){
+                    path.add(node.right);
+                }
+            }
+            ans.add(level);
+        }
+        return ans;
+    }
 
+}
+```
+
+下面两题都需要用到中序遍历的特性
+
+leetcode 530
+
+leetcode 98 
