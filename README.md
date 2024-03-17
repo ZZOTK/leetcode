@@ -131,8 +131,8 @@
     * [二分查找的判定问题](src/leetcode/双指针_二分/erfen.md) 
     * [最长递增子序列](src/leetcode/双指针_二分/txef.md)
 
-* 前缀和
-  * [一般的前缀和做法](src/leetcode/哈希表/huachuang.md)
+* 滑动窗口
+  * [滑窗](src/leetcode/哈希表/huachuang.md)
   * 
 * 前缀和
     * [一般的前缀和做法](src/leetcode/哈希表/qzh.md)
@@ -160,7 +160,7 @@
   
 * 优先队列
     * [PriorityQueue优先队列](src/leetcode/单调栈_优先队列/pq.md)
-    * [优先队列怎么用](src/leetcode/单调栈_优先队列/priority.md)
+    * [优先队列怎么用（第k大的数）](src/leetcode/单调栈_优先队列/priority.md)
     * [优先队列配贪心](src/leetcode/单调栈_优先队列/tanx.md)
     * [数据流的中位数](src/leetcode/单调栈_优先队列/offer41.md)
     

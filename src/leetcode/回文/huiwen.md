@@ -3,26 +3,30 @@ public class leetcode5 {
     //中心扩散法遍历做法
     public String longestPalindrome(String s) {
         int n = s.length();
-        int max  = 0;
-        int templ = 0;
-        int tempr = 0;
-        for(int i = 0; i < n; i ++){
-            for(int j = 0; j <= 1; j ++){
-                int l = i;
-                int r = l + j;
-                while(l >= 0 && r < n && s.charAt(l) == s.charAt(r)){
-                    int temp = r - l + 1;
-                    if(temp > max){
-                        templ = l;
-                        tempr = r;
-                        max = temp;
-                    }
-                    l --;
-                    r ++;
-                }
+        int max = 0;
+        String res = s;
+        for(int i = 0; i < n-1; i ++){
+            String longest = getLongest(s, i, i);
+            String longest1 = getLongest(s, i, i + 1);
+            if(longest.length() >max){
+                max = longest.length();
+                res = longest;
+            }
+            if(longest1.length() >max){
+                max = longest1.length();
+                res = longest1;
             }
         }
-        return s.substring(templ,tempr + 1);
+        return res;
+    }
+
+    public String getLongest(String s, int i, int j){
+        int n = s.length();
+        while(i >=0 && j<n && s.charAt(i) == s.charAt(j) ){
+            i--;
+            j++;
+        }
+        return s.substring(i+1,j);
     }
 
     //动态规划做法

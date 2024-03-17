@@ -31,5 +31,28 @@ public class leetcde3 {
         }
         return max;
     }
+    
+    // 利用hashset做滑动窗口
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int l = 0;
+        int r = 0;
+        int res = 0;
+        while(r < s.length()){
+            if(!set.contains(s.charAt(r))){
+                set.add(s.charAt(r));
+                r ++;
+                res = Math.max(r-l,res);
+            }else{
+                // 左边界移动到不包含右边的字符为止。
+                while(set.contains(s.charAt(r))){
+                    set.remove(s.charAt(l));
+                    l++;
+                }
+                res = Math.max(r-l,res);
+            }
+        }
+        return res;
+    }
 }
 ```
