@@ -116,3 +116,61 @@ class LRUCache {
 
 }
 ```
+
+使用java 的deque实现
+
+```java
+class LRUCache {
+
+    private Map<Integer, Integer> cache = new HashMap<>();
+    private int capacity;
+    Deque<Integer> dq = new LinkedList<>();
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int get(int key) {
+        Integer val = cache.get(key);
+        if (val == null) {
+            return -1;
+        }
+        // 如果 key 存在，先通过哈希表定位，再移到头部
+        moveToHead(key);
+        return val;
+    }
+
+    public void put(int key, int value) {
+        Integer val = cache.get(key);
+        if (val == null) {
+            // 如果 key 不存在，创建一个新的节点
+            // 添加进哈希表
+            cache.put(key, value);
+            // 添加至双向链表的头部
+            addToHead(key);
+            if (dq.size() > capacity) {
+                // 删除哈希表中对应的项
+                Integer last = dq.getLast();
+                dq.removeLast();
+                cache.remove(last);
+            }
+        }
+        else {
+            // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
+            cache.put(key,value);
+            moveToHead(key);
+        }
+    }
+
+    //将一个节点增加到头部
+    private void addToHead(Integer val) {
+        dq.addFirst(val);
+    }
+
+    //将一个节点移动带头部
+    private void moveToHead(int val) {
+        dq.remove(val);
+        dq.addFirst(val);
+    }
+}
+```
+实际leetcode会超时，原因是remove操作太慢了。上面自己实现的代码，remove可以直接找到这个node，不用遍历

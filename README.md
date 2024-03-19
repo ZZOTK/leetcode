@@ -147,6 +147,7 @@
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)
     * [leetcode中的背包问题](src/leetcode/动态规划/leetcodebags.md)
+    * [常见题型](src/leetcode/动态规划/changjian.md)
     * [分组dp](src/leetcode/动态规划/fengzudp.md)
     * [最长公共子串与子序列](src/leetcode/动态规划/lencommon.md)
    
@@ -177,7 +178,8 @@
 * 回溯
     * [和为target的方案](src/leetcode/回溯_DFS_BFS/btrack_sum.md)
     * [岛屿问题](src/leetcode/回溯_DFS_BFS/daoyu.md)
-    * [子集问题](src/leetcode/程序员面试金典/ziji.md)
+    * [常见回溯问题](src/leetcode/回溯_DFS_BFS/changjian.md)
+    * [子集/全排列问题](src/leetcode/程序员面试金典/ziji.md)
 
 * 链表
     * [有环无环环入口](src/leetcode/链表/huan.md)
