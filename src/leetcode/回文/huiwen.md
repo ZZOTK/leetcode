@@ -65,3 +65,35 @@ public class leetcode5 {
     }
 }
 ```
+
+leetcode516 最长回文子序列
+
+子序列就不能用中心扩散法了。需要用动态规划
+
+* dp[n][m]表示n-m下标下，s的最长回文子序列
+* 状态转移和回文子串是一样的
+* 最终结果是dp[0][n],就是整个字符串的最长回文子序列,所以第一行是最后填充的
+
+```java
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        for(int i = 0; i < n; i ++){
+            dp[i][i] = 1;
+        }
+        // 注意dp顺序
+        for(int i = n-1; i >= 0; i --){
+            for(int j = i + 1; j <n ; j ++){
+                if(s.charAt(i) ==s.charAt(j)){
+                    dp[i][j] = dp[i+1][j-1] + 2;
+                }else {
+                    dp[i][j] = Math.max(dp[i+1][j],dp[i][j-1]);
+                }
+            }
+        }
+        return dp[0][n-1];
+    }
+
+}
+```

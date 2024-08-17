@@ -46,7 +46,16 @@ Redisson提供了一个监控锁的看门狗，它的作用是在Redisson实例�
 * watch dog 机制启动，且代码中没有释放锁操作时，watch dog 会不断的给锁续期；
 * 从可2得出，如果程序释放锁操作时因为异常没有被执行，那么锁无法被释放，所以释放锁操作一定要放到 finally {} 中；
 
-锁释放失败会无限延期吗？
+> watchdog其实就是在你获取到redisson锁之后，在后台开启了一个定时任务，会将获取到锁的线程的id相关数据放入到
+EXPIRATION_RENEWAL_MAP，然后定时任务每隔 10s 去查一下，看看当前这个map中是否还有 对应的 value值数据。 如果有，则取出第一个 threadId,根据这个threadId去找对应锁的名称，（getLockName）。如果锁存在就延长锁的时间。
+
+释放锁流程分析：
+> * 判断key是否存在
+> * 将当前客户端对应的 锁的hash结构的 value 递减为0,
+>* 先删除锁，发送解锁消息，向通道 redisson_lock_channel 广播形式发送。
+>* 取消watchdog机制， 删除EXPIRATION_RENEWAL_MAP的线程id【cancelExpirationRenewal】,并且取消定时任务线程
+
+* 锁释放失败会无限延期吗？
 
 不会，因为无论释放锁操作是否成功，EXPIRATION_RENEWAL_MAP中的目标 ExpirationEntry 对象已经被移除了，watch dog 通过判断后就不会继续给锁续期了。
 

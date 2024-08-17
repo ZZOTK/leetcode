@@ -13,7 +13,7 @@ public class leetcode543 {
             return 0;
         }
         int left = dfs(root.left);
-        int right = dfs(root.right);
+        int right = dfs(root.right); 
         max = Math.max(max,left +right);
         return Math.max(left,right) +1;
     }
