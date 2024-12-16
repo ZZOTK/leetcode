@@ -63,6 +63,7 @@
     * [布隆过滤器BloomFilter](src/sql/redis/bloomfliter/BloomFilter.md)  
     * [Redis集群](src/sql/redis/集群/jq.md)
     * [2024-4-redis](src/sql/redis/redis面试.md)
+    * [redis数据结构](src/sql/redis/redis数据结构.md)
 
 * Spring框架
     * [Spring](src/SSM/Spring/Spring.md)
