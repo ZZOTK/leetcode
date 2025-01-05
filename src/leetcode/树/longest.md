@@ -15,9 +15,23 @@ public class leetcode543 {
         int left = dfs(root.left);
         int right = dfs(root.right); 
         max = Math.max(max,left +right);
+        // 到某个节点为止的最大深度
         return Math.max(left,right) +1;
     }
 
+}
+```
+
+leetcode104 二叉树的最大深度
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        // 最大深度必须过根节点
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
 }
 ```
 

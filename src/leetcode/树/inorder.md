@@ -139,3 +139,31 @@ public class leetcode102 {
 leetcode 530
 
 leetcode 98 
+
+### leetcode 230 二叉搜索树第k小的节点
+其实就是中序遍历，然后取第k个节点
+```java
+class Solution {
+  int rank = 0;
+    int res = 0;
+
+    public int kthSmallest(TreeNode root, int k) {
+        tra(root, k);
+        return res;
+        
+    }
+
+    public void tra(TreeNode root ,int  k){
+        if(root == null){
+            return;
+        }
+        tra(root.left, k);
+        rank ++;
+        if(rank == k){
+            res = root.val;
+            return;
+        }
+        tra(root.right, k);
+    }
+}
+```

@@ -48,6 +48,7 @@ addWaiter（加入等待队列）:
 ![img.png](AQS5.png)
 
 * enq方法是完整的入队方法，比原来的方法多了一个判空。
+* addWaiter就是将线程加入到了等待队列
 
 acquireQueued(node）（获取队列中的节点）：
 
@@ -55,6 +56,21 @@ acquireQueued(node）（获取队列中的节点）：
 
 利用interrupted标志位来确定是否获取。
 
+当前节点的前一个节点是头结点，会继续tryAcquire，如果成功获取锁，就把当前节点改为头结点。
+
+如果线程被中断，那么acquireQueued方法会返回true
+
+## ReentrantLock
+
+公平锁的lock
+
+![img.png](公平锁.png)
+
+非公平锁的lock
+
+![img.png](非公平锁.png)
+
+相比于公平锁，先直接进行了一次cas更改状态
 
 ## CountDownLatch
 用来控制一个或者多个线程等待多个线程。

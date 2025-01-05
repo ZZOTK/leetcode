@@ -136,4 +136,53 @@ class Solution {
 }
 ```
 
+## K个一组反转链表
+```java
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dump = new ListNode(-1);
+        dump.next = head;
+        // 上一组的最后一个节点
+        ListNode preGroup = dump;
+        while(true){
+            // 反转组的第一个节点
+            ListNode start = preGroup.next;
+            // 反转组的最后一个节点
+            ListNode end  =start;
+            for(int i = 0; i < k-1; i ++){
+                if(end == null){
+                    return dump.next;
+                }
+                end = end.next;
 
+            }
+            // 如果不足k个直接返回
+            if(end == null){
+                return dump.next;
+            }
+            // 断开上一组和下一组的链接
+            preGroup.next = null;
+            ListNode nextGroup = end.next;
+            end.next = null;
+            // 反转当前组
+            reverse(start);
+            // 连接上一组和下一组
+            // 此时，反转组的第一个和最后一个节点已经反转过了
+            start.next = nextGroup;
+            preGroup.next = end;
+            preGroup = start;
+        }
+    }
+
+
+    public void reverse(ListNode head){
+        ListNode pre = null;
+        while (head != null){
+            ListNode temp = head.next;
+            head.next = pre;
+            pre =head;
+            head = temp;
+        }
+    }
+}
+```
