@@ -65,6 +65,9 @@
     * [2024-4-redis](src/sql/redis/redis面试.md)
     * [redis数据结构](src/sql/redis/redis数据结构.md)
 
+* ES
+  * [ES基础](src/ES/es.md)
+
 * Spring框架
     * [Spring](src/SSM/Spring/Spring.md)
     * [SpringMVC](src/SSM/MVC/SpringMvc.md)
