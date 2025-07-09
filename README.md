@@ -55,6 +55,7 @@
     * [Mysql索引](src/sql/sql索引/sql索引.md)
     * [Mysql事务](src/sql/sql事务/sql事务.md)
     * [Innodb四大特性](src/sql/innodb特性/Innodb.md)
+    * [订单系统分库分表的设计](src/sql/fkfb.md)
     
 * Redis
     * [Redis基础](src/sql/redis/Redis.md)

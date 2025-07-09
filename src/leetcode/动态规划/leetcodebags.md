@@ -19,6 +19,7 @@ public class leetcode416 {
             target = sum / 2 ;
         }
         int len = nums.length ;
+        // dp[i][j] 选了前i个元素，和为j能否成功
         boolean[][] dp = new boolean[len + 1][target + 1];
         for ( int i = 0; i < len + 1 ; i ++ ){
             dp[i][0] = true ;
@@ -26,6 +27,7 @@ public class leetcode416 {
         for ( int i = 0 ; i < len ; i ++){
             for (int j = 1; j < target + 1 ; j ++ ){
                 if (nums[i] > j){
+                    // 此时必定不选第i个
                     dp[i + 1][j] = dp[i][j];
                 }else {
                     dp[i+1][j] = dp[i][j] || dp[i][j - nums[i]];
@@ -34,7 +36,7 @@ public class leetcode416 {
         }
         return dp[len][target];
     }
-
+    
 
     //压缩为一维的dp
     public boolean canPartition1(int[] nums) {
@@ -101,6 +103,29 @@ public class leetcode322 {
         }
         return dp[amount];
     }
+
+
+
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount +1];
+        Arrays.fill(dp,Integer.MAX_VALUE);
+        dp[0] = 0;
+        for(int coin : coins){
+            for(int i = coin ; i<= amount; i ++){
+                // 此时凑不出
+                if(dp[i-coin] == Integer.MAX_VALUE){
+                    continue;
+                }
+                // 比前一次多一个硬币
+                dp[i] = Math.min(dp[i-coin] + 1,dp[i]);
+            }
+        }
+        if(dp[amount] == Integer.MAX_VALUE){
+            return -1;
+        }
+        return dp[amount];
+    }
+
 
 
     //BFS算法
@@ -207,4 +232,4 @@ public class leetcode494 {
         return dp[target];
     }
 }
-```i
+```

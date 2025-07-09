@@ -44,6 +44,16 @@ raw与embstr的区别
 （2）采用内存分配方式不同，虽然raw和embstr编码方式都是使用redisObject结构和sdshdr结构。但是raw编码方式采用两次分配内存的方式，分别创建redisObject和sdshdr，而embstr编码方式则是采用一次分配，分配一个连续的空间给redisObject和sdshdr。（embstr一次性分配内存的方式：1，使得分配空间的次数减少。2、释放内存也只需要一次。3、在连续的内存块中，利用了缓存的优点。）
 
 
+# Hash对象的数据结构
+
+哈希对象的编码可以是 ziplist 或者 hashtable；对应的底层实现有两种, 一种是ziplist, 一种是dict。
+
+当同时满足下面两个条件时，使用ziplist（压缩列表）编码：
+
+1、列表保存元素个数小于512个
+
+2、每个元素长度小于64字节
+
 # 跳表结构的差异
 ```C
 /*
