@@ -37,6 +37,56 @@
     }
 ```
 
+## 84. 柱状图中最大的矩形
+
+核心：找到当前柱子，左右第一个小于它高度的位置。
+
+单调栈左右遍历
+
+```java
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+         int n = heights.length;
+        int[] l = new int[n];
+        int[] r = new int[n];
+        int max = 0;
+        Stack<Integer> stack = new Stack<>();
+        for(int i =0 ; i <n; i ++){
+            // 注意这里的=，相同高度可以继续下压
+            while(!stack.isEmpty() && heights[i] <= heights[stack.peek()]){
+                stack.pop();
+            }
+            // 也就是这个柱子左侧没有比他低的柱子
+            if(stack.isEmpty()){
+                l[i] = -1;
+            }else {
+                l[i] = stack.peek();
+            }
+            stack.push(i);
+        }
+        stack.clear();
+
+        for(int i =n-1 ; i >=0; i --){
+            while(!stack.isEmpty() && heights[i] <= heights[stack.peek()]){
+                stack.pop();
+            }
+            if(stack.isEmpty()){
+                r[i] = n;
+            }else {
+                r[i] = stack.peek();
+            }
+            stack.push(i);
+        }
+
+        for(int i =0; i < n; i ++){
+            max = Math.max(max,(r[i] -l[i] -1) *heights[i]);
+        }
+        return max; 
+        
+    }
+}
+```
+
 ## leetcode907
 
 给定一个整数数组 arr，找到 min(b)的总和，其中 b 的范围为 arr 的每个（连续）子数组。
