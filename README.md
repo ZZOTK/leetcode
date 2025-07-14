@@ -148,6 +148,7 @@
 * 纯逻辑
   * [前后两次遍历](src/leetcode/逻辑思考/双向遍历.md)
   * [杂项汇总](src/leetcode/逻辑思考/汇总.md)
+  * [编辑距离/编辑问题](src/leetcode/逻辑思考/编辑.md)
 
 * **动态规划**
     * [经典的背包问题](src/leetcode/动态规划/bags.md)

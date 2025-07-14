@@ -87,6 +87,78 @@ class Solution {
 }
 ```
 
+## leetcode 95 
+
+```java
+class Solution {
+
+    public int maximalRectangle(char[][] matrix) {
+        int n = matrix.length;
+        if (n == 0) {
+            return 0;
+        }
+        int m = matrix[0].length;
+        int[][] heights = new int[n + 1][m];
+        // 构建数组，height[i][j]表示以第i行为底，每一列的高度
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == '1') {
+                    heights[i + 1][j] = heights[i][j] + 1;
+                }
+            }
+        }
+        int max = 0;
+        // for循环每一行，计算每一行为底的最大高度
+        for (int i = 1; i <= n; i++) {
+            int[] height = heights[i];
+            // 调用leetcode84
+            int levelMax = largestRectangleArea(height);
+            max = Math.max(max, levelMax);
+        }
+        return max;
+    }
+    
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        int[] l = new int[n];
+        int[] r = new int[n];
+        int max = 0;
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                l[i] = -1;
+            } else {
+                l[i] = stack.peek();
+            }
+            stack.push(i);
+        }
+        stack.clear();
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                r[i] = n;
+            } else {
+                r[i] = stack.peek();
+            }
+            stack.push(i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, (r[i] - l[i] - 1) * heights[i]);
+        }
+        return max;
+    }
+
+
+}
+```
+
 ## leetcode907
 
 给定一个整数数组 arr，找到 min(b)的总和，其中 b 的范围为 arr 的每个（连续）子数组。
